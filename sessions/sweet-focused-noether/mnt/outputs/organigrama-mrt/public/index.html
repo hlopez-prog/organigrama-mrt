@@ -9,6 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root {
   --bg:#f0f4f8; --sidebar:#ffffff; --card:#ffffff; --card2:#f1f5f9;
@@ -173,8 +174,30 @@ input[type=range]{width:100%;accent-color:var(--accent);margin-bottom:8px;}
 .badge-error{background:rgba(239,68,68,.15);color:#f87171;}
 
 
-/* ── DASHBOARD ── */
-#dashboard-panel{display:none;flex:1;overflow-y:auto;padding:20px;background:var(--bg);}
+/* ── DASHBOARD PREMIUM ── */
+#dashboard-panel{display:none;flex:1;overflow-y:auto;background:#f0f4f8;}
+.dash-header{background:linear-gradient(135deg,#1d4ed8 0%,#0891b2 100%);padding:28px 28px 20px;color:#fff;}
+.dash-header-title{font-size:22px;font-weight:800;letter-spacing:-.3px;}
+.dash-header-sub{font-size:12px;opacity:.8;margin-top:4px;}
+.dash-header-kpis{display:flex;gap:32px;margin-top:20px;}
+.dash-kpi{text-align:center;}
+.dash-kpi-num{font-size:36px;font-weight:800;line-height:1;}
+.dash-kpi-label{font-size:10px;opacity:.75;text-transform:uppercase;letter-spacing:.8px;margin-top:3px;}
+.dash-kpi-divider{width:1px;background:rgba(255,255,255,.25);margin:4px 0;}
+.dash-body{padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.dash-full{grid-column:1/-1;}
+.dc{background:#fff;border-radius:14px;padding:22px;box-shadow:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04);border:1px solid #e8eef5;}
+.dc-title{font-size:13px;font-weight:700;color:#0f172a;margin-bottom:2px;display:flex;align-items:center;gap:7px;}
+.dc-sub{font-size:11px;color:#94a3b8;margin-bottom:16px;}
+.dc-chart-wrap{position:relative;}
+.dir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px;}
+.dir-item{background:linear-gradient(135deg,#f8fafc,#eff6ff);border:1px solid #dbeafe;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px;transition:all .2s;}
+.dir-item:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(29,78,216,.1);}
+.dir-av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;margin-bottom:4px;}
+.dir-nm{font-size:11px;font-weight:700;color:#1e293b;line-height:1.3;}
+.dir-pt{font-size:10px;color:#64748b;margin-top:1px;line-height:1.3;}
+.dir-badge{display:inline-flex;align-items:center;gap:4px;background:#1d4ed8;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;margin-top:4px;width:fit-content;}
+
 .dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
 .dash-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
 .kpi-box{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;position:relative;overflow:hidden;}
@@ -242,7 +265,7 @@ input[type=range]{width:100%;accent-color:var(--accent);margin-bottom:8px;}
 
     <div class="filter-section">
       <div class="filter-header">
-        <span class="filter-label">🏛 Dirección (Área Principal)</span>
+        <span class="filter-label">🏛 Dirección</span>
         <button class="filter-clear" onclick="clearGroup('direccion')">Limpiar</button>
       </div>
       <div class="chips" id="chips-direccion"></div>
@@ -622,8 +645,7 @@ function updateActiveBar(group) {
 
 function clearGroup(group) {
   filterSel[group].clear();
-  const chipId = group==='area'?'chips-direccion':'chips-'+group;
-  buildChips(chipId, group, [...document.querySelectorAll('#'+chipId+' .chip')].map(c=>c.textContent));
+  buildChips('chips-'+group, group, [...document.querySelectorAll('#chips-'+group+' .chip')].map(c=>c.textContent));
   updateActiveBar(group);
   applyFilters();
 }
@@ -1522,98 +1544,243 @@ function getDirectorTree() {
   }).sort((a,b) => b.teamSize - a.teamSize);
 }
 
+let _dashCharts = {};
+
+function destroyDashCharts() {
+  Object.values(_dashCharts).forEach(c => { try{ c.destroy(); }catch(e){} });
+  _dashCharts = {};
+}
+
 function renderDashboard() {
+  destroyDashCharts();
   const total   = allNodes.length;
   const activos = allNodes.filter(n=>n.estatus==='Activo').length;
   const vac     = allNodes.filter(n=>n.estatus==='Vacante').length;
-  const ubis    = countBy(allNodes, 'ubicacion');
+  const ubis    = countBy(allNodes.filter(n=>n.ubicacion), 'ubicacion');
   const niveles = countBy(allNodes, 'nivel');
   const dires   = countBy(allNodes.filter(n=>n.direccion), 'direccion');
   const dirs    = getDirectorTree();
-  const maxUbi  = ubis[0]?.[1] || 1;
-  const maxNiv  = niveles[0]?.[1] || 1;
-  const maxDir  = dires[0]?.[1] || 1;
+  const now     = new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric'});
+
+  const PALETTE  = ['#1d4ed8','#0891b2','#059669','#7c3aed','#d97706','#dc2626','#0f766e','#9333ea','#c2410c'];
+  const NIV_COL  = {Directivo:'#1d4ed8',Gerencia:'#0891b2',Superintendencia:'#0f766e',Jefatura:'#059669',Supervisión:'#7c3aed',Administrativo:'#9333ea',Operativo:'#94a3b8'};
 
   document.getElementById('dashboard-panel').innerHTML = `
-  <div style="padding:20px;overflow-y:auto;flex:1">
-    <!-- KPIs -->
-    <div class="dash-grid">
-      <div class="kpi-box blue">
-        <div class="kpi-label">Total Colaboradores</div>
-        <div class="kpi-num">${total}</div>
-        <div class="kpi-sub">${activos} activos · ${vac} vacantes</div>
-      </div>
-      <div class="kpi-box green">
-        <div class="kpi-label">Ubicaciones</div>
-        <div class="kpi-num">${ubis.length}</div>
-        <div class="kpi-sub">Plantas y oficinas activas</div>
-      </div>
-      <div class="kpi-box purple">
-        <div class="kpi-label">Niveles Jerárquicos</div>
-        <div class="kpi-num">${niveles.length}</div>
-        <div class="kpi-sub">${dirs.length} directivos registrados</div>
+    <div class="dash-header">
+      <div class="dash-header-title">📊 Dashboard Ejecutivo RRHH</div>
+      <div class="dash-header-sub">MRT Corporativo · Actualizado: ${now}</div>
+      <div class="dash-header-kpis">
+        <div class="dash-kpi"><div class="dash-kpi-num">${total}</div><div class="dash-kpi-label">Colaboradores</div></div>
+        <div class="dash-kpi-divider"></div>
+        <div class="dash-kpi"><div class="dash-kpi-num">${activos}</div><div class="dash-kpi-label">Activos</div></div>
+        <div class="dash-kpi-divider"></div>
+        <div class="dash-kpi"><div class="dash-kpi-num">${vac}</div><div class="dash-kpi-label">Vacantes</div></div>
+        <div class="dash-kpi-divider"></div>
+        <div class="dash-kpi"><div class="dash-kpi-num">${ubis.length}</div><div class="dash-kpi-label">Ubicaciones</div></div>
+        <div class="dash-kpi-divider"></div>
+        <div class="dash-kpi"><div class="dash-kpi-num">${dires.length}</div><div class="dash-kpi-label">Direcciones</div></div>
+        <div class="dash-kpi-divider"></div>
+        <div class="dash-kpi"><div class="dash-kpi-num">${dirs.filter(d=>d.nivel==='Directivo').length}</div><div class="dash-kpi-label">Directivos</div></div>
       </div>
     </div>
-
-    <div class="dash-grid-2">
-      <!-- Por Ubicación -->
-      <div class="dash-card">
-        <div class="dash-card-title">📍 Colaboradores por Ubicación / Planta</div>
-        ${ubis.map(([ubi, cnt], i) => `
-          <div class="bar-row">
-            <div class="bar-label" title="${ubi}">${ubi||'Sin ubicación'}</div>
-            <div class="bar-track"><div class="bar-fill" style="width:${Math.round(cnt/maxUbi*100)}%;background:${UBI_COLORS[i%UBI_COLORS.length]}"></div></div>
-            <div class="bar-count">${cnt}</div>
-            <div class="bar-pct">${Math.round(cnt/total*100)}%</div>
-          </div>`).join('')}
+    <div class="dash-body">
+      <!-- Donut Dirección -->
+      <div class="dc">
+        <div class="dc-title">🏛 Distribución por Dirección</div>
+        <div class="dc-sub">Proporción de colaboradores por área principal</div>
+        <div class="dc-chart-wrap" style="height:260px"><canvas id="ch-dir"></canvas></div>
       </div>
-
-      <!-- Por Nivel -->
-      <div class="dash-card">
-        <div class="dash-card-title">🏷 Colaboradores por Nivel Jerárquico</div>
-        ${niveles.map(([niv, cnt]) => `
-          <div class="bar-row">
-            <div class="bar-label" style="display:flex;align-items:center;gap:6px">
-              <span class="nivel-dot" style="background:${NIVEL_COLORS_DASH[niv]||'#94a3b8'}"></span>${niv}
-            </div>
-            <div class="bar-track"><div class="bar-fill" style="width:${Math.round(cnt/maxNiv*100)}%;background:${NIVEL_COLORS_DASH[niv]||'#94a3b8'}"></div></div>
-            <div class="bar-count">${cnt}</div>
-            <div class="bar-pct">${Math.round(cnt/total*100)}%</div>
-          </div>`).join('')}
+      <!-- Donut Ubicación -->
+      <div class="dc">
+        <div class="dc-title">📍 Distribución por Planta / Ubicación</div>
+        <div class="dc-sub">Headcount por instalación</div>
+        <div class="dc-chart-wrap" style="height:260px"><canvas id="ch-ubi"></canvas></div>
       </div>
-    </div>
-
-    <div class="dash-grid-2">
-      <!-- Por Dirección -->
-      <div class="dash-card">
-        <div class="dash-card-title">🏛 Colaboradores por Dirección (Área Principal)</div>
-        ${dires.map(([dir, cnt], i) => `
-          <div class="bar-row">
-            <div class="bar-label" title="${dir}">${dir}</div>
-            <div class="bar-track"><div class="bar-fill" style="width:${Math.round(cnt/maxDir*100)}%;background:${UBI_COLORS[i%UBI_COLORS.length]}"></div></div>
-            <div class="bar-count">${cnt}</div>
-            <div class="bar-pct">${Math.round(cnt/total*100)}%</div>
-          </div>`).join('')}
+      <!-- Bar Nivel -->
+      <div class="dc">
+        <div class="dc-title">🏷 Colaboradores por Nivel Jerárquico</div>
+        <div class="dc-sub">Estructura de la organización por nivel</div>
+        <div class="dc-chart-wrap" style="height:240px"><canvas id="ch-nivel"></canvas></div>
       </div>
-
-      <!-- Directivos y su organización -->
-      <div class="dash-card">
-        <div class="dash-card-title">👔 Estructura Directiva</div>
-        ${dirs.map(d => {
-          const col = NIVEL_COLORS_DASH[d.nivel]||'#1d4ed8';
-          const ini = (d.nombre||'').split(' ').filter(w=>w.length>1).map(w=>w[0]).slice(0,2).join('');
-          return `<div class="dir-card">
-            <div class="dir-avatar" style="background:${col}">${ini}</div>
-            <div>
-              <div class="dir-name">${d.nombre}</div>
-              <div class="dir-puesto">${d.puesto}</div>
-            </div>
-            <div class="dir-count">${d.teamSize} personas</div>
-          </div>`;
-        }).join('')}
+      <!-- Horizontal bar Ubicación detalle -->
+      <div class="dc">
+        <div class="dc-title">📊 Headcount por Planta — Detalle</div>
+        <div class="dc-sub">Número exacto de personas por instalación</div>
+        <div class="dc-chart-wrap" style="height:240px"><canvas id="ch-ubi2"></canvas></div>
       </div>
-    </div>
-  </div>`;
+      <!-- Directors full width -->
+      <div class="dc dash-full">
+        <div class="dc-title">👔 Estructura Directiva — Tamaño de Organización</div>
+        <div class="dc-sub">Cada directivo y el total de colaboradores bajo su mando</div>
+        <div class="dc-chart-wrap" style="height:200px"><canvas id="ch-dirs"></canvas></div>
+      </div>
+      <!-- Director cards -->
+      <div class="dc dash-full">
+        <div class="dc-title">🎯 Directivos MRT Corporativo</div>
+        <div class="dc-sub">Líderes y tamaño de su equipo</div>
+        <div class="dir-grid">
+          ${dirs.map((d,i) => {
+            const col = NIV_COL[d.nivel]||'#1d4ed8';
+            const ini = (d.nombre||'').split(' ').filter(w=>w.length>1).map(w=>w[0]).slice(0,2).join('');
+            const nm  = (d.nombre||'').split(' ').slice(0,3).join(' ');
+            return \`<div class="dir-item">
+              <div class="dir-av" style="background:\${col}">\${ini}</div>
+              <div class="dir-nm">\${nm}</div>
+              <div class="dir-pt">\${d.puesto}</div>
+              <div class="dir-badge">👥 \${d.teamSize} personas</div>
+            </div>\`;
+          }).join('')}
+        </div>
+      </div>
+    </div>`;
+
+  // Chart.js global defaults
+  Chart.defaults.font.family = "'Inter', sans-serif";
+  Chart.defaults.color = '#64748b';
+
+  const pluginDatalabels = {
+    id:'centerText',
+    afterDraw(chart) {
+      if(chart.config.type!=='doughnut') return;
+      const {ctx,data,chartArea:{top,left,width,height}} = chart;
+      const total2 = data.datasets[0].data.reduce((a,b)=>a+b,0);
+      ctx.save();
+      ctx.font = 'bold 28px Inter';
+      ctx.fillStyle = '#0f172a';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(total2, left+width/2, top+height/2-8);
+      ctx.font = '11px Inter';
+      ctx.fillStyle = '#94a3b8';
+      ctx.fillText('total', left+width/2, top+height/2+14);
+      ctx.restore();
+    }
+  };
+
+  // ── CHART 1: Donut Direcciones ──
+  setTimeout(()=>{
+    const c1 = document.getElementById('ch-dir');
+    if(!c1) return;
+    _dashCharts.dir = new Chart(c1, {
+      type: 'doughnut',
+      data: {
+        labels: dires.map(([d])=>d),
+        datasets:[{ data: dires.map(([,v])=>v), backgroundColor: PALETTE, borderWidth: 2, borderColor: '#fff', hoverOffset: 8 }]
+      },
+      options: {
+        cutout: '65%', animation:{animateScale:true,duration:800},
+        plugins: {
+          legend:{position:'right', labels:{boxWidth:12,padding:10,font:{size:11}}},
+          tooltip:{callbacks:{label:ctx=>\` \${ctx.label}: \${ctx.raw} (\${Math.round(ctx.raw/total*100)}%)\`}}
+        }
+      },
+      plugins:[pluginDatalabels]
+    });
+  },50);
+
+  // ── CHART 2: Donut Ubicaciones ──
+  setTimeout(()=>{
+    const c2 = document.getElementById('ch-ubi');
+    if(!c2) return;
+    _dashCharts.ubi = new Chart(c2, {
+      type: 'doughnut',
+      data: {
+        labels: ubis.map(([u])=>u),
+        datasets:[{ data: ubis.map(([,v])=>v), backgroundColor: PALETTE.slice(2), borderWidth: 2, borderColor: '#fff', hoverOffset: 8 }]
+      },
+      options: {
+        cutout: '65%', animation:{animateScale:true,duration:900},
+        plugins:{
+          legend:{position:'right', labels:{boxWidth:12,padding:8,font:{size:11}}},
+          tooltip:{callbacks:{label:ctx=>\` \${ctx.label}: \${ctx.raw} (\${Math.round(ctx.raw/total*100)}%)\`}}
+        }
+      },
+      plugins:[pluginDatalabels]
+    });
+  },100);
+
+  // ── CHART 3: Bar Niveles ──
+  setTimeout(()=>{
+    const c3 = document.getElementById('ch-nivel');
+    if(!c3) return;
+    _dashCharts.nivel = new Chart(c3, {
+      type: 'bar',
+      data: {
+        labels: niveles.map(([n])=>n),
+        datasets:[{
+          label:'Colaboradores',
+          data: niveles.map(([,v])=>v),
+          backgroundColor: niveles.map(([n])=> (NIV_COL[n]||'#94a3b8')+'cc'),
+          borderColor:     niveles.map(([n])=> NIV_COL[n]||'#94a3b8'),
+          borderWidth:1.5, borderRadius:8, borderSkipped:false
+        }]
+      },
+      options: {
+        animation:{duration:800},
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>\`\${ctx.raw} colaboradores (\${Math.round(ctx.raw/total*100)}%)\`}}},
+        scales:{
+          x:{grid:{display:false},ticks:{font:{size:10,weight:'600'}}},
+          y:{grid:{color:'#f1f5f9'},ticks:{font:{size:10}},beginAtZero:true}
+        }
+      }
+    });
+  },150);
+
+  // ── CHART 4: Horizontal bar Ubicaciones ──
+  setTimeout(()=>{
+    const c4 = document.getElementById('ch-ubi2');
+    if(!c4) return;
+    _dashCharts.ubi2 = new Chart(c4, {
+      type: 'bar',
+      data: {
+        labels: ubis.map(([u])=>u),
+        datasets:[{
+          label:'Personas',
+          data: ubis.map(([,v])=>v),
+          backgroundColor: PALETTE.map(c=>c+'cc'),
+          borderColor: PALETTE,
+          borderWidth:1.5, borderRadius:6, borderSkipped:false
+        }]
+      },
+      options: {
+        indexAxis:'y', animation:{duration:900},
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>\`\${ctx.raw} personas\`}}},
+        scales:{
+          x:{grid:{color:'#f1f5f9'},ticks:{font:{size:10}},beginAtZero:true},
+          y:{grid:{display:false},ticks:{font:{size:10,weight:'500'}}}
+        }
+      }
+    });
+  },200);
+
+  // ── CHART 5: Bar Directivos ──
+  setTimeout(()=>{
+    const c5 = document.getElementById('ch-dirs');
+    if(!c5) return;
+    const dLabels = dirs.map(d=>(d.nombre||'').split(' ').slice(0,2).join(' '));
+    const dData   = dirs.map(d=>d.teamSize);
+    _dashCharts.dirs = new Chart(c5, {
+      type:'bar',
+      data:{
+        labels:dLabels,
+        datasets:[{
+          label:'Equipo',
+          data:dData,
+          backgroundColor:PALETTE.map(c=>c+'cc'),
+          borderColor:PALETTE,
+          borderWidth:1.5, borderRadius:8, borderSkipped:false
+        }]
+      },
+      options:{
+        animation:{duration:1000},
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>\`\${ctx.raw} personas en su organización\`}}},
+        scales:{
+          x:{grid:{display:false},ticks:{font:{size:10,weight:'600'},maxRotation:30}},
+          y:{grid:{color:'#f1f5f9'},ticks:{font:{size:10}},beginAtZero:true}
+        }
+      }
+    });
+  },250);
 }
 
 // ═══════════════════════════════════════════════
