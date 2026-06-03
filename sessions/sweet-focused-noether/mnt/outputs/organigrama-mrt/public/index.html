@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OrgChart Pro — MRT Corporativo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root {
+  --bg:#0b0f1a; --sidebar:#0f1629; --card:#141c2e; --card2:#1a2340;
+  --hover:#1e2b45; --border:#1e2d45; --border2:#243553;
+  --accent:#3b82f6; --accent2:#06b6d4; --green:#10b981;
+  --yellow:#f59e0b; --red:#ef4444; --purple:#8b5cf6;
+  --text:#f1f5f9; --text2:#94a3b8; --muted:#475569;
+  --r:10px; --r2:6px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);display:flex;height:100vh;overflow:hidden;}
+
+/* ── SIDEBAR ── */
+#sidebar{width:260px;min-width:260px;background:var(--sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;}
+.logo{padding:20px 18px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.logo-ic{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.logo-t{font-size:13px;font-weight:700;} .logo-s{font-size:10px;color:var(--text2);}
+.sec{padding:16px 14px 6px;font-size:9px;font-weight:700;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;}
+.panel{padding:10px 14px;}
+
+/* Controls */
+.ctrl-label{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:5px;display:block;}
+.ctrl-input{width:100%;background:var(--card);border:1px solid var(--border2);border-radius:var(--r2);padding:7px 10px;font-size:12px;color:var(--text);font-family:'Inter',sans-serif;outline:none;margin-bottom:8px;}
+.ctrl-input:focus{border-color:var(--accent);}
+select.ctrl-input option{background:var(--card2);}
+.search-wrap{position:relative;margin-bottom:8px;}
+.search-wrap input{padding-left:28px;}
+.search-wrap::before{content:'🔍';position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:11px;}
+
+/* Layout buttons */
+.layout-btns{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;}
+.layout-btn{background:var(--card);border:1px solid var(--border2);border-radius:var(--r2);padding:7px 4px;font-size:11px;font-weight:500;color:var(--text2);cursor:pointer;text-align:center;transition:all .2s;}
+.layout-btn:hover{background:var(--hover);color:var(--text);}
+.layout-btn.active{background:rgba(59,130,246,.2);border-color:var(--accent);color:var(--accent);}
+
+/* Color scheme buttons */
+.color-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
+.color-dot{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .2s;}
+.color-dot.active{border-color:#fff;transform:scale(1.15);}
+
+/* Btn */
+.btn{width:100%;padding:8px;border-radius:var(--r2);font-size:12px;font-weight:600;cursor:pointer;border:none;font-family:'Inter',sans-serif;margin-bottom:6px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;}
+.btn-primary{background:var(--accent);color:#fff;} .btn-primary:hover{background:#2563eb;}
+.btn-secondary{background:var(--card2);color:var(--text2);border:1px solid var(--border2);} .btn-secondary:hover{background:var(--hover);color:var(--text);}
+.btn-success{background:var(--green);color:#fff;}
+.btn-sm{padding:6px 12px;width:auto;font-size:11px;}
+.divider{border:none;border-top:1px solid var(--border);margin:10px 0;}
+
+/* Stats */
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:12px;}
+.stat-num{font-weight:700;color:var(--accent);}
+.tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:600;}
+.tag-blue{background:rgba(59,130,246,.15);color:#60a5fa;}
+.tag-green{background:rgba(16,185,129,.15);color:#34d399;}
+.tag-yellow{background:rgba(245,158,11,.15);color:#fbbf24;}
+.tag-red{background:rgba(239,68,68,.15);color:#f87171;}
+.tag-purple{background:rgba(139,92,246,.15);color:#a78bfa;}
+.tag-cyan{background:rgba(6,182,212,.15);color:#22d3ee;}
+
+/* Range */
+input[type=range]{width:100%;accent-color:var(--accent);margin-bottom:8px;}
+.range-val{font-size:11px;color:var(--text2);text-align:right;margin-top:-6px;margin-bottom:6px;}
+
+/* Checkbox */
+.check-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);margin-bottom:6px;cursor:pointer;}
+.check-row input{accent-color:var(--accent);}
+
+/* ── MAIN ── */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+#topbar{height:52px;min-height:52px;background:var(--sidebar);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:12px;}
+#topbar-title{font-size:15px;font-weight:700;}
+#topbar-sub{font-size:11px;color:var(--text2);}
+#topbar-actions{margin-left:auto;display:flex;gap:8px;align-items:center;}
+.tbtn{padding:6px 14px;border-radius:var(--r2);font-size:11px;font-weight:600;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:all .2s;display:flex;align-items:center;gap:5px;}
+.tbtn-primary{background:var(--accent);color:#fff;} .tbtn-primary:hover{background:#2563eb;}
+.tbtn-secondary{background:var(--card2);color:var(--text2);border:1px solid var(--border2);} .tbtn-secondary:hover{color:var(--text);}
+.tbtn-success{background:var(--green);color:#fff;}
+.tbtn-export{background:var(--purple);color:#fff;}
+
+/* ── CANVAS ── */
+#chart-wrap{flex:1;position:relative;overflow:hidden;background:var(--bg);}
+#chart-svg{width:100%;height:100%;cursor:grab;}
+#chart-svg:active{cursor:grabbing;}
+
+/* Node cards */
+.org-node{cursor:pointer;}
+.node-card{transition:all .2s;}
+.node-card:hover .node-bg{stroke-width:2;}
+.node-bg{transition:all .2s;}
+
+/* Minimap */
+#minimap{position:absolute;bottom:16px;right:16px;width:180px;height:110px;background:rgba(15,22,41,.9);border:1px solid var(--border2);border-radius:8px;overflow:hidden;}
+#minimap-svg{width:100%;height:100%;}
+#minimap-vp{fill:rgba(59,130,246,.15);stroke:var(--accent);stroke-width:1.5;}
+
+/* Zoom controls */
+#zoom-ctrl{position:absolute;bottom:16px;left:16px;display:flex;flex-direction:column;gap:6px;}
+.zc-btn{width:32px;height:32px;background:var(--card2);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.zc-btn:hover{background:var(--accent);border-color:var(--accent);}
+
+/* Level legend */
+#legend{position:absolute;top:16px;right:16px;background:rgba(15,22,41,.92);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;min-width:140px;}
+.leg-title{font-size:9px;font-weight:700;color:var(--muted);letter-spacing:1px;margin-bottom:8px;text-transform:uppercase;}
+.leg-item{display:flex;align-items:center;gap:6px;margin-bottom:5px;font-size:11px;color:var(--text2);}
+.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+
+/* Search highlight */
+.node-highlight .node-bg{stroke:#fbbf24!important;stroke-width:2.5!important;}
+.node-dimmed{opacity:.25;}
+
+/* Tooltip */
+#tooltip{position:absolute;background:var(--card2);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;font-size:12px;pointer-events:none;display:none;z-index:100;min-width:200px;box-shadow:0 8px 32px rgba(0,0,0,.4);}
+.tt-name{font-size:13px;font-weight:700;margin-bottom:4px;}
+.tt-row{display:flex;justify-content:space-between;gap:12px;margin-top:3px;font-size:11px;}
+.tt-label{color:var(--text2);}
+
+/* Modal */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.modal-ov.open{display:flex;}
+.modal{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:26px;width:90%;max-width:520px;max-height:85vh;overflow-y:auto;}
+.modal-title{font-size:16px;font-weight:700;margin-bottom:4px;}
+.modal-sub{font-size:12px;color:var(--text2);margin-bottom:18px;}
+.form-group{margin-bottom:12px;}
+.form-group label{display:block;font-size:11px;font-weight:600;color:var(--text2);margin-bottom:4px;}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:var(--r2);padding:8px 10px;font-size:12px;color:var(--text);font-family:'Inter',sans-serif;outline:none;}
+.form-group input:focus,.form-group select:focus{border-color:var(--accent);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);}
+.mbtn{padding:7px 16px;border-radius:var(--r2);font-size:12px;font-weight:600;cursor:pointer;border:none;font-family:'Inter',sans-serif;}
+.mbtn-primary{background:var(--accent);color:#fff;}
+.mbtn-secondary{background:var(--card2);color:var(--text2);border:1px solid var(--border2);}
+
+/* Drop zone */
+.dz{border:2px dashed var(--border2);border-radius:var(--r);padding:30px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:12px;}
+.dz:hover,.dz.over{border-color:var(--accent);background:rgba(59,130,246,.05);}
+.dz-icon{font-size:36px;margin-bottom:8px;}
+.dz-text{font-size:13px;font-weight:600;}
+.dz-sub{font-size:11px;color:var(--text2);margin-top:4px;}
+
+/* Toast */
+#toast{position:fixed;bottom:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:6px;}
+.ti{background:var(--card2);border:1px solid var(--border2);border-radius:8px;padding:10px 14px;font-size:12px;display:flex;align-items:center;gap:7px;min-width:260px;animation:sin .3s ease;}
+.ti.s{border-left:3px solid var(--green);} .ti.e{border-left:3px solid var(--red);} .ti.i{border-left:3px solid var(--accent);}
+@keyframes sin{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* Progress */
+#progress-wrap{position:absolute;inset:0;background:rgba(11,15,26,.85);display:none;align-items:center;justify-content:center;flex-direction:column;z-index:500;}
+#progress-wrap.show{display:flex;}
+.prog-box{background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:28px 36px;text-align:center;}
+.prog-title{font-size:14px;font-weight:700;margin-bottom:12px;}
+.prog-bar-wrap{width:240px;height:6px;background:var(--card2);border-radius:3px;overflow:hidden;}
+.prog-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;transition:width .3s;}
+
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+
+/* ── SAVE BADGE ── */
+.save-badge{font-size:11px;font-weight:600;padding:4px 10px;border-radius:12px;transition:all .3s;}
+.badge-saving{background:rgba(245,158,11,.15);color:#fbbf24;}
+.badge-saved{background:rgba(16,185,129,.15);color:#34d399;}
+.badge-error{background:rgba(239,68,68,.15);color:#f87171;}
+
+/* ── FILTER CHIPS ── */
+.filter-section{margin-bottom:10px;}
+.filter-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.filter-label{font-size:11px;font-weight:600;color:var(--text2);}
+.filter-clear{font-size:10px;color:var(--accent);cursor:pointer;background:none;border:none;font-family:'Inter',sans-serif;padding:0;}
+.filter-clear:hover{text-decoration:underline;}
+.chips{display:flex;flex-wrap:wrap;gap:5px;}
+.chip{padding:4px 9px;border-radius:20px;font-size:10px;font-weight:600;cursor:pointer;border:1px solid var(--border2);background:var(--card);color:var(--text2);transition:all .18s;white-space:nowrap;user-select:none;}
+.chip:hover{border-color:var(--accent);color:var(--accent);}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+.chip.on:hover{background:#2563eb;}
+.active-bar{font-size:10px;color:var(--text2);margin-top:4px;min-height:14px;}
+.active-bar span{color:var(--accent);font-weight:700;}
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<nav id="sidebar">
+  <div class="logo">
+    <div class="logo-ic">🏢</div>
+    <div><div class="logo-t">OrgChart Pro</div><div class="logo-s">Minería · 343 colaboradores</div></div>
+  </div>
+
+  <div class="sec">Filtros</div>
+  <div class="panel">
+    <div class="search-wrap" style="margin-bottom:10px">
+      <input class="ctrl-input" type="text" id="f-search" placeholder="Buscar nombre o puesto..." oninput="applyFilters()">
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-header">
+        <span class="filter-label">📍 Ubicación / Planta</span>
+        <button class="filter-clear" onclick="clearGroup('ubicacion')">Limpiar</button>
+      </div>
+      <div class="chips" id="chips-ubicacion"></div>
+      <div class="active-bar" id="bar-ubicacion"></div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-header">
+        <span class="filter-label">🏷 Nivel Jerárquico</span>
+        <button class="filter-clear" onclick="clearGroup('nivel')">Limpiar</button>
+      </div>
+      <div class="chips" id="chips-nivel"></div>
+      <div class="active-bar" id="bar-nivel"></div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-header">
+        <span class="filter-label">🗂 Área / Depto.</span>
+        <button class="filter-clear" onclick="clearGroup('area')">Limpiar</button>
+      </div>
+      <div class="chips" id="chips-area"></div>
+      <div class="active-bar" id="bar-area"></div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-header">
+        <span class="filter-label">⚡ Estatus</span>
+        <button class="filter-clear" onclick="clearGroup('estatus')">Limpiar</button>
+      </div>
+      <div class="chips" id="chips-estatus"></div>
+    </div>
+
+    <button class="btn btn-secondary" style="margin-top:8px" onclick="clearFilters()">↺ Limpiar todos los filtros</button>
+  </div>
+
+  <div class="divider"></div>
+  <div class="sec">Vista</div>
+  <div class="panel">
+    <label class="ctrl-label">Diseño</label>
+    <div class="layout-btns">
+      <div class="layout-btn active" id="lb-td" onclick="setLayout('top-down')">⬇ Vertical</div>
+      <div class="layout-btn" id="lb-lr" onclick="setLayout('left-right')">➡ Horizontal</div>
+      <div class="layout-btn" id="lb-rad" onclick="setLayout('radial')">◎ Radial</div>
+      <div class="layout-btn" id="lb-com" onclick="setLayout('compact')">⊞ Compacto</div>
+    </div>
+    <label class="ctrl-label">Esquema de color</label>
+    <div class="color-btns" id="color-schemes">
+      <div class="color-dot active" style="background:linear-gradient(135deg,#3b82f6,#06b6d4)" data-scheme="blue" onclick="setColorScheme('blue')" title="Azul corporativo"></div>
+      <div class="color-dot" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)" data-scheme="purple" onclick="setColorScheme('purple')" title="Púrpura"></div>
+      <div class="color-dot" style="background:linear-gradient(135deg,#10b981,#06b6d4)" data-scheme="green" onclick="setColorScheme('green')" title="Verde"></div>
+      <div class="color-dot" style="background:linear-gradient(135deg,#f59e0b,#ef4444)" data-scheme="warm" onclick="setColorScheme('warm')" title="Cálido"></div>
+      <div class="color-dot" style="background:linear-gradient(135deg,#64748b,#94a3b8)" data-scheme="mono" onclick="setColorScheme('mono')" title="Monocromático"></div>
+    </div>
+    <label class="ctrl-label">Tamaño de nodos</label>
+    <input type="range" id="node-size" min="60" max="140" value="100" oninput="updateNodeSize(this.value)">
+    <div class="range-val" id="node-size-val">100%</div>
+    <label class="check-row"><input type="checkbox" id="show-photos" checked onchange="togglePhotos()"> Mostrar fotos/avatares</label>
+    <label class="check-row"><input type="checkbox" id="show-vacant" checked onchange="applyFilters()"> Mostrar vacantes</label>
+    <label class="check-row"><input type="checkbox" id="show-lines" checked onchange="toggleLines()"> Mostrar líneas de reporte</label>
+    <label class="check-row"><input type="checkbox" id="show-counts" checked onchange="renderChart()"> Mostrar conteo reportes</label>
+  </div>
+
+  <div class="divider"></div>
+  <div class="sec">Estadísticas</div>
+  <div class="panel" id="stats-panel">
+    <div class="stat-row"><span>Total posiciones</span><span class="stat-num" id="s-total">0</span></div>
+    <div class="stat-row"><span>Activos</span><span class="stat-num" id="s-activos">0</span></div>
+    <div class="stat-row"><span>Vacantes</span><span class="stat-num" id="s-vacantes">0</span></div>
+    <div class="stat-row"><span>Niveles</span><span class="stat-num" id="s-niveles">0</span></div>
+    <div class="stat-row"><span>Áreas</span><span class="stat-num" id="s-areas">0</span></div>
+    <div class="stat-row"><span>Visibles ahora</span><span class="stat-num" id="s-visible">0</span></div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="sec">Datos</div>
+  <div class="panel">
+    <button class="btn btn-primary" onclick="openModal('modal-import')">🔄 Actualizar datos (Excel/CSV)</button>
+    <button class="btn btn-secondary" onclick="downloadTemplate()">⬇ Plantilla Excel</button>
+    <button class="btn btn-secondary" onclick="openModal('modal-add')">＋ Agregar posición</button>
+    <button class="btn btn-secondary" onclick="loadFromServer()">↺ Recargar desde servidor</button>
+  </div>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<div id="main">
+  <div id="topbar">
+    <div>
+      <div id="topbar-title">Organigrama — MRT Corporativo</div>
+      <div id="topbar-sub" id="topbar-sub">MRT Corporativo · Cargando...</div>
+    </div>
+    <div id="topbar-actions">
+      <span id="save-badge" class="save-badge"></span>
+      <button class="tbtn tbtn-secondary" onclick="loadFromServer()">↺ Sync</button>
+      <button class="tbtn tbtn-secondary" onclick="fitAll()">⌖ Centrar</button>
+      <button class="tbtn tbtn-secondary" onclick="expandAll()">⊕ Expandir todo</button>
+      <button class="tbtn tbtn-secondary" onclick="collapseAll()">⊖ Colapsar</button>
+      <button class="tbtn tbtn-export" onclick="exportPNG()">🖼 PNG</button>
+      <button class="tbtn tbtn-export" onclick="exportPDF()">📄 PDF</button>
+      <button class="tbtn tbtn-primary" onclick="openModal('modal-add')">＋ Posición</button>
+    </div>
+  </div>
+
+  <div id="chart-wrap">
+    <svg id="chart-svg"></svg>
+    <div id="legend">
+      <div class="leg-title">Nivel jerárquico</div>
+      <div id="legend-items"></div>
+    </div>
+    <div id="zoom-ctrl">
+      <button class="zc-btn" onclick="doZoom(1.25)" title="Acercar">+</button>
+      <button class="zc-btn" onclick="doZoom(0.8)" title="Alejar">−</button>
+      <button class="zc-btn" onclick="fitAll()" title="Centrar">⌖</button>
+      <button class="zc-btn" onclick="doZoom(1)" title="100%" style="font-size:10px">1:1</button>
+    </div>
+    <div id="minimap"><svg id="minimap-svg"><rect id="minimap-vp" class="minimap-vp"></rect></svg></div>
+    <div id="tooltip">
+      <div class="tt-name" id="tt-name"></div>
+      <div class="tt-row"><span class="tt-label">Puesto</span><span id="tt-puesto"></span></div>
+      <div class="tt-row"><span class="tt-label">Área</span><span id="tt-area"></span></div>
+      <div class="tt-row"><span class="tt-label">Nivel</span><span id="tt-nivel"></span></div>
+      <div class="tt-row"><span class="tt-label">Reportes</span><span id="tt-rep"></span></div>
+      <div class="tt-row"><span class="tt-label">Estatus</span><span id="tt-est"></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROGRESS ══ -->
+<div id="progress-wrap">
+  <div class="prog-box">
+    <div class="prog-title" id="prog-title">Procesando...</div>
+    <div class="prog-bar-wrap"><div class="prog-bar" id="prog-bar" style="width:0%"></div></div>
+    <div style="font-size:11px;color:var(--text2);margin-top:8px" id="prog-sub"></div>
+  </div>
+</div>
+
+<!-- ══ MODAL: IMPORT ══ -->
+<div class="modal-ov" id="modal-import">
+  <div class="modal">
+    <div class="modal-title">Actualizar Base de Datos</div>
+    <div class="modal-sub">Carga tu archivo Excel o CSV actualizado. Los datos nuevos reemplazarán o se fusionarán con los existentes.</div>
+    <div class="dz" id="drop-zone" onclick="document.getElementById('file-inp').click()">
+      <input type="file" id="file-inp" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleFile(event)">
+      <div class="dz-icon">📊</div>
+      <div class="dz-text">Arrastra aquí tu archivo Excel</div>
+      <div class="dz-sub">.xlsx · .xls · .csv · máx. 10 MB</div>
+    </div>
+    <div id="import-preview" style="display:none">
+      <div style="font-size:12px;color:var(--text2);margin-bottom:8px" id="import-info"></div>
+      <div style="overflow-x:auto;max-height:200px;font-size:11px;" id="import-table"></div>
+      <div style="margin-top:10px;">
+        <label class="ctrl-label">Columna: Nombre</label>
+        <select class="ctrl-input" id="map-nombre"></select>
+        <label class="ctrl-label">Columna: Puesto</label>
+        <select class="ctrl-input" id="map-puesto"></select>
+        <label class="ctrl-label">Columna: Área</label>
+        <select class="ctrl-input" id="map-area"></select>
+        <label class="ctrl-label">Columna: Nivel</label>
+        <select class="ctrl-input" id="map-nivel"></select>
+        <label class="ctrl-label">Columna: Reporta a (ID o Nombre del jefe)</label>
+        <select class="ctrl-input" id="map-manager"></select>
+        <label class="ctrl-label">Columna: ID empleado (opcional)</label>
+        <select class="ctrl-input" id="map-id"></select>
+        <label class="ctrl-label">Columna: Ubicación (opcional)</label>
+        <select class="ctrl-input" id="map-ubicacion"></select>
+        <label class="ctrl-label">Columna: Estatus (opcional)</label>
+        <select class="ctrl-input" id="map-estatus"></select>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-secondary" onclick="closeModal('modal-import')">Cancelar</button>
+      <button class="mbtn mbtn-primary" id="btn-confirm-import" style="display:none" onclick="confirmImport()">✓ Importar y visualizar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL: ADD POSITION ══ -->
+<div class="modal-ov" id="modal-add">
+  <div class="modal">
+    <div class="modal-title" id="add-modal-title">Nueva Posición</div>
+    <div class="modal-sub">Agrega un nodo al organigrama</div>
+    <input type="hidden" id="edit-id">
+    <div class="form-row">
+      <div class="form-group"><label>Nombre completo</label><input type="text" id="add-nombre" placeholder="Juan García López"></div>
+      <div class="form-group"><label>ID / No. Empleado</label><input type="text" id="add-id" placeholder="MRT-001"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Puesto</label><input type="text" id="add-puesto" placeholder="Gerente de Área"></div>
+      <div class="form-group"><label>Área</label><input type="text" id="add-area" placeholder="Operaciones"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Nivel</label>
+        <select id="add-nivel"><option>Directivo</option><option>Gerencia</option><option>Jefatura</option><option>Supervisión</option><option>Operativo</option></select>
+      </div>
+      <div class="form-group"><label>Estatus</label>
+        <select id="add-estatus"><option>Activo</option><option>Vacante</option><option>Inactivo</option></select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Ubicación / Planta</label><input type="text" id="add-ubicacion" placeholder="Oficina Central"></div>
+      <div class="form-group"><label>Reporta a (ID del jefe)</label>
+        <select id="add-manager"><option value="">— Sin jefe directo (raíz) —</option></select>
+      </div>
+    </div>
+    <div class="form-group"><label>Foto URL (opcional)</label><input type="text" id="add-foto" placeholder="https://..."></div>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-secondary" onclick="closeModal('modal-add')">Cancelar</button>
+      <button class="mbtn mbtn-primary" onclick="savePosition()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL: NODE DETAIL ══ -->
+<div class="modal-ov" id="modal-detail">
+  <div class="modal" style="max-width:480px">
+    <div id="detail-content"></div>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-secondary" onclick="closeModal('modal-detail')">Cerrar</button>
+      <button class="mbtn" style="background:var(--red);color:#fff" onclick="deleteNode()">🗑 Eliminar</button>
+      <button class="mbtn mbtn-primary" onclick="editNode()">✏ Editar</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════
+//  DATA & STATE
+// ═══════════════════════════════════════════════
+let allNodes = [];
+let visibleNodes = [];
+let collapsed = new Set();
+let selectedId = null;
+let currentLayout = 'top-down';
+let nodeScale = 1;
+let showPhotos = true;
+let showLines = true;
+let importRawData = null;
+let importCols = [];
+
+// Multi-select filter state
+const filterSel = { area: new Set(), nivel: new Set(), ubicacion: new Set(), estatus: new Set() };
+let zoomBehavior, svgSel, gSel;
+
+const SCHEMES = {
+  blue:   {Directivo:'#1d4ed8',Gerencia:'#3b82f6',Superintendencia:'#0284c7',Jefatura:'#06b6d4',Supervisión:'#0ea5e9',Administrativo:'#7c3aed',Operativo:'#10b981'},
+  purple: {Directivo:'#6d28d9',Gerencia:'#8b5cf6',Superintendencia:'#7c3aed',Jefatura:'#a855f7',Supervisión:'#c084fc',Administrativo:'#ec4899',Operativo:'#06b6d4'},
+  green:  {Directivo:'#065f46',Gerencia:'#059669',Superintendencia:'#0f766e',Jefatura:'#10b981',Supervisión:'#34d399',Administrativo:'#3b82f6',Operativo:'#6ee7b7'},
+  warm:   {Directivo:'#991b1b',Gerencia:'#dc2626',Superintendencia:'#c2410c',Jefatura:'#ea580c',Supervisión:'#d97706',Administrativo:'#ca8a04',Operativo:'#65a30d'},
+  mono:   {Directivo:'#1e293b',Gerencia:'#334155',Superintendencia:'#475569',Jefatura:'#64748b',Supervisión:'#94a3b8',Administrativo:'#7c3aed',Operativo:'#cbd5e1'},
+};
+let currentScheme = 'blue';
+
+function nodeColor(nivel) {
+  return SCHEMES[currentScheme][nivel] || '#3b82f6';
+}
+
+// ═══════════════════════════════════════════════
+//  DEMO DATA (large org ~50 nodes)
+// ═══════════════════════════════════════════════
+function loadDemo() {
+  const areas = ['Operaciones','Finanzas','RRHH','Tecnología','Seguridad','Mantenimiento','Logística','Comercial'];
+  const niveles = ['Directivo','Gerencia','Jefatura','Supervisión','Operativo'];
+  const ubicaciones = ['Oficina Central','Planta Norte','Planta Sur','Corporativo'];
+  allNodes = [];
+  let id = 1;
+  // Root
+  allNodes.push({id:'N001',nombre:'Pedro Ramírez García',puesto:'Director General',area:'Dirección',nivel:'Directivo',manager:null,estatus:'Activo',ubicacion:'Corporativo'});
+  // Level 1 Directors
+  const dirs = [
+    {nombre:'Mario Gutiérrez López',puesto:'Dir. Operaciones',area:'Operaciones'},
+    {nombre:'Ricardo Morales Vega',puesto:'Dir. Finanzas',area:'Finanzas'},
+    {nombre:'Héctor López Hdz.',puesto:'Dir. RRHH',area:'RRHH'},
+    {nombre:'Sandra Fuentes Cruz',puesto:'Dir. Tecnología',area:'Tecnología'},
+    {nombre:'Roberto Salinas P.',puesto:'Dir. Comercial',area:'Comercial'},
+  ];
+  dirs.forEach((d,i) => {
+    const nid = 'N00'+(i+2);
+    allNodes.push({id:nid,nombre:d.nombre,puesto:d.puesto,area:d.area,nivel:'Directivo',manager:'N001',estatus:'Activo',ubicacion:'Corporativo'});
+  });
+  // Level 2 Gerencias
+  const gerMgrs = ['N002','N002','N002','N003','N003','N004','N004','N005','N005','N006'];
+  const gerData = [
+    {nombre:'Laura Sánchez Cruz',puesto:'Gte. Producción',area:'Operaciones'},
+    {nombre:'Carlos Mendoza Ríos',puesto:'Gte. Mantenimiento',area:'Mantenimiento'},
+    {nombre:'Ana Rdz. Pérez',puesto:'Gte. Seguridad',area:'Seguridad'},
+    {nombre:'Jorge Flores Mtz.',puesto:'Gte. Contabilidad',area:'Finanzas'},
+    {nombre:'Valeria Torres M.',puesto:'Gte. Tesorería',area:'Finanzas'},
+    {nombre:'Patricia Torres M.',puesto:'Gte. Reclutamiento',area:'RRHH'},
+    {nombre:'Luis Castro Reyes',puesto:'Gte. Compensaciones',area:'RRHH'},
+    {nombre:'Daniela Vega Leal',puesto:'Gte. Sistemas',area:'Tecnología'},
+    {nombre:'Marcos Ortiz P.',puesto:'Gte. Infraestructura',area:'Tecnología'},
+    {nombre:'Sofía Vargas León',puesto:'Gte. Ventas',area:'Comercial'},
+  ];
+  gerData.forEach((g,i) => {
+    const nid = 'N0'+(10+i+1);
+    allNodes.push({id:nid,nombre:g.nombre,puesto:g.puesto,area:g.area,nivel:'Gerencia',manager:gerMgrs[i],estatus:'Activo',ubicacion:ubicaciones[i%4]});
+  });
+  // Level 3 Jefaturas
+  const jefMgrs = ['N011','N011','N012','N012','N013','N014','N015','N016','N017','N018','N019','N020'];
+  const jefData = [
+    {nombre:'Roberto Jiménez A.',puesto:'Jefe Turno A',area:'Operaciones'},
+    {nombre:'Diana Morales R.',puesto:'Jefa Calidad',area:'Operaciones'},
+    {nombre:'Fernando Ruiz S.',puesto:'Jefe Eléctrico',area:'Mantenimiento'},
+    {nombre:'Carmen López T.',puesto:'Jefa Mecánica',area:'Mantenimiento'},
+    {nombre:'Eduardo Vega P.',puesto:'Jefe Guardias',area:'Seguridad'},
+    {nombre:'Ximena Castro L.',puesto:'Jefa Contabilidad',area:'Finanzas'},
+    {nombre:'Omar Flores G.',puesto:'Jefe Nómina',area:'RRHH'},
+    {nombre:'Paola Reyes M.',puesto:'Jefa Selección',area:'RRHH'},
+    {nombre:'Iván Torres H.',puesto:'Jefe Desarrollo',area:'Tecnología'},
+    {nombre:'Renata Salinas V.',puesto:'Jefa Servidores',area:'Tecnología'},
+    {nombre:'Aldo Méndez C.',puesto:'Jefe Ventas Norte',area:'Comercial'},
+    {nombre:'Gabriela Ponce F.',puesto:'Jefa Ventas Sur',area:'Comercial'},
+  ];
+  jefData.forEach((j,i) => {
+    const nid = 'N0'+(20+i+1);
+    allNodes.push({id:nid,nombre:j.nombre,puesto:j.puesto,area:j.area,nivel:'Jefatura',manager:jefMgrs[i],estatus:i===3?'Vacante':'Activo',ubicacion:ubicaciones[i%4]});
+  });
+  // Level 4 Supervisores
+  const supMgrs = ['N021','N021','N022','N023','N024','N025','N026','N027','N028','N029','N030','N031','N032'];
+  for(let i=0;i<13;i++){
+    const nid='N0'+(40+i+1);
+    allNodes.push({id:nid,nombre:'Sup. '+['Alberto','Brenda','César','Diana','Ernesto','Fabiola','Guillermo','Helena','Isaac','Julia','Kevin','Laura','Miguel'][i]+' '+['Rios','Soto','Luna','Cruz','Peña','Vega','Mora','Silva','Ruiz','Leal','Park','Díaz','Rojas'][i],
+      puesto:'Supervisor '+(i+1),area:['Operaciones','Mantenimiento','Seguridad','Finanzas','RRHH','Tecnología','Comercial'][i%7],nivel:'Supervisión',
+      manager:supMgrs[i],estatus:i===7?'Inactivo':'Activo',ubicacion:ubicaciones[i%4]});
+  }
+  // Level 5 Operativos
+  const opMgrs = allNodes.filter(n=>n.nivel==='Supervisión').map(n=>n.id);
+  ['Ana','Beto','Carlos','Dani','Elena','Felipe','Gaby','Hugo','Irene','José','Karen','Leo'].forEach((nm,i)=>{
+    allNodes.push({id:'N0'+(60+i+1),nombre:nm+' Op. '+(i+1),puesto:'Operador '+(i+1),
+      area:['Operaciones','Mantenimiento','Seguridad'][i%3],nivel:'Operativo',
+      manager:opMgrs[i%opMgrs.length],estatus:'Activo',ubicacion:ubicaciones[i%4]});
+  });
+  populateFilters();
+  applyFilters();
+  toast('Demo cargado: '+allNodes.length+' posiciones','s');
+}
+
+// ═══════════════════════════════════════════════
+//  FILTERS
+// ═══════════════════════════════════════════════
+function populateFilters() {
+  const areas  = [...new Set(allNodes.map(n=>n.area).filter(Boolean))].sort();
+  const ubis   = [...new Set(allNodes.map(n=>n.ubicacion).filter(Boolean))].sort();
+  const niveles= ['Directivo','Gerencia','Superintendencia','Jefatura','Supervisión','Administrativo','Operativo'];
+  const estatus= [...new Set(allNodes.map(n=>n.estatus||'Activo').filter(Boolean))].sort();
+
+  buildChips('chips-ubicacion', 'ubicacion', ubis);
+  buildChips('chips-nivel',     'nivel',     niveles.filter(n=>allNodes.some(x=>x.nivel===n)));
+  buildChips('chips-area',      'area',      areas);
+  buildChips('chips-estatus',   'estatus',   estatus);
+  updateStats();
+}
+
+function buildChips(containerId, group, values) {
+  const c = document.getElementById(containerId);
+  if(!c) return;
+  c.innerHTML = values.map(v => {
+    const on = filterSel[group].has(v) ? 'on' : '';
+    return `<div class="chip ${on}" onclick="toggleChip(this,'${group}','${v.replace(/'/g,"\'")}')">${v}</div>`;
+  }).join('');
+}
+
+function toggleChip(el, group, value) {
+  if(filterSel[group].has(value)) {
+    filterSel[group].delete(value);
+    el.classList.remove('on');
+  } else {
+    filterSel[group].add(value);
+    el.classList.add('on');
+  }
+  updateActiveBar(group);
+  applyFilters();
+}
+
+function updateActiveBar(group) {
+  const bar = document.getElementById('bar-'+group);
+  if(!bar) return;
+  const sel = filterSel[group];
+  if(sel.size === 0) { bar.innerHTML = ''; return; }
+  bar.innerHTML = `Mostrando: <span>${[...sel].join(', ')}</span>`;
+}
+
+function clearGroup(group) {
+  filterSel[group].clear();
+  buildChips('chips-'+group, group, [...document.querySelectorAll('#chips-'+group+' .chip')].map(c=>c.textContent));
+  updateActiveBar(group);
+  applyFilters();
+}
+
+function applyFilters() {
+  const q  = (document.getElementById('f-search').value||'').toLowerCase().trim();
+  const sv = document.getElementById('show-vacant') && document.getElementById('show-vacant').checked;
+
+  const hasFilter = q || filterSel.area.size || filterSel.nivel.size || filterSel.ubicacion.size || filterSel.estatus.size || !sv;
+
+  visibleNodes = allNodes.filter(n => {
+    // Vacant toggle
+    if(!sv && n.estatus==='Vacante') return false;
+    // Multi-select chips — if nothing selected in a group, all pass
+    if(filterSel.area.size     && !filterSel.area.has(n.area))            return false;
+    if(filterSel.nivel.size    && !filterSel.nivel.has(n.nivel))           return false;
+    if(filterSel.ubicacion.size&& !filterSel.ubicacion.has(n.ubicacion))   return false;
+    if(filterSel.estatus.size  && !filterSel.estatus.has(n.estatus||'Activo')) return false;
+    // Text search
+    if(q && !(
+      (n.nombre||'').toLowerCase().includes(q) ||
+      (n.puesto||'').toLowerCase().includes(q) ||
+      (n.area  ||'').toLowerCase().includes(q)
+    )) return false;
+    return true;
+  });
+
+  updateStats();
+  renderChart();
+}
+
+function clearFilters() {
+  document.getElementById('f-search').value = '';
+  Object.keys(filterSel).forEach(g => { filterSel[g].clear(); updateActiveBar(g); });
+  document.getElementById('show-vacant').checked = true;
+  // Re-render chips without selections
+  populateFilters();
+  applyFilters();
+  toast('Todos los filtros limpiados','i');
+}
+
+function updateStats() {
+  document.getElementById('s-total').textContent = allNodes.length;
+  document.getElementById('s-activos').textContent = allNodes.filter(n=>n.estatus==='Activo').length;
+  document.getElementById('s-vacantes').textContent = allNodes.filter(n=>n.estatus==='Vacante').length;
+  document.getElementById('s-niveles').textContent = new Set(allNodes.map(n=>n.nivel)).size;
+  document.getElementById('s-areas').textContent = new Set(allNodes.map(n=>n.area)).size;
+  document.getElementById('s-visible').textContent = visibleNodes.length;
+  document.getElementById('topbar-sub').textContent = `MRT Corporativo · ${allNodes.length} posiciones · ${visibleNodes.length} visibles`;
+}
+
+// ═══════════════════════════════════════════════
+//  RENDER CHART
+// ═══════════════════════════════════════════════
+const NW = 190, NH = 84; // node base width/height
+
+function renderChart() {
+  const wrap = document.getElementById('chart-wrap');
+  const W = wrap.clientWidth, H = wrap.clientHeight;
+  const svg = d3.select('#chart-svg');
+  svg.selectAll('*').remove();
+  if(!visibleNodes.length) {
+    svg.append('text').attr('x',W/2).attr('y',H/2).attr('text-anchor','middle').attr('fill','#475569').attr('font-size',14).text('No hay datos — importa Excel o carga el demo');
+    return;
+  }
+  // Build hierarchy
+  const idSet = new Set(visibleNodes.map(n=>n.id));
+  const roots = visibleNodes.filter(n=>!n.manager||!idSet.has(n.manager));
+  let root;
+  if(roots.length===1) {
+    root = d3.hierarchy(roots[0], d => collapsed.has(d.id)?null:visibleNodes.filter(n=>n.manager===d.id));
+  } else {
+    const fake = {id:'__root__',nombre:'',puesto:'',nivel:'',manager:null,_fake:true};
+    root = d3.hierarchy(fake, d => d._fake ? roots : (collapsed.has(d.id)?null:visibleNodes.filter(n=>n.manager===d.id)));
+  }
+
+  // Layout
+  const nw = NW*nodeScale, nh = NH*nodeScale;
+  let treeLayout;
+  if(currentLayout==='radial') {
+    const r = Math.min(W,H)*0.42;
+    treeLayout = d3.cluster().size([2*Math.PI, r]).separation((a,b)=>( a.parent===b.parent?1:2)/a.depth);
+  } else if(currentLayout==='left-right') {
+    treeLayout = d3.tree().nodeSize([nh+16, nw+60]);
+  } else if(currentLayout==='compact') {
+    treeLayout = d3.tree().nodeSize([nh+8, nw+30]);
+  } else {
+    treeLayout = d3.tree().nodeSize([nw+24, nh+50]);
+  }
+  treeLayout(root);
+
+  // SVG setup
+  svg.attr('width',W).attr('height',H);
+  const g = svg.append('g');
+  zoomBehavior = d3.zoom().scaleExtent([0.05,3]).on('zoom', e=>{ g.attr('transform',e.transform); updateMinimap(e.transform,W,H); });
+  svg.call(zoomBehavior);
+  svgSel = svg; gSel = g;
+
+  // Links
+  if(showLines) {
+    const linkGen = currentLayout==='radial'
+      ? d3.linkRadial().angle(d=>d.x).radius(d=>d.y)
+      : currentLayout==='left-right' || currentLayout==='compact'
+        ? d3.linkHorizontal().x(d=>d.y).y(d=>d.x)
+        : d3.linkVertical().x(d=>d.x).y(d=>d.y);
+
+    g.selectAll('.link').data(root.links().filter(l=>!l.source.data._fake)).enter()
+      .append('path').attr('class','link').attr('fill','none')
+      .attr('stroke','#1e2d45').attr('stroke-width',1.5).attr('d',linkGen);
+  }
+
+  // Nodes
+  const node = g.selectAll('.org-node')
+    .data(root.descendants().filter(d=>!d.data._fake)).enter()
+    .append('g').attr('class','org-node')
+    .attr('transform', d => {
+      if(currentLayout==='radial') return `rotate(${d.x*180/Math.PI-90}) translate(${d.y},0)`;
+      if(currentLayout==='left-right'||currentLayout==='compact') return `translate(${d.y},${d.x})`;
+      return `translate(${d.x},${d.y})`;
+    })
+    .on('click', (e,d) => { e.stopPropagation(); nodeClick(d.data); })
+    .on('dblclick', (e,d) => { e.stopPropagation(); toggleCollapse(d.data.id); })
+    .on('mouseover', (e,d) => showTooltip(e,d.data))
+    .on('mouseout', hideTooltip);
+
+  const hw = nw/2, hh = nh/2;
+  const vacantPat = g.append('defs').append('pattern').attr('id','vac-stripe').attr('patternUnits','userSpaceOnUse').attr('width',8).attr('height',8);
+  vacantPat.append('path').attr('d','M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2').attr('stroke','#475569').attr('stroke-width',1.5).attr('opacity',.4);
+
+  node.each(function(d) {
+    const n = d.data, sel = d3.select(this);
+    const col = nodeColor(n.nivel);
+    const isVacant = n.estatus==='Vacante';
+    const isInactive = n.estatus==='Inactivo';
+    const alpha = isInactive ? '33' : '22';
+
+    // Shadow
+    sel.append('rect').attr('x',-hw+3).attr('y',-hh+3).attr('width',nw).attr('height',nh).attr('rx',10).attr('fill','rgba(0,0,0,.3)');
+
+    // Card background
+    const bg = sel.append('rect').attr('class','node-bg').attr('x',-hw).attr('y',-hh).attr('width',nw).attr('height',nh)
+      .attr('rx',10).attr('fill', isVacant?'url(#vac-stripe)':'#141c2e').attr('stroke',col).attr('stroke-width', n.id===selectedId?2.5:1);
+
+    // Color top bar
+    sel.append('rect').attr('x',-hw).attr('y',-hh).attr('width',nw).attr('height',4).attr('rx',2).attr('fill',col);
+
+    // Avatar circle
+    if(showPhotos) {
+      sel.append('circle').attr('cx',-hw+22).attr('cy',0).attr('r',17).attr('fill',col+'44');
+      if(n.foto) {
+        const clip = g.select('defs').empty() ? g.append('defs') : g.select('defs');
+        const cid = 'clip-'+n.id;
+        clip.append('clipPath').attr('id',cid).append('circle').attr('cx',-hw+22).attr('cy',0).attr('r',16);
+        sel.append('image').attr('href',n.foto).attr('x',-hw+6).attr('y',-16).attr('width',32).attr('height',32).attr('clip-path',`url(#${cid})`);
+      } else {
+        const initials = (n.nombre||'').split(' ').filter(w=>w.length>1).map(w=>w[0]).slice(0,2).join('');
+        sel.append('text').attr('x',-hw+22).attr('y',5).attr('text-anchor','middle').attr('fill',col).attr('font-size',12).attr('font-weight',700).text(initials);
+      }
+    }
+
+    // Name
+    const tx = showPhotos ? -hw+44 : -hw+10;
+    const maxNameW = showPhotos ? nw-54 : nw-20;
+    const nameStr = truncText(n.nombre||'Vacante', Math.floor(maxNameW/7));
+    sel.append('text').attr('x',tx).attr('y',-12).attr('fill', isVacant?'#94a3b8':isInactive?'#64748b':'#f1f5f9').attr('font-size',11).attr('font-weight',600).text(nameStr);
+
+    // Puesto
+    const puestoStr = truncText(n.puesto||'', Math.floor(maxNameW/6.5));
+    sel.append('text').attr('x',tx).attr('y',4).attr('fill','#94a3b8').attr('font-size',10).text(puestoStr);
+
+    // Area tag
+    const areaStr = truncText(n.area||'', 16);
+    const areaW = Math.min(areaStr.length*6.5+12, maxNameW*0.6);
+    sel.append('rect').attr('x',tx).attr('y',12).attr('width',areaW).attr('height',14).attr('rx',7).attr('fill',col+'22');
+    sel.append('text').attr('x',tx+6).attr('y',23).attr('fill',col).attr('font-size',9).attr('font-weight',600).text(areaStr);
+
+    // Reports count badge
+    const childCnt = visibleNodes.filter(x=>x.manager===n.id).length;
+    const showCounts = document.getElementById('show-counts').checked;
+    if(showCounts && childCnt>0) {
+      sel.append('circle').attr('cx',hw-10).attr('cy',-hh+10).attr('r',9).attr('fill',col);
+      sel.append('text').attr('x',hw-10).attr('y',-hh+14).attr('text-anchor','middle').attr('fill','#fff').attr('font-size',9).attr('font-weight',700).text(childCnt);
+    }
+
+    // Collapse indicator
+    if(collapsed.has(n.id) && childCnt>0) {
+      sel.append('circle').attr('cx',0).attr('cy',hh).attr('r',8).attr('fill',col);
+      sel.append('text').attr('x',0).attr('y',hh+4).attr('text-anchor','middle').attr('fill','#fff').attr('font-size',10).attr('font-weight',700).text('+');
+    }
+
+    // Vacant overlay
+    if(isVacant) {
+      sel.append('text').attr('x',hw-8).attr('y',hh-8).attr('text-anchor','end').attr('fill','#f59e0b').attr('font-size',9).attr('font-weight',700).text('VACANTE');
+    }
+    if(isInactive) {
+      sel.append('text').attr('x',hw-8).attr('y',hh-8).attr('text-anchor','end').attr('fill','#ef4444').attr('font-size',9).attr('font-weight',700).text('INACTIVO');
+    }
+  });
+
+  // Center
+  fitAll(false);
+  buildLegend();
+  buildMinimap(g, W, H);
+}
+
+function truncText(str, maxLen) { return str.length>maxLen ? str.slice(0,maxLen-1)+'…' : str; }
+
+// ═══════════════════════════════════════════════
+//  INTERACTIONS
+// ═══════════════════════════════════════════════
+function nodeClick(data) {
+  selectedId = data.id;
+  renderChart();
+  showDetail(data);
+}
+
+function toggleCollapse(id) {
+  if(collapsed.has(id)) collapsed.delete(id); else collapsed.add(id);
+  renderChart();
+}
+
+function expandAll()  { collapsed.clear(); renderChart(); toast('Todo expandido','i'); }
+function collapseAll(){
+  allNodes.forEach(n => { if(visibleNodes.filter(x=>x.manager===n.id).length) collapsed.add(n.id); });
+  renderChart(); toast('Todo colapsado','i');
+}
+
+function showDetail(data) {
+  const reports = allNodes.filter(n=>n.manager===data.id);
+  const mgr = allNodes.find(n=>n.id===data.manager);
+  const col = nodeColor(data.nivel);
+  document.getElementById('detail-content').innerHTML = `
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+      <div style="width:52px;height:52px;border-radius:50%;background:${col}44;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:${col};flex-shrink:0">
+        ${(data.nombre||'').split(' ').filter(w=>w.length>1).map(w=>w[0]).slice(0,2).join('')}
+      </div>
+      <div>
+        <div style="font-size:17px;font-weight:700">${data.nombre||'Vacante'}</div>
+        <div style="font-size:12px;color:var(--text2);margin-top:2px">${data.puesto||''}</div>
+        <div style="margin-top:5px"><span class="tag" style="background:${col}22;color:${col}">${data.nivel||''}</span>
+        ${data.estatus==='Vacante'?'<span class="tag tag-yellow" style="margin-left:4px">Vacante</span>':data.estatus==='Inactivo'?'<span class="tag tag-red" style="margin-left:4px">Inactivo</span>':'<span class="tag tag-green" style="margin-left:4px">Activo</span>'}</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+      <div style="background:var(--card2);border-radius:8px;padding:12px;font-size:12px;">
+        <div style="font-size:9px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase">Información</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="color:var(--text2)">ID</span><span style="font-family:monospace">${data.id||'—'}</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="color:var(--text2)">Área</span><span>${data.area||'—'}</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="color:var(--text2)">Ubicación</span><span>${data.ubicacion||'—'}</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="color:var(--text2)">Reporta a</span><span>${mgr?mgr.nombre:'—'}</span></div>
+      </div>
+      <div style="background:var(--card2);border-radius:8px;padding:12px;font-size:12px;">
+        <div style="font-size:9px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase">Equipo</div>
+        <div style="font-size:24px;font-weight:800;color:${col}">${reports.length}</div>
+        <div style="color:var(--text2);margin-bottom:8px">reportes directos</div>
+        ${reports.slice(0,4).map(r=>`<div style="font-size:11px;color:var(--text2);margin-bottom:3px">· ${r.nombre}</div>`).join('')}
+        ${reports.length>4?`<div style="font-size:10px;color:var(--muted)">... y ${reports.length-4} más</div>`:''}
+      </div>
+    </div>`;
+  document.getElementById('detail-content').setAttribute('data-id', data.id);
+  openModal('modal-detail');
+}
+
+function deleteNode() {
+  const id = document.getElementById('detail-content').getAttribute('data-id');
+  if(!id) return;
+  if(!confirm('¿Eliminar esta posición del organigrama?')) return;
+  allNodes = allNodes.filter(n=>n.id!==id);
+  allNodes.forEach(n=>{ if(n.manager===id) n.manager=null; });
+  closeModal('modal-detail');
+  applyFilters();
+  scheduleSave();
+  toast('Posición eliminada y guardada','i');
+}
+
+function editNode() {
+  const id = document.getElementById('detail-content').getAttribute('data-id');
+  const n = allNodes.find(x=>x.id===id);
+  if(!n) return;
+  closeModal('modal-detail');
+  document.getElementById('add-modal-title').textContent='Editar Posición';
+  document.getElementById('edit-id').value = id;
+  document.getElementById('add-nombre').value = n.nombre||'';
+  document.getElementById('add-id').value = n.id||'';
+  document.getElementById('add-puesto').value = n.puesto||'';
+  document.getElementById('add-area').value = n.area||'';
+  document.getElementById('add-nivel').value = n.nivel||'Operativo';
+  document.getElementById('add-estatus').value = n.estatus||'Activo';
+  document.getElementById('add-ubicacion').value = n.ubicacion||'';
+  document.getElementById('add-foto').value = n.foto||'';
+  populateManagerSelect(id);
+  document.getElementById('add-manager').value = n.manager||'';
+  openModal('modal-add');
+}
+
+// ═══════════════════════════════════════════════
+//  LAYOUT & VISUAL
+// ═══════════════════════════════════════════════
+function setLayout(l) {
+  currentLayout = l;
+  document.querySelectorAll('.layout-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('lb-'+(l==='top-down'?'td':l==='left-right'?'lr':l==='radial'?'rad':'com')).classList.add('active');
+  collapsed.clear();
+  renderChart();
+}
+
+function setColorScheme(s) {
+  currentScheme = s;
+  document.querySelectorAll('.color-dot').forEach(d=>d.classList.remove('active'));
+  document.querySelector(`[data-scheme="${s}"]`).classList.add('active');
+  renderChart();
+  buildLegend();
+}
+
+function updateNodeSize(v) {
+  nodeScale = v/100;
+  document.getElementById('node-size-val').textContent = v+'%';
+  renderChart();
+}
+
+function togglePhotos() { showPhotos = document.getElementById('show-photos').checked; renderChart(); }
+function toggleLines()  { showLines  = document.getElementById('show-lines').checked;  renderChart(); }
+
+function buildLegend() {
+  const levels = [...new Set(visibleNodes.map(n=>n.nivel).filter(Boolean))];
+  document.getElementById('legend-items').innerHTML = levels.map(l=>`
+    <div class="leg-item"><div class="leg-dot" style="background:${nodeColor(l)}"></div>${l}</div>`).join('');
+}
+
+// ═══════════════════════════════════════════════
+//  ZOOM
+// ═══════════════════════════════════════════════
+function doZoom(factor) {
+  if(!svgSel||!zoomBehavior) return;
+  svgSel.transition().duration(350).call(zoomBehavior.scaleBy, factor);
+}
+
+function fitAll(animate=true) {
+  if(!svgSel||!gSel||!zoomBehavior) return;
+  const wrap = document.getElementById('chart-wrap');
+  const W = wrap.clientWidth, H = wrap.clientHeight;
+  try {
+    const bbox = gSel.node().getBBox();
+    if(!bbox.width||!bbox.height) return;
+    const scale = Math.min(0.9*W/bbox.width, 0.9*H/bbox.height, 2);
+    const tx = W/2 - scale*(bbox.x+bbox.width/2);
+    const ty = H/2 - scale*(bbox.y+bbox.height/2);
+    const t = d3.zoomIdentity.translate(tx,ty).scale(scale);
+    (animate?svgSel.transition().duration(600):svgSel).call(zoomBehavior.transform, t);
+  } catch(e){}
+}
+
+// ═══════════════════════════════════════════════
+//  MINIMAP
+// ═══════════════════════════════════════════════
+function buildMinimap(g, W, H) {
+  const mm = document.getElementById('minimap-svg');
+  const mw = 180, mh = 110;
+  try {
+    const bbox = g.node().getBBox();
+    if(!bbox.width) return;
+    const sc = Math.min(mw/bbox.width, mh/bbox.height)*0.85;
+    const tx = (mw - bbox.width*sc)/2 - bbox.x*sc;
+    const ty = (mh - bbox.height*sc)/2 - bbox.y*sc;
+    d3.select(mm).selectAll('*').remove();
+    const mg = d3.select(mm).append('g').attr('transform',`translate(${tx},${ty}) scale(${sc})`);
+    d3.select('#chart-svg').selectAll('.link').each(function(){ mg.append('path').attr('d',d3.select(this).attr('d')).attr('fill','none').attr('stroke','#1e2d45').attr('stroke-width',1.5/sc); });
+    d3.select('#chart-svg').selectAll('.org-node').each(function(d){ const tr=d3.select(this).attr('transform'); mg.append('rect').attr('transform',tr).attr('x',-NW*nodeScale/2).attr('y',-NH*nodeScale/2).attr('width',NW*nodeScale).attr('height',NH*nodeScale).attr('rx',4).attr('fill',nodeColor(d.data.nivel)).attr('opacity',.7); });
+  } catch(e){}
+}
+
+function updateMinimap(transform, W, H) {
+  const mm = document.getElementById('minimap');
+  const mw=mm.clientWidth, mh=mm.clientHeight;
+  try {
+    const bbox = gSel.node().getBBox();
+    const sc = Math.min(mw/bbox.width, mh/bbox.height)*0.85;
+    const tx2 = (mw-bbox.width*sc)/2-bbox.x*sc;
+    const ty2 = (mh-bbox.height*sc)/2-bbox.y*sc;
+    const vx = (-transform.x/transform.k)*sc+tx2;
+    const vy = (-transform.y/transform.k)*sc+ty2;
+    const vw = (W/transform.k)*sc, vh = (H/transform.k)*sc;
+    d3.select('#minimap-vp').attr('x',vx).attr('y',vy).attr('width',vw).attr('height',vh);
+  } catch(e){}
+}
+
+// ═══════════════════════════════════════════════
+//  TOOLTIP
+// ═══════════════════════════════════════════════
+function showTooltip(e, data) {
+  const t = document.getElementById('tooltip');
+  const reps = allNodes.filter(n=>n.manager===data.id).length;
+  document.getElementById('tt-name').textContent = data.nombre||'Vacante';
+  document.getElementById('tt-puesto').textContent = data.puesto||'—';
+  document.getElementById('tt-area').textContent = data.area||'—';
+  document.getElementById('tt-nivel').textContent = data.nivel||'—';
+  document.getElementById('tt-rep').textContent = reps;
+  document.getElementById('tt-est').textContent = data.estatus||'—';
+  t.style.display='block';
+  t.style.left=(e.offsetX+14)+'px';
+  t.style.top=(e.offsetY-10)+'px';
+}
+function hideTooltip() { document.getElementById('tooltip').style.display='none'; }
+
+// ═══════════════════════════════════════════════
+//  EXCEL IMPORT
+// ═══════════════════════════════════════════════
+const dz = document.getElementById('drop-zone');
+dz.addEventListener('dragover', e=>{ e.preventDefault(); dz.classList.add('over'); });
+dz.addEventListener('dragleave', ()=>dz.classList.remove('over'));
+dz.addEventListener('drop', e=>{ e.preventDefault(); dz.classList.remove('over'); processFile(e.dataTransfer.files[0]); });
+
+function handleFile(e) { processFile(e.target.files[0]); }
+
+function processFile(file) {
+  if(!file) return;
+  showProgress('Leyendo archivo...', 20);
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      showProgress('Procesando datos...', 60);
+      const wb = XLSX.read(e.target.result, {type:'binary'});
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const data = XLSX.utils.sheet_to_json(ws, {defval:''});
+      if(!data.length) { hideProgress(); toast('El archivo está vacío','e'); return; }
+      importRawData = data;
+      importCols = Object.keys(data[0]);
+      showProgress('Listo', 100);
+      setTimeout(()=>{ hideProgress(); showImportPreview(data, file.name); }, 400);
+    } catch(err) { hideProgress(); toast('Error al leer: '+err.message,'e'); }
+  };
+  reader.readAsBinaryString(file);
+}
+
+function showImportPreview(data, name) {
+  document.getElementById('import-info').textContent = `📄 ${name} — ${data.length} filas · ${importCols.length} columnas`;
+  // Preview table
+  const rows = data.slice(0,4);
+  let html = `<table style="border-collapse:collapse;width:100%"><thead><tr>${importCols.map(c=>`<th style="padding:4px 8px;border-bottom:1px solid var(--border2);text-align:left;color:var(--muted);white-space:nowrap">${c}</th>`).join('')}</tr></thead><tbody>`;
+  rows.forEach(r=>{ html+=`<tr>${importCols.map(c=>`<td style="padding:3px 8px;border-bottom:1px solid var(--border);white-space:nowrap;max-width:100px;overflow:hidden;text-overflow:ellipsis">${r[c]}</td>`).join('')}</tr>`; });
+  html += '</tbody></table>';
+  document.getElementById('import-table').innerHTML = html;
+  // Column mapping selects
+  ['nombre','puesto','area','nivel','manager','id','ubicacion','estatus'].forEach(f=>{
+    const sel = document.getElementById('map-'+f);
+    sel.innerHTML = '<option value="">— No incluida —</option>'+importCols.map(c=>`<option value="${c}" ${autoMatch(c,f)?'selected':''}>${c}</option>`).join('');
+  });
+  document.getElementById('import-preview').style.display='block';
+  document.getElementById('btn-confirm-import').style.display='block';
+}
+
+function autoMatch(col, field) {
+  const c = col.toLowerCase().replace(/[\s_\-\.]/g,'');
+  const maps = {nombre:['nombre','name','empleado','colaborador','trabajador'],puesto:['puesto','cargo','posicion','position','titulo','title','job'],area:['area','departamento','dept','dpto','division'],nivel:['nivel','level','jerarquia','grado'],manager:['manager','jefe','reportaa','supervisor','boss','reporte'],id:['id','numero','no','emp','empleadoid','idempleado'],ubicacion:['ubicacion','planta','location','sede','oficina'],estatus:['estatus','status','estado','activo']};
+  return (maps[field]||[]).some(k=>c.includes(k));
+}
+
+async function confirmImport() {
+  if(!importRawData) return;
+  showProgress('Importando posiciones...', 10);
+  const get = f => document.getElementById('map-'+f).value;
+  const newNodes = [];
+  importRawData.forEach((row,i) => {
+    showProgress(`Importando ${i+1}/${importRawData.length}...`, Math.round(i/importRawData.length*80)+10);
+    const id = (get('id')&&row[get('id')])?String(row[get('id')]).trim():`IMP-${String(i+1).padStart(4,'0')}`;
+    newNodes.push({
+      id, nombre:get('nombre')?String(row[get('nombre')]||'').trim():'',
+      puesto: get('puesto')?String(row[get('puesto')]||'').trim():'',
+      area:   get('area')  ?String(row[get('area')]  ||'').trim():'',
+      nivel:  get('nivel') ?String(row[get('nivel')] ||'').trim():'Operativo',
+      manager:get('manager')?String(row[get('manager')]||'').trim()||null:null,
+      ubicacion:get('ubicacion')?String(row[get('ubicacion')]||'').trim():'',
+      estatus:get('estatus')?String(row[get('estatus')]||'').trim():'Activo',
+    });
+  });
+  // Merge or replace
+  if(allNodes.length && confirm(`¿Agregar a los ${allNodes.length} nodos existentes? OK=Agregar, Cancelar=Reemplazar`)) {
+    const existIds = new Set(allNodes.map(n=>n.id));
+    newNodes.forEach(n=>{ if(existIds.has(n.id)) { Object.assign(allNodes.find(x=>x.id===n.id),n); } else allNodes.push(n); });
+  } else {
+    allNodes = newNodes;
+  }
+  showProgress('Guardando en servidor...', 90);
+  if(allNodes.length && confirm(`¿Agregar a los ${allNodes.length} nodos existentes? OK=Agregar, Cancelar=Reemplazar`)) {
+    const existIds = new Set(allNodes.map(n=>n.id));
+    newNodes.forEach(n=>{ if(existIds.has(n.id)) { Object.assign(allNodes.find(x=>x.id===n.id),n); } else allNodes.push(n); });
+  } else {
+    allNodes = newNodes;
+  }
+  try {
+    await apiPut('/api/nodes', allNodes);
+    showProgress('Listo', 100);
+    setTimeout(()=>{ hideProgress(); populateFilters(); applyFilters(); closeModal('modal-import'); toast(`${newNodes.length} posiciones importadas y guardadas en el servidor`,'s'); }, 300);
+  } catch(e) {
+    hideProgress();
+    toast('Importado localmente pero error al guardar en servidor: '+e.message,'e');
+    populateFilters(); applyFilters(); closeModal('modal-import');
+  }
+}
+
+// ═══════════════════════════════════════════════
+//  SAVE POSITION
+// ═══════════════════════════════════════════════
+function populateManagerSelect(excludeId='') {
+  const sel = document.getElementById('add-manager');
+  sel.innerHTML = '<option value="">— Sin jefe directo (raíz) —</option>';
+  allNodes.filter(n=>n.id!==excludeId).forEach(n=>{
+    sel.innerHTML += `<option value="${n.id}">${n.nombre||n.id} — ${n.puesto||''}</option>`;
+  });
+}
+
+function savePosition() {
+  const editId = document.getElementById('edit-id').value;
+  const newId = document.getElementById('add-id').value.trim() || ('POS-'+Date.now());
+  const node = {
+    id: editId||newId,
+    nombre:   document.getElementById('add-nombre').value.trim(),
+    puesto:   document.getElementById('add-puesto').value.trim(),
+    area:     document.getElementById('add-area').value.trim(),
+    nivel:    document.getElementById('add-nivel').value,
+    estatus:  document.getElementById('add-estatus').value,
+    ubicacion:document.getElementById('add-ubicacion').value.trim(),
+    manager:  document.getElementById('add-manager').value||null,
+    foto:     document.getElementById('add-foto').value.trim()||null,
+  };
+  if(!node.nombre && node.estatus!=='Vacante') { toast('El nombre es obligatorio','e'); return; }
+  if(editId) {
+    const idx = allNodes.findIndex(n=>n.id===editId);
+    if(idx>-1) allNodes[idx] = node; else allNodes.push(node);
+  } else {
+    allNodes.push(node);
+  }
+  closeModal('modal-add');
+  document.getElementById('edit-id').value='';
+  document.getElementById('add-modal-title').textContent='Nueva Posición';
+  populateFilters(); applyFilters();
+  scheduleSave();
+  toast(editId ? 'Posición actualizada y guardada' : 'Posición agregada y guardada', 's');
+}
+
+// ═══════════════════════════════════════════════
+//  EXPORT
+// ═══════════════════════════════════════════════
+async function exportPNG() {
+  showProgress('Generando imagen PNG...', 30);
+  try {
+    const svg = document.getElementById('chart-svg');
+    const clone = svg.cloneNode(true);
+    clone.style.background='#0b0f1a';
+    clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+    // Embed font
+    const styleEl = document.createElement('style');
+    styleEl.textContent = "text{font-family:'Inter',Arial,sans-serif;}";
+    clone.insertBefore(styleEl, clone.firstChild);
+    const serializer = new XMLSerializer();
+    const svgStr = serializer.serializeToString(clone);
+    const canvas = document.createElement('canvas');
+    const scale = 2; // retina
+    canvas.width  = svg.clientWidth*scale;
+    canvas.height = svg.clientHeight*scale;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle='#0b0f1a'; ctx.fillRect(0,0,canvas.width,canvas.height);
+    const img = new Image();
+    img.onload = () => {
+      ctx.drawImage(img,0,0,canvas.width,canvas.height);
+      showProgress('Descargando...', 90);
+      const a=document.createElement('a');
+      a.download='organigrama_'+Date.now()+'.png';
+      a.href=canvas.toDataURL('image/png',1.0);
+      a.click();
+      hideProgress(); toast('Imagen PNG descargada','s');
+    };
+    img.onerror = () => { hideProgress(); exportPNGFallback(); };
+    img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svgStr);
+  } catch(e) { hideProgress(); exportPNGFallback(); }
+}
+
+async function exportPNGFallback() {
+  showProgress('Capturando pantalla...', 40);
+  try {
+    const wrap = document.getElementById('chart-wrap');
+    const canvas = await html2canvas(wrap, {backgroundColor:'#0b0f1a',scale:2,logging:false,useCORS:true});
+    showProgress('Descargando...', 90);
+    const a=document.createElement('a'); a.download='organigrama_'+Date.now()+'.png'; a.href=canvas.toDataURL('image/png'); a.click();
+    hideProgress(); toast('Imagen PNG descargada','s');
+  } catch(e){ hideProgress(); toast('Error al exportar imagen: '+e.message,'e'); }
+}
+
+async function exportPDF() {
+  showProgress('Generando PDF...', 20);
+  try {
+    const wrap = document.getElementById('chart-wrap');
+    const canvas = await html2canvas(wrap, {backgroundColor:'#0b0f1a',scale:1.5,logging:false,useCORS:true});
+    showProgress('Construyendo PDF...', 70);
+    const imgData = canvas.toDataURL('image/png');
+    const iw=canvas.width, ih=canvas.height;
+    // Build PDF via data URL + print trick since no jsPDF CDN needed
+    const pdfW = Math.max(iw*0.75, 800), pdfH = ih*0.75;
+    const htmlContent = `<!DOCTYPE html><html><head><title>Organigrama MRT</title>
+    <style>body{margin:0;padding:0}img{max-width:100%;display:block}
+    @page{size:${pdfW}px ${pdfH}px;margin:0}@media print{body{margin:0}}</style></head>
+    <body><img src="${imgData}"></body></html>`;
+    const blob = new Blob([htmlContent],{type:'text/html'});
+    const url = URL.createObjectURL(blob);
+    const win = window.open(url,'_blank');
+    if(win) { win.onload=()=>{ win.print(); URL.revokeObjectURL(url); }; }
+    showProgress('Listo', 100);
+    setTimeout(hideProgress, 600);
+    toast('PDF listo para imprimir (usa Guardar como PDF)','s');
+  } catch(e){ hideProgress(); toast('Error al generar PDF: '+e.message,'e'); }
+}
+
+// ═══════════════════════════════════════════════
+//  TEMPLATE DOWNLOAD
+// ═══════════════════════════════════════════════
+function downloadTemplate() {
+  const cols = ['ID_Empleado','Nombre_Completo','Puesto','Area','Nivel','Reporta_A_ID','Ubicacion','Estatus','Foto_URL'];
+  const ejemplo = [
+    ['MRT-001','Pedro Ramírez García','Director General','Dirección','Directivo','','Corporativo','Activo',''],
+    ['MRT-002','Mario Gutiérrez López','Director de Operaciones','Operaciones','Directivo','MRT-001','Corporativo','Activo',''],
+    ['MRT-003','Laura Sánchez Cruz','Gerente de Producción','Operaciones','Gerencia','MRT-002','Planta Norte','Activo',''],
+    ['MRT-004','Carlos Mendoza Ríos','Jefe de Turno A','Operaciones','Jefatura','MRT-003','Planta Norte','Activo',''],
+    ['MRT-005','Ana Rodríguez Pérez','Supervisor Seguridad','Seguridad','Supervisión','MRT-002','Planta Norte','Vacante',''],
+    ['MRT-006','Jorge Flores Martínez','Operador Sr.','Operaciones','Operativo','MRT-004','Planta Norte','Activo',''],
+  ];
+  const ws = XLSX.utils.aoa_to_sheet([cols,...ejemplo]);
+  ws['!cols'] = cols.map(()=>({wch:22}));
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,'Organigrama',ws);
+  // Instructions sheet
+  const inst = [
+    ['INSTRUCCIONES DE USO — PLANTILLA ORGANIGRAMA'],[''],
+    ['COLUMNAS OBLIGATORIAS:'],
+    ['ID_Empleado','Identificador único por persona (ej: MRT-001). No duplicar.'],
+    ['Nombre_Completo','Nombre y apellidos del colaborador o "VACANTE" si es plaza disponible.'],
+    ['Puesto','Nombre del puesto o cargo.'],
+    ['Area','Área o departamento al que pertenece.'],
+    ['Nivel','Uno de: Directivo / Gerencia / Jefatura / Supervisión / Operativo'],
+    ['Reporta_A_ID','ID del jefe directo. Dejar en blanco solo para el Director General (raíz).'],
+    [''],['COLUMNAS OPCIONALES:'],
+    ['Ubicacion','Planta, sucursal u oficina donde trabaja.'],
+    ['Estatus','Activo / Vacante / Inactivo'],
+    ['Foto_URL','URL pública de la foto del colaborador (opcional).'],
+    [''],['NOTAS:'],
+    ['- El campo Reporta_A_ID debe contener un ID que exista en la columna ID_Empleado.'],
+    ['- Solo puede haber UNA persona sin Reporta_A_ID (la raíz del organigrama).'],
+    ['- El archivo puede tener hasta 5,000 filas.'],
+    ['- Guarda el archivo como .xlsx o .csv antes de importar.'],
+  ];
+  const ws2 = XLSX.utils.aoa_to_sheet(inst);
+  ws2['!cols'] = [{wch:28},{wch:70}];
+  XLSX.utils.book_append_sheet(wb,'Instrucciones',ws2);
+  XLSX.writeFile(wb,'plantilla_organigrama_MRT.xlsx');
+  toast('Plantilla descargada','s');
+}
+
+// ═══════════════════════════════════════════════
+//  MODAL / PROGRESS / TOAST
+// ═══════════════════════════════════════════════
+function openModal(id) {
+  if(id==='modal-add') populateManagerSelect();
+  document.getElementById(id).classList.add('open');
+}
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-ov').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m) m.classList.remove('open'); }));
+
+function showProgress(msg, pct) {
+  document.getElementById('prog-title').textContent=msg;
+  document.getElementById('prog-bar').style.width=pct+'%';
+  document.getElementById('progress-wrap').classList.add('show');
+}
+function hideProgress() { document.getElementById('progress-wrap').classList.remove('show'); }
+
+function toast(msg, type='i') {
+  const c=document.getElementById('toast');
+  const t=document.createElement('div');
+  t.className=`ti ${type}`;
+  t.innerHTML=`${type==='s'?'✓':type==='e'?'✗':'ℹ'} ${msg}`;
+  c.appendChild(t);
+  setTimeout(()=>t.remove(),3500);
+}
+
+// ═══════════════════════════════════════════════
+//  KEYBOARD SHORTCUTS
+// ═══════════════════════════════════════════════
+document.addEventListener('keydown', e => {
+  if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT'||e.target.tagName==='TEXTAREA') return;
+  if(e.key==='f'||e.key==='F') fitAll();
+  if(e.key==='+'||e.key==='=') doZoom(1.2);
+  if(e.key==='-') doZoom(0.8);
+  if(e.key==='e') expandAll();
+  if(e.key==='c') collapseAll();
+  if(e.key==='Escape') { document.querySelectorAll('.modal-ov.open').forEach(m=>m.classList.remove('open')); hideTooltip(); }
+});
+
+// ═══════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════
+});
+</script>
+</body>
+</html>
