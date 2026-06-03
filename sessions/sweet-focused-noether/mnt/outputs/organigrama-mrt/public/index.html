@@ -1286,8 +1286,69 @@ document.addEventListener('keydown', e => {
 });
 
 // ═══════════════════════════════════════════════
+//  API — Conexión al servidor persistente
+// ═══════════════════════════════════════════════
+const API = '';
+
+async function apiGet(path) {
+  const r = await fetch(API + path);
+  if(!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+async function apiPut(path, body) {
+  const r = await fetch(API + path, {method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
+  if(!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+
+let saveTimer = null;
+function scheduleSave() {
+  clearTimeout(saveTimer);
+  showSaveBadge('saving');
+  saveTimer = setTimeout(saveAllNodes, 800);
+}
+async function saveAllNodes() {
+  try {
+    await apiPut('/api/nodes', allNodes);
+    showSaveBadge('saved');
+    setTimeout(()=>showSaveBadge('idle'), 2500);
+  } catch(e) {
+    showSaveBadge('error');
+    toast('Error al guardar: ' + e.message, 'e');
+  }
+}
+function showSaveBadge(state) {
+  const el = document.getElementById('save-badge');
+  if(!el) return;
+  const s = {idle:{text:'',cls:''},saving:{text:'💾 Guardando...',cls:'badge-saving'},saved:{text:'✓ Guardado',cls:'badge-saved'},error:{text:'⚠ Error',cls:'badge-error'}}[state]||{text:'',cls:''};
+  el.textContent = s.text; el.className = 'save-badge ' + s.cls;
+}
+
+async function loadFromServer() {
+  showProgress('Conectando al servidor...', 20);
+  try {
+    const res = await apiGet('/api/nodes');
+    allNodes = (res.data || res || []);
+    if(!Array.isArray(allNodes)) allNodes = [];
+    showProgress('Construyendo organigrama...', 70);
+    populateFilters();
+    applyFilters();
+    hideProgress();
+    document.querySelector('.logo-s').textContent = 'Minería · ' + allNodes.length + ' colaboradores';
+    toast(allNodes.length + ' colaboradores cargados', 's');
+  } catch(e) {
+    hideProgress();
+    console.error('Error cargando datos:', e);
+    toast('Error al conectar: ' + e.message, 'e');
+  }
+}
+
+// ═══════════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', () => {
+  loadFromServer();
+  window.addEventListener('resize', () => { if(visibleNodes.length) renderChart(); });
 });
 </script>
 </body>
