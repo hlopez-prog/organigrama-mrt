@@ -197,9 +197,10 @@ input[type=range]{width:100%;accent-color:var(--accent);margin-bottom:8px;}
 
   <div class="sec">Filtros</div>
   <div class="panel">
-    <div class="search-wrap" style="margin-bottom:10px">
+    <div class="search-wrap" style="margin-bottom:4px">
       <input class="ctrl-input" type="text" id="f-search" placeholder="Buscar nombre o puesto..." oninput="applyFilters()">
     </div>
+    <div id="search-info" style="font-size:10px;color:var(--text2);margin-bottom:10px;min-height:14px;padding:0 2px"></div>
 
     <div class="filter-section">
       <div class="filter-header">
@@ -217,15 +218,6 @@ input[type=range]{width:100%;accent-color:var(--accent);margin-bottom:8px;}
       </div>
       <div class="chips" id="chips-nivel"></div>
       <div class="active-bar" id="bar-nivel"></div>
-    </div>
-
-    <div class="filter-section">
-      <div class="filter-header">
-        <span class="filter-label">🗂 Área / Depto.</span>
-        <button class="filter-clear" onclick="clearGroup('area')">Limpiar</button>
-      </div>
-      <div class="chips" id="chips-area"></div>
-      <div class="active-bar" id="bar-area"></div>
     </div>
 
     <div class="filter-section">
@@ -445,7 +437,8 @@ let importRawData = null;
 let importCols = [];
 
 // Multi-select filter state
-const filterSel = { area: new Set(), nivel: new Set(), ubicacion: new Set(), estatus: new Set() };
+const filterSel = { nivel: new Set(), ubicacion: new Set(), estatus: new Set() };
+let searchHighlights = new Set();
 let zoomBehavior, svgSel, gSel;
 
 const SCHEMES = {
@@ -546,14 +539,12 @@ function loadDemo() {
 //  FILTERS
 // ═══════════════════════════════════════════════
 function populateFilters() {
-  const areas  = [...new Set(allNodes.map(n=>n.area).filter(Boolean))].sort();
   const ubis   = [...new Set(allNodes.map(n=>n.ubicacion).filter(Boolean))].sort();
   const niveles= ['Directivo','Gerencia','Superintendencia','Jefatura','Supervisión','Administrativo','Operativo'];
   const estatus= [...new Set(allNodes.map(n=>n.estatus||'Activo').filter(Boolean))].sort();
 
   buildChips('chips-ubicacion', 'ubicacion', ubis);
   buildChips('chips-nivel',     'nivel',     niveles.filter(n=>allNodes.some(x=>x.nivel===n)));
-  buildChips('chips-area',      'area',      areas);
   buildChips('chips-estatus',   'estatus',   estatus);
   updateStats();
 }
@@ -594,26 +585,80 @@ function clearGroup(group) {
   applyFilters();
 }
 
+// ── Helpers para búsqueda de organigrama completo ──
+function getAllDescendants(nodeId) {
+  const result = new Set();
+  const queue = [nodeId];
+  while(queue.length) {
+    const id = queue.shift();
+    if(result.has(id)) continue;
+    result.add(id);
+    allNodes.filter(n => String(n.manager) === String(id)).forEach(n => queue.push(n.id));
+  }
+  return result;
+}
+
+function getAllAncestors(nodeId) {
+  const result = new Set();
+  const idMap = new Map(allNodes.map(n => [String(n.id), n]));
+  let cur = idMap.get(String(nodeId));
+  let limit = 0;
+  while(cur && cur.manager && limit++ < 20) {
+    result.add(String(cur.manager));
+    cur = idMap.get(String(cur.manager));
+  }
+  return result;
+}
+
 function applyFilters() {
-  const q  = (document.getElementById('f-search').value||'').toLowerCase().trim();
-  const sv = document.getElementById('show-vacant') && document.getElementById('show-vacant').checked;
+  const q   = (document.getElementById('f-search').value||'').toLowerCase().trim();
+  const sv  = document.getElementById('show-vacant') && document.getElementById('show-vacant').checked;
+  searchHighlights = new Set();
 
-  const hasFilter = q || filterSel.area.size || filterSel.nivel.size || filterSel.ubicacion.size || filterSel.estatus.size || !sv;
-
-  visibleNodes = allNodes.filter(n => {
-    // Vacant toggle
-    if(!sv && n.estatus==='Vacante') return false;
-    // Multi-select chips — if nothing selected in a group, all pass
-    if(filterSel.area.size     && !filterSel.area.has(n.area))            return false;
-    if(filterSel.nivel.size    && !filterSel.nivel.has(n.nivel))           return false;
-    if(filterSel.ubicacion.size&& !filterSel.ubicacion.has(n.ubicacion))   return false;
-    if(filterSel.estatus.size  && !filterSel.estatus.has(n.estatus||'Activo')) return false;
-    // Text search
-    if(q && !(
+  // ── BÚSQUEDA: muestra organigrama completo de la persona ──
+  if(q) {
+    const matches = allNodes.filter(n =>
       (n.nombre||'').toLowerCase().includes(q) ||
-      (n.puesto||'').toLowerCase().includes(q) ||
-      (n.area  ||'').toLowerCase().includes(q)
-    )) return false;
+      (n.puesto||'').toLowerCase().includes(q)
+    );
+
+    if(matches.length === 0) {
+      visibleNodes = [];
+      updateStats();
+      try { renderChart(); } catch(e){ hideProgress(); }
+      return;
+    }
+
+    const showIds = new Set();
+    matches.forEach(m => {
+      searchHighlights.add(String(m.id));
+      // Toda la cadena hacia arriba (jefes)
+      getAllAncestors(m.id).forEach(id => showIds.add(id));
+      // El nodo mismo
+      showIds.add(String(m.id));
+      // Todo su equipo hacia abajo
+      getAllDescendants(m.id).forEach(id => showIds.add(id));
+    });
+
+    visibleNodes = allNodes.filter(n => showIds.has(String(n.id)));
+
+    // Apply chip filters on top of search results
+    if(filterSel.nivel.size)     visibleNodes = visibleNodes.filter(n => filterSel.nivel.has(n.nivel) || searchHighlights.has(String(n.id)));
+    if(filterSel.ubicacion.size) visibleNodes = visibleNodes.filter(n => filterSel.ubicacion.has(n.ubicacion) || searchHighlights.has(String(n.id)));
+    if(filterSel.estatus.size)   visibleNodes = visibleNodes.filter(n => filterSel.estatus.has(n.estatus||'Activo') || searchHighlights.has(String(n.id)));
+    if(!sv) visibleNodes = visibleNodes.filter(n => n.estatus !== 'Vacante' || searchHighlights.has(String(n.id)));
+
+    updateStats();
+    try { renderChart(); } catch(e){ console.error('render err:',e); hideProgress(); }
+    return;
+  }
+
+  // ── SIN BÚSQUEDA: aplica solo los chip filters ──
+  visibleNodes = allNodes.filter(n => {
+    if(!sv && n.estatus==='Vacante') return false;
+    if(filterSel.nivel.size     && !filterSel.nivel.has(n.nivel))           return false;
+    if(filterSel.ubicacion.size && !filterSel.ubicacion.has(n.ubicacion))   return false;
+    if(filterSel.estatus.size   && !filterSel.estatus.has(n.estatus||'Activo')) return false;
     return true;
   });
 
@@ -624,6 +669,7 @@ function applyFilters() {
 function clearFilters() {
   document.getElementById('f-search').value = '';
   Object.keys(filterSel).forEach(g => { filterSel[g].clear(); updateActiveBar(g); });
+  searchHighlights = new Set();
   document.getElementById('show-vacant').checked = true;
   // Re-render chips without selections
   populateFilters();
@@ -640,6 +686,15 @@ function updateStats() {
   document.getElementById('s-visible').textContent = visibleNodes.length;
   const tsEl = document.getElementById('topbar-sub');
   if(tsEl) tsEl.textContent = `MRT Corporativo · ${allNodes.length} posiciones · ${visibleNodes.length} visibles`;
+  const si = document.getElementById('search-info');
+  const q2 = (document.getElementById('f-search')?.value||'').trim();
+  if(si) {
+    if(q2 && searchHighlights.size > 0)
+      si.innerHTML = `<span style="color:var(--accent)">✓ ${searchHighlights.size} encontrado(s)</span> · ${visibleNodes.length} nodos visibles`;
+    else if(q2 && visibleNodes.length === 0)
+      si.innerHTML = `<span style="color:var(--red)">✗ Sin resultados para "${q2}"</span>`;
+    else si.innerHTML = '';
+  }
 }
 
 // ═══════════════════════════════════════════════
@@ -737,8 +792,15 @@ function renderChart() {
     sel.append('rect').attr('x',-hw+3).attr('y',-hh+3).attr('width',nw).attr('height',nh).attr('rx',10).attr('fill','rgba(0,0,0,.3)');
 
     // Card background
+    const isHighlight = searchHighlights.has(String(n.id));
     const bg = sel.append('rect').attr('class','node-bg').attr('x',-hw).attr('y',-hh).attr('width',nw).attr('height',nh)
-      .attr('rx',10).attr('fill', isVacant?'url(#vac-stripe)':'#141c2e').attr('stroke',col).attr('stroke-width', n.id===selectedId?2.5:1);
+      .attr('rx',10)
+      .attr('fill', isHighlight ? col+'33' : isVacant?'url(#vac-stripe)':'#141c2e')
+      .attr('stroke', isHighlight ? col : n.id===selectedId ? col : col+'88')
+      .attr('stroke-width', isHighlight ? 3 : n.id===selectedId ? 2.5 : 1);
+    if(isHighlight) {
+      sel.append('rect').attr('x',-hw).attr('y',-hh).attr('width',nw).attr('height',4).attr('rx',2).attr('fill',col);
+    }
 
     // Color top bar
     sel.append('rect').attr('x',-hw).attr('y',-hh).attr('width',nw).attr('height',4).attr('rx',2).attr('fill',col);
