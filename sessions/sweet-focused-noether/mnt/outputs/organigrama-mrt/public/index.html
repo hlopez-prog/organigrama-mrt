@@ -244,8 +244,8 @@ input[type=range]{width:100%;accent-color:var(--accent);margin-bottom:8px;}
   <div class="panel">
     <label class="ctrl-label">Diseño</label>
     <div class="layout-btns">
-      <div class="layout-btn active" id="lb-td" onclick="setLayout('top-down')">⬇ Vertical</div>
-      <div class="layout-btn" id="lb-lr" onclick="setLayout('left-right')">➡ Horizontal</div>
+      <div class="layout-btn" id="lb-td" onclick="setLayout('top-down')">⬇ Vertical</div>
+      <div class="layout-btn active" id="lb-lr" onclick="setLayout('left-right')">➡ Horizontal</div>
       <div class="layout-btn" id="lb-rad" onclick="setLayout('radial')">◎ Radial</div>
       <div class="layout-btn" id="lb-com" onclick="setLayout('compact')">⊞ Compacto</div>
     </div>
@@ -437,7 +437,7 @@ let allNodes = [];
 let visibleNodes = [];
 let collapsed = new Set();
 let selectedId = null;
-let currentLayout = 'top-down';
+let currentLayout = 'left-right';
 let nodeScale = 1;
 let showPhotos = true;
 let showLines = true;
@@ -618,7 +618,7 @@ function applyFilters() {
   });
 
   updateStats();
-  renderChart();
+  try { renderChart(); } catch(e){ console.error('render err:',e); hideProgress(); }
 }
 
 function clearFilters() {
@@ -638,7 +638,8 @@ function updateStats() {
   document.getElementById('s-niveles').textContent = new Set(allNodes.map(n=>n.nivel)).size;
   document.getElementById('s-areas').textContent = new Set(allNodes.map(n=>n.area)).size;
   document.getElementById('s-visible').textContent = visibleNodes.length;
-  document.getElementById('topbar-sub').textContent = `MRT Corporativo · ${allNodes.length} posiciones · ${visibleNodes.length} visibles`;
+  const tsEl = document.getElementById('topbar-sub');
+  if(tsEl) tsEl.textContent = `MRT Corporativo · ${allNodes.length} posiciones · ${visibleNodes.length} visibles`;
 }
 
 // ═══════════════════════════════════════════════
@@ -658,11 +659,17 @@ function renderChart() {
   // Build hierarchy
   const idSet = new Set(visibleNodes.map(n=>n.id));
   const roots = visibleNodes.filter(n=>!n.manager||!idSet.has(n.manager));
+  if(!roots.length) {
+    g.append('text').attr('x',W/2).attr('y',H/2).attr('text-anchor','middle')
+      .attr('fill','#f59e0b').attr('font-size',13)
+      .text('No se encontraron nodos raíz — revisa que un colaborador no tenga Reporta_A_ID');
+    return;
+  }
   let root;
   if(roots.length===1) {
     root = d3.hierarchy(roots[0], d => collapsed.has(d.id)?null:visibleNodes.filter(n=>n.manager===d.id));
   } else {
-    const fake = {id:'__root__',nombre:'',puesto:'',nivel:'',manager:null,_fake:true};
+    const fake = {id:'__root__',nombre:'Organización',puesto:'',nivel:'Directivo',manager:null,_fake:true};
     root = d3.hierarchy(fake, d => d._fake ? roots : (collapsed.has(d.id)?null:visibleNodes.filter(n=>n.manager===d.id)));
   }
 
@@ -812,6 +819,24 @@ function toggleCollapse(id) {
 }
 
 function expandAll()  { collapsed.clear(); renderChart(); toast('Todo expandido','i'); }
+
+function autoCollapseDeep() {
+  // Build depth map
+  const idMap = {};
+  allNodes.forEach(n => idMap[n.id] = n);
+  function depth(n, visited = new Set()) {
+    if(!n || visited.has(n.id)) return 0;
+    visited.add(n.id);
+    if(!n.manager || !idMap[n.manager]) return 0;
+    return 1 + depth(idMap[n.manager], visited);
+  }
+  // Collapse nodes at depth 2+ that have children
+  const childSet = new Set(allNodes.map(n=>n.manager).filter(Boolean));
+  allNodes.forEach(n => {
+    const d = depth(n);
+    if(d >= 2 && childSet.has(n.id)) collapsed.add(n.id);
+  });
+}
 function collapseAll(){
   allNodes.forEach(n => { if(visibleNodes.filter(x=>x.manager===n.id).length) collapsed.add(n.id); });
   renderChart(); toast('Todo colapsado','i');
@@ -1331,10 +1356,13 @@ async function loadFromServer() {
     allNodes = (res.data || res || []);
     if(!Array.isArray(allNodes)) allNodes = [];
     showProgress('Construyendo organigrama...', 70);
+    // Auto-collapse deep nodes for large orgs (>100 nodes)
+    if(allNodes.length > 100) autoCollapseDeep();
     populateFilters();
     applyFilters();
     hideProgress();
     document.querySelector('.logo-s').textContent = 'Minería · ' + allNodes.length + ' colaboradores';
+    document.getElementById('topbar-sub').textContent = 'MRT Corporativo · ' + allNodes.length + ' posiciones';
     toast(allNodes.length + ' colaboradores cargados', 's');
   } catch(e) {
     hideProgress();
