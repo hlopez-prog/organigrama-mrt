@@ -1073,12 +1073,6 @@ async function confirmImport() {
     allNodes = newNodes;
   }
   showProgress('Guardando en servidor...', 90);
-  if(allNodes.length && confirm(`¿Agregar a los ${allNodes.length} nodos existentes? OK=Agregar, Cancelar=Reemplazar`)) {
-    const existIds = new Set(allNodes.map(n=>n.id));
-    newNodes.forEach(n=>{ if(existIds.has(n.id)) { Object.assign(allNodes.find(x=>x.id===n.id),n); } else allNodes.push(n); });
-  } else {
-    allNodes = newNodes;
-  }
   try {
     await apiPut('/api/nodes', allNodes);
     showProgress('Listo', 100);
