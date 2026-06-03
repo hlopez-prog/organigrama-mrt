@@ -1286,8 +1286,40 @@ document.addEventListener('keydown', e => {
 });
 
 // ═══════════════════════════════════════════════
+//  API HELPERS
+// ═══════════════════════════════════════════════
+async function apiPut(endpoint, data) {
+  const res = await fetch(endpoint, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: res.statusText }));
+    throw new Error(err.error || `HTTP ${res.status}`);
+  }
+  return res.json();
+}
+
+async function loadFromServer() {
+  try {
+    const res = await fetch('/api/nodes');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    if (!json.ok) throw new Error(json.error || 'Error del servidor');
+    allNodes = json.data || [];
+    populateFilters();
+    applyFilters();
+    toast(`${allNodes.length} posiciones cargadas desde el servidor`, 's');
+  } catch (e) {
+    toast('Error al cargar desde servidor: ' + e.message, 'e');
+  }
+}
+
+// ═══════════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════════
+loadFromServer();
 });
 </script>
 </body>
