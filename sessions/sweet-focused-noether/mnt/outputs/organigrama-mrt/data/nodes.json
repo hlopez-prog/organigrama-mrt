@@ -9,7 +9,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1768",
@@ -21,7 +21,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1876",
@@ -33,7 +33,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1819",
@@ -45,7 +45,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1925",
@@ -57,7 +57,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1793",
@@ -69,7 +69,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "22",
@@ -81,7 +81,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "42",
@@ -93,7 +93,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1788",
@@ -105,7 +105,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1855",
@@ -117,7 +117,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "84",
@@ -129,7 +129,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1939",
@@ -141,7 +141,7 @@
     "ubicacion": "PROYECTO NAMIQUIPA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Procesos (Los Olivos)"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1813",
@@ -153,7 +153,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1852",
@@ -165,7 +165,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1899",
@@ -177,7 +177,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1968",
@@ -189,7 +189,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Metalurgia"
+    "direccion": "Dirección Metalurgia"
   },
   {
     "id": "85",
@@ -201,7 +201,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1328",
@@ -213,7 +213,7 @@
     "ubicacion": "UNIDAD CHOIX",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Embarques (Choix)"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1816",
@@ -225,7 +225,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1905",
@@ -237,7 +237,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "1879",
@@ -249,7 +249,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1901",
@@ -261,7 +261,7 @@
     "ubicacion": "PROYECTO NAMIQUIPA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Procesos (Los Olivos)"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "184",
@@ -273,7 +273,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1898",
@@ -285,7 +285,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1780",
@@ -297,7 +297,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "1903",
@@ -309,7 +309,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "354",
@@ -321,7 +321,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1716",
@@ -333,7 +333,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1666",
@@ -345,7 +345,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1928",
@@ -357,7 +357,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1850",
@@ -369,7 +369,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1731",
@@ -381,7 +381,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1781",
@@ -393,7 +393,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1697",
@@ -405,7 +405,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1936",
@@ -417,7 +417,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1933",
@@ -429,7 +429,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1774",
@@ -441,7 +441,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1729",
@@ -453,7 +453,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1767",
@@ -465,7 +465,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1822",
@@ -477,7 +477,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1688",
@@ -489,7 +489,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1831",
@@ -501,7 +501,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1802",
@@ -513,7 +513,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1750",
@@ -525,7 +525,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "400",
@@ -537,7 +537,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1938",
@@ -549,7 +549,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1685",
@@ -561,7 +561,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1908",
@@ -573,7 +573,7 @@
     "ubicacion": "GEOLOGIA ZACATECAS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1907",
@@ -585,7 +585,7 @@
     "ubicacion": "GEOLOGIA ZACATECAS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1930",
@@ -597,7 +597,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1714",
@@ -609,7 +609,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1871",
@@ -621,7 +621,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1882",
@@ -633,7 +633,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1847",
@@ -645,7 +645,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1720",
@@ -657,7 +657,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1282",
@@ -669,7 +669,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "1746",
@@ -681,7 +681,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1937",
@@ -693,7 +693,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1830",
@@ -705,7 +705,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1913",
@@ -717,7 +717,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1853",
@@ -729,7 +729,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1872",
@@ -741,7 +741,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1888",
@@ -753,7 +753,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1838",
@@ -765,7 +765,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "949",
@@ -777,7 +777,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1869",
@@ -789,7 +789,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1785",
@@ -801,7 +801,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1867",
@@ -813,7 +813,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "596",
@@ -825,7 +825,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "1873",
@@ -837,7 +837,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1916",
@@ -849,7 +849,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1223",
@@ -861,7 +861,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1904",
@@ -873,7 +873,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1935",
@@ -885,7 +885,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1660",
@@ -897,7 +897,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1740",
@@ -909,7 +909,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1775",
@@ -921,7 +921,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1759",
@@ -933,7 +933,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Metalurgia"
+    "direccion": "Dirección Metalurgia"
   },
   {
     "id": "1724",
@@ -945,7 +945,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Metalurgia"
+    "direccion": "Dirección Metalurgia"
   },
   {
     "id": "1718",
@@ -957,7 +957,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "475",
@@ -969,7 +969,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1057",
@@ -981,7 +981,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1849",
@@ -993,7 +993,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1828",
@@ -1005,7 +1005,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1863",
@@ -1017,7 +1017,7 @@
     "ubicacion": "PROYECTO NAMIQUIPA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Procesos (Los Olivos)"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1773",
@@ -1029,7 +1029,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1699",
@@ -1041,7 +1041,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1860",
@@ -1053,7 +1053,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1706",
@@ -1065,7 +1065,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1896",
@@ -1077,7 +1077,7 @@
     "ubicacion": "UNIDAD CHOIX",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Embarques (Choix)"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1894",
@@ -1089,7 +1089,7 @@
     "ubicacion": "UNIDAD CHOIX",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Embarques (Choix)"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1760",
@@ -1101,7 +1101,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1016",
@@ -1113,7 +1113,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Capital Humano"
+    "direccion": "Dirección de Recursos Humanos"
   },
   {
     "id": "1756",
@@ -1125,7 +1125,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1677",
@@ -1137,7 +1137,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "532",
@@ -1149,7 +1149,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1710",
@@ -1161,7 +1161,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1693",
@@ -1173,7 +1173,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1840",
@@ -1185,7 +1185,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Metalurgia"
+    "direccion": "Dirección Metalurgia"
   },
   {
     "id": "1915",
@@ -1197,7 +1197,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1031",
@@ -1209,7 +1209,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1889",
@@ -1221,7 +1221,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1183",
@@ -1233,7 +1233,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Metalurgia"
+    "direccion": "Dirección Metalurgia"
   },
   {
     "id": "1848",
@@ -1245,7 +1245,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1577",
@@ -1257,7 +1257,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Capital Humano"
+    "direccion": "Dirección de Recursos Humanos"
   },
   {
     "id": "1581",
@@ -1269,7 +1269,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Capital Humano"
+    "direccion": "Dirección de Recursos Humanos"
   },
   {
     "id": "1604",
@@ -1281,7 +1281,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Capital Humano"
+    "direccion": "Dirección de Recursos Humanos"
   },
   {
     "id": "1829",
@@ -1293,7 +1293,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1670",
@@ -1305,7 +1305,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1770",
@@ -1317,7 +1317,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1919",
@@ -1329,7 +1329,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1715",
@@ -1341,7 +1341,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "631",
@@ -1353,7 +1353,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1912",
@@ -1365,7 +1365,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "1815",
@@ -1377,7 +1377,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1920",
@@ -1389,7 +1389,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1748",
@@ -1401,7 +1401,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "816",
@@ -1413,7 +1413,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "854",
@@ -1425,7 +1425,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1862",
@@ -1437,7 +1437,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1918",
@@ -1449,7 +1449,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Capital Humano"
+    "direccion": "Dirección de Recursos Humanos"
   },
   {
     "id": "1931",
@@ -1461,7 +1461,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1910",
@@ -1473,7 +1473,7 @@
     "ubicacion": "UNIDAD CHOIX",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Embarques (Choix)"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "826",
@@ -1485,7 +1485,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1741",
@@ -1497,7 +1497,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1678",
@@ -1509,7 +1509,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1745",
@@ -1521,7 +1521,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Capital Humano"
+    "direccion": "Dirección de Recursos Humanos"
   },
   {
     "id": "1909",
@@ -1533,7 +1533,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "926",
@@ -1545,7 +1545,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "584",
@@ -1557,7 +1557,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "1861",
@@ -1569,7 +1569,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1803",
@@ -1581,7 +1581,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1856",
@@ -1593,7 +1593,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1877",
@@ -1605,7 +1605,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1",
@@ -1617,7 +1617,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "2",
@@ -1629,7 +1629,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "1778",
@@ -1641,7 +1641,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "1763",
@@ -1653,7 +1653,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1726",
@@ -1665,7 +1665,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1690",
@@ -1677,7 +1677,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1753",
@@ -1689,7 +1689,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "870",
@@ -1701,7 +1701,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1875",
@@ -1713,7 +1713,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1692",
@@ -1725,7 +1725,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1056",
@@ -1737,7 +1737,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "1437",
@@ -1749,7 +1749,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1805",
@@ -1761,7 +1761,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1818",
@@ -1773,7 +1773,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1883",
@@ -1785,7 +1785,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1051",
@@ -1797,7 +1797,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1927",
@@ -1809,7 +1809,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "3",
@@ -1821,7 +1821,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "1929",
@@ -1833,7 +1833,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Capital Humano"
+    "direccion": "Dirección de Recursos Humanos"
   },
   {
     "id": "1734",
@@ -1845,7 +1845,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1940",
@@ -1857,7 +1857,7 @@
     "ubicacion": "PROYECTO NAMIQUIPA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Procesos (Los Olivos)"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1663",
@@ -1869,7 +1869,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1689",
@@ -1881,7 +1881,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1787",
@@ -1893,7 +1893,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1917",
@@ -1905,7 +1905,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1817",
@@ -1917,7 +1917,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1800",
@@ -1929,7 +1929,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1695",
@@ -1941,7 +1941,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1841",
@@ -1953,7 +1953,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1797",
@@ -1965,7 +1965,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1934",
@@ -1977,7 +1977,7 @@
     "ubicacion": "PROYECTO NAMIQUIPA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Procesos (Los Olivos)"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1821",
@@ -1989,7 +1989,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1762",
@@ -2001,7 +2001,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1779",
@@ -2013,7 +2013,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "1900",
@@ -2025,7 +2025,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1761",
@@ -2037,7 +2037,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1843",
@@ -2049,7 +2049,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1789",
@@ -2061,7 +2061,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1881",
@@ -2073,7 +2073,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "888",
@@ -2085,7 +2085,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1749",
@@ -2097,7 +2097,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1874",
@@ -2109,7 +2109,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1772",
@@ -2121,7 +2121,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "298",
@@ -2133,7 +2133,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Capital Humano"
+    "direccion": "Dirección de Recursos Humanos"
   },
   {
     "id": "1646",
@@ -2145,7 +2145,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "102",
@@ -2157,7 +2157,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "1820",
@@ -2169,7 +2169,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1922",
@@ -2181,7 +2181,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1751",
@@ -2193,7 +2193,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1926",
@@ -2205,7 +2205,7 @@
     "ubicacion": "PROYECTO NAMIQUIPA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Procesos (Los Olivos)"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1810",
@@ -2217,7 +2217,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1674",
@@ -2229,7 +2229,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1825",
@@ -2241,7 +2241,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1824",
@@ -2253,7 +2253,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "909",
@@ -2265,7 +2265,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1723",
@@ -2277,7 +2277,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1673",
@@ -2289,7 +2289,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1932",
@@ -2301,7 +2301,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1472",
@@ -2313,7 +2313,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Capital Humano"
+    "direccion": "Dirección de Recursos Humanos"
   },
   {
     "id": "1645",
@@ -2325,7 +2325,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1193",
@@ -2337,7 +2337,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1019",
@@ -2349,7 +2349,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1066",
@@ -2361,7 +2361,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1049",
@@ -2373,7 +2373,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "713",
@@ -2385,7 +2385,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1641",
@@ -2397,7 +2397,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1332",
@@ -2409,7 +2409,7 @@
     "ubicacion": "UNIDAD CHOIX",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Embarques (Choix)"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "703",
@@ -2421,7 +2421,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "937",
@@ -2433,7 +2433,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "570",
@@ -2445,7 +2445,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1007",
@@ -2457,7 +2457,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "369",
@@ -2469,7 +2469,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "728",
@@ -2481,7 +2481,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1037",
@@ -2493,7 +2493,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "648",
@@ -2505,7 +2505,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "1134",
@@ -2517,7 +2517,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "410",
@@ -2529,7 +2529,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "1625",
@@ -2541,7 +2541,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "529",
@@ -2553,7 +2553,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1101",
@@ -2565,7 +2565,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "859",
@@ -2577,7 +2577,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1814",
@@ -2589,7 +2589,7 @@
     "ubicacion": "UNIDAD CHOIX",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Embarques (Choix)"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "640",
@@ -2601,7 +2601,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1655",
@@ -2613,7 +2613,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1487",
@@ -2625,7 +2625,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1360",
@@ -2637,7 +2637,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1289",
@@ -2649,7 +2649,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1783",
@@ -2661,7 +2661,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1846",
@@ -2673,7 +2673,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "295",
@@ -2685,7 +2685,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "597",
@@ -2697,7 +2697,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1271",
@@ -2709,7 +2709,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "587",
@@ -2721,7 +2721,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "11",
@@ -2733,7 +2733,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1109",
@@ -2745,7 +2745,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1499",
@@ -2757,7 +2757,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "670",
@@ -2769,7 +2769,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1173",
@@ -2781,7 +2781,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "7",
@@ -2793,7 +2793,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "1556",
@@ -2805,7 +2805,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "225",
@@ -2817,7 +2817,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "793",
@@ -2829,7 +2829,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "214",
@@ -2841,7 +2841,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1704",
@@ -2853,7 +2853,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "317",
@@ -2865,7 +2865,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1286",
@@ -2877,7 +2877,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "833",
@@ -2889,7 +2889,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "843",
@@ -2901,7 +2901,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "409",
@@ -2913,7 +2913,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1639",
@@ -2925,7 +2925,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1277",
@@ -2937,7 +2937,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "684",
@@ -2949,7 +2949,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1325",
@@ -2961,7 +2961,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "772",
@@ -2973,7 +2973,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Metalurgia"
+    "direccion": "Dirección Metalurgia"
   },
   {
     "id": "1459",
@@ -2985,7 +2985,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1216",
@@ -2997,7 +2997,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1214",
@@ -3009,7 +3009,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1735",
@@ -3021,7 +3021,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1782",
@@ -3033,7 +3033,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "234",
@@ -3045,7 +3045,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "418",
@@ -3057,7 +3057,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Metalurgia"
+    "direccion": "Dirección Metalurgia"
   },
   {
     "id": "1605",
@@ -3069,7 +3069,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "646",
@@ -3081,7 +3081,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "300",
@@ -3093,7 +3093,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Capital Humano"
+    "direccion": "Dirección de Recursos Humanos"
   },
   {
     "id": "1857",
@@ -3105,7 +3105,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1858",
@@ -3117,7 +3117,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1128",
@@ -3129,7 +3129,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "362",
@@ -3141,7 +3141,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1224",
@@ -3153,7 +3153,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "61",
@@ -3165,7 +3165,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "950",
@@ -3177,7 +3177,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Staff DG"
+    "direccion": "Dirección General"
   },
   {
     "id": "955",
@@ -3189,7 +3189,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1200",
@@ -3201,7 +3201,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1231",
@@ -3213,7 +3213,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1648",
@@ -3225,7 +3225,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1327",
@@ -3237,7 +3237,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1337",
@@ -3249,7 +3249,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "568",
@@ -3261,7 +3261,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "552",
@@ -3273,7 +3273,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "762",
@@ -3285,7 +3285,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "930",
@@ -3297,7 +3297,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1166",
@@ -3309,7 +3309,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "651",
@@ -3321,7 +3321,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1305",
@@ -3333,7 +3333,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1353",
@@ -3345,7 +3345,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1562",
@@ -3357,7 +3357,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1870",
@@ -3369,7 +3369,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "159",
@@ -3381,7 +3381,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "21",
@@ -3393,7 +3393,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "257",
@@ -3405,7 +3405,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "799",
@@ -3417,7 +3417,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1806",
@@ -3429,7 +3429,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1380",
@@ -3441,7 +3441,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1612",
@@ -3453,7 +3453,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1106",
@@ -3465,7 +3465,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "219",
@@ -3477,7 +3477,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "190",
@@ -3489,7 +3489,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Metalurgia"
+    "direccion": "Dirección Metalurgia"
   },
   {
     "id": "757",
@@ -3501,7 +3501,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "771",
@@ -3513,7 +3513,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1527",
@@ -3525,7 +3525,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "221",
@@ -3537,7 +3537,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "118",
@@ -3549,7 +3549,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "252",
@@ -3561,7 +3561,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "847",
@@ -3573,7 +3573,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "235",
@@ -3585,7 +3585,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1201",
@@ -3597,7 +3597,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "182",
@@ -3609,7 +3609,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1024",
@@ -3621,7 +3621,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "756",
@@ -3633,7 +3633,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "800",
@@ -3645,7 +3645,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1596",
@@ -3657,7 +3657,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1521",
@@ -3669,7 +3669,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1010",
@@ -3681,7 +3681,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "348",
@@ -3693,7 +3693,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1686",
@@ -3705,7 +3705,7 @@
     "ubicacion": "PROYECTO NAMIQUIPA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Procesos (Los Olivos)"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1018",
@@ -3717,7 +3717,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "183",
@@ -3729,7 +3729,7 @@
     "ubicacion": "UNIDAD CHOIX",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Embarques (Choix)"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1886",
@@ -3741,7 +3741,7 @@
     "ubicacion": "",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Procesos (Los Olivos)"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1514",
@@ -3753,7 +3753,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Capital Humano"
+    "direccion": "Dirección de Recursos Humanos"
   },
   {
     "id": "375",
@@ -3765,7 +3765,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "983",
@@ -3777,7 +3777,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "173",
@@ -3789,7 +3789,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "555",
@@ -3801,7 +3801,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "674",
@@ -3813,7 +3813,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1362",
@@ -3825,7 +3825,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1906",
@@ -3837,7 +3837,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1911",
@@ -3849,7 +3849,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1914",
@@ -3861,7 +3861,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1526",
@@ -3873,7 +3873,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1623",
@@ -3885,7 +3885,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "218",
@@ -3897,7 +3897,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Capital Humano"
+    "direccion": "Dirección de Recursos Humanos"
   },
   {
     "id": "1921",
@@ -3909,7 +3909,7 @@
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "783",
@@ -3921,7 +3921,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1341",
@@ -3933,7 +3933,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1304",
@@ -3945,7 +3945,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Administracion y Finanzas"
+    "direccion": "Dirección Administración y Finanzas"
   },
   {
     "id": "1629",
@@ -3957,7 +3957,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "647",
@@ -3969,7 +3969,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "1071",
@@ -3981,7 +3981,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "176",
@@ -3993,7 +3993,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "730",
@@ -4005,7 +4005,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Dir. General"
+    "direccion": "Dirección General"
   },
   {
     "id": "147",
@@ -4017,7 +4017,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "174",
@@ -4029,7 +4029,7 @@
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "842",
@@ -4041,7 +4041,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "208",
@@ -4053,7 +4053,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1630",
@@ -4065,7 +4065,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "866",
@@ -4077,7 +4077,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "158",
@@ -4089,7 +4089,7 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Exploraciones"
+    "direccion": "Dirección de Exploración"
   },
   {
     "id": "1620",
@@ -4101,7 +4101,7 @@
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
   },
   {
     "id": "311",
@@ -4113,6 +4113,42 @@
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
     "foto": null,
-    "direccion": "Operaciones"
+    "direccion": "Dirección de Operaciones"
+  },
+  {
+    "id": "VAC-001",
+    "nombre": "VACANTE",
+    "puesto": "Jefe de Seguridad Industrial",
+    "area": "Seguridad Industrial",
+    "nivel": "Jefatura",
+    "manager": "843",
+    "ubicacion": "CIENEGUITA",
+    "estatus": "Vacante",
+    "foto": null,
+    "direccion": "Dirección de Operaciones"
+  },
+  {
+    "id": "VAC-002",
+    "nombre": "VACANTE",
+    "puesto": "Analista de Recursos Humanos",
+    "area": "Recursos Humanos",
+    "nivel": "Operativo",
+    "manager": "1514",
+    "ubicacion": "CORPORATIVO CHIHUAHUA",
+    "estatus": "Vacante",
+    "foto": null,
+    "direccion": "Dirección de Recursos Humanos"
+  },
+  {
+    "id": "VAC-003",
+    "nombre": "VACANTE",
+    "puesto": "Supervisor de Mantenimiento",
+    "area": "Mantenimiento",
+    "nivel": "Supervisión",
+    "manager": "843",
+    "ubicacion": "CIENEGUITA",
+    "estatus": "Vacante",
+    "foto": null,
+    "direccion": "Dirección de Operaciones"
   }
 ]

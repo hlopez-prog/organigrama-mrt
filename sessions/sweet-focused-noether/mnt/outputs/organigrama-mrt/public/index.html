@@ -130,7 +130,7 @@ body{font-family:'Inter',sans-serif;background:#f0f4f8;color:#0f172a;display:fle
     <div class="chips" id="ch-niv"></div>
   </div>
   <div class="sb-foot">
-    <button class="btn btn-blue" onclick="openM('modal-add')">＋ Agregar posición</button>
+    <button class="btn btn-blue" onclick="openEdit(null)">＋ Agregar posición</button>
     <button class="btn btn-gray" onclick="clrAll()">↺ Limpiar todos los filtros</button>
     <button class="btn btn-gray" onclick="loadData()">🔄 Recargar datos del servidor</button>
   </div>
@@ -182,7 +182,7 @@ body{font-family:'Inter',sans-serif;background:#f0f4f8;color:#0f172a;display:fle
   </div>
 </div>
 
-<div id="tip"><div class="tt-n" id="tt-n"></div><div class="tt-r"><span style="color:#94a3b8">Puesto</span><span id="tt-p"></span></div><div class="tt-r"><span style="color:#94a3b8">Dirección</span><span id="tt-d"></span></div><div class="tt-r"><span style="color:#94a3b8">Ubicación</span><span id="tt-u"></span></div><div class="tt-r"><span style="color:#94a3b8">Nivel</span><span id="tt-nv"></span></div><div class="tt-r"><span style="color:#94a3b8">Reportes</span><span id="tt-r"></span></div></div>
+<div id="tip"><div class="tt-n" id="tt-n"></div><div class="tt-r"><span style="color:#94a3b8">Puesto</span><span id="tt-p"></span></div><div class="tt-r"><span style="color:#94a3b8">Dirección</span><span id="tt-d"></span></div><div class="tt-r"><span style="color:#94a3b8">Ubicación</span><span id="tt-u"></span></div><div class="tt-r"><span style="color:#94a3b8">Nivel</span><span id="tt-nv"></span></div><div class="tt-r"><span style="color:#94a3b8">Reportes</span><span id="tt-r"></span></div><div style="margin-top:6px;padding-top:6px;border-top:1px solid #f1f5f9;font-size:9px;color:#94a3b8" id="tt-tip"></div></div>
 
 <div class="mbg" id="modal-add">
   <div class="modal">
@@ -192,7 +192,7 @@ body{font-family:'Inter',sans-serif;background:#f0f4f8;color:#0f172a;display:fle
     <div class="mfr"><div class="mfg"><label>Puesto</label><input type="text" id="e-pue" placeholder="Gerente de Área"></div><div class="mfg"><label>Nivel</label><select id="e-niv"><option>Directivo</option><option>Gerencia</option><option>Superintendencia</option><option>Jefatura</option><option>Supervisión</option><option>Administrativo</option><option selected>Operativo</option></select></div></div>
     <div class="mfr"><div class="mfg"><label>Área / Departamento</label><input type="text" id="e-are" placeholder="Operaciones"></div><div class="mfg"><label>Ubicación</label><input type="text" id="e-ubi" placeholder="CIENEGUITA"></div></div>
     <div class="mfr"><div class="mfg"><label>Reporta a (ID del jefe)</label><input type="text" id="e-mgr" placeholder="730"></div><div class="mfg"><label>Estatus</label><select id="e-est"><option>Activo</option><option>Vacante</option><option>Inactivo</option></select></div></div>
-    <div class="mac"><button class="mbtn mbtn-gray" onclick="closeM('modal-add')">Cancelar</button><button class="mbtn mbtn-blue" onclick="saveN()">Guardar</button></div>
+    <div class="mac"><button class="mbtn mbtn-gray" onclick="closeM('modal-add')">Cancelar</button><button class="mbtn" style="background:#dc2626;color:#fff" id="btn-del" onclick="delNode()">🗑 Eliminar</button><button class="mbtn mbtn-blue" onclick="saveN()">Guardar</button></div>
   </div>
 </div>
 <div id="toast"></div>
@@ -333,7 +333,7 @@ function rChart(){
     .attr('d',d3.linkVertical().x(function(d){return d.x;}).y(function(d){return d.y;}));
   var nd=g.selectAll('.nd').data(root.descendants().filter(function(d){return!d.data._f;})).enter()
     .append('g').attr('transform',function(d){return'translate('+d.x+','+d.y+')';}).style('cursor','pointer')
-    .on('click',function(e,d){e.stopPropagation();SEL=d.data.id;rChart();toast((d.data.nombre||'Vacante'),'i');})
+    .on('click',function(e,d){e.stopPropagation();SEL=d.data.id;rChart();openEdit(d.data);})
     .on('dblclick',function(e,d){e.stopPropagation();var sid=String(d.data.id);COL.has(sid)?COL.delete(sid):COL.add(sid);rChart();})
     .on('mouseover',function(e,d){showTip(e,d.data);}).on('mouseout',function(){document.getElementById('tip').style.display='none';});
   var hw=NW/2,hh=NH/2;
@@ -366,7 +366,11 @@ function rChart(){
       s.append('text').attr('x',hw-10).attr('y',-hh+14).attr('text-anchor','middle').attr('fill','#fff').attr('font-size',8).attr('font-weight',700).text(ch2);
       if(COL.has(String(d.data.id))){s.append('circle').attr('cx',0).attr('cy',hh).attr('r',8).attr('fill',NC[d.data.nivel]||'#94a3b8');s.append('text').attr('x',0).attr('y',hh+4).attr('text-anchor','middle').attr('fill','#fff').attr('font-size',10).attr('font-weight',700).text('+');}
     }
-    if(d.data.estatus==='Vacante')d3.select(this).append('text').attr('x',hw-4).attr('y',hh-5).attr('text-anchor','end').attr('fill','#d97706').attr('font-size',8).attr('font-weight',700).text('VACANTE');
+    if(d.data.estatus==='Vacante'){
+      d3.select(this).select('rect:nth-child(2)').attr('stroke','#f59e0b').attr('stroke-dasharray','4,3').attr('stroke-width',2).attr('fill','#fffbeb');
+      d3.select(this).append('rect').attr('x',-hw+2).attr('y',hh-14).attr('width',50).attr('height',13).attr('rx',6).attr('fill','#f59e0b');
+      d3.select(this).append('text').attr('x',-hw+27).attr('y',hh-4).attr('text-anchor','middle').attr('fill','#fff').attr('font-size',8).attr('font-weight',700).text('VACANTE');
+    }
   });
   bLeg(VN);fitC(false);
 }
@@ -400,6 +404,7 @@ function showTip(e,d){
   document.getElementById('tt-n').textContent=d.nombre||'Vacante';
   document.getElementById('tt-p').textContent=d.puesto||'—';
   document.getElementById('tt-d').textContent=d.direccion||'—';
+  document.getElementById('tt-tip').textContent='Clic para editar · Doble clic para colapsar';
   document.getElementById('tt-u').textContent=d.ubicacion||'—';
   document.getElementById('tt-nv').textContent=d.nivel||'—';
   document.getElementById('tt-r').textContent=r;
@@ -459,12 +464,63 @@ function rdash(){
 }
 
 /* CRUD */
+function openEdit(data){
+  document.getElementById('m-title').textContent = data && String(data.id).indexOf('VAC')===0 ? 'Nueva Posición' : (data ? 'Editar Posición' : 'Nueva Posición');
+  if(data){
+    document.getElementById('e-id').value  = data.id||'';
+    document.getElementById('e-eid').value = data.id||'';
+    document.getElementById('e-nom').value = data.nombre||'';
+    document.getElementById('e-pue').value = data.puesto||'';
+    document.getElementById('e-are').value = data.area||'';
+    document.getElementById('e-niv').value = data.nivel||'Operativo';
+    document.getElementById('e-ubi').value = data.ubicacion||'';
+    document.getElementById('e-mgr').value = data.manager||'';
+    document.getElementById('e-est').value = data.estatus||'Activo';
+  }
+  openM('modal-add');
+}
 function saveN(){
   var eId=document.getElementById('e-id').value;
-  var n={id:document.getElementById('e-eid').value.trim()||('N'+Date.now()),nombre:document.getElementById('e-nom').value.trim(),puesto:document.getElementById('e-pue').value.trim(),area:document.getElementById('e-are').value.trim(),nivel:document.getElementById('e-niv').value,ubicacion:document.getElementById('e-ubi').value.trim(),manager:document.getElementById('e-mgr').value.trim()||null,estatus:document.getElementById('e-est').value,foto:null};
-  if(eId){var i=AN.findIndex(function(x){return String(x.id)===String(eId);});if(i>-1)AN[i]=n;else AN.push(n);}else AN.push(n);
-  closeM('modal-add');document.getElementById('e-id').value='';
+  var empId=document.getElementById('e-eid').value.trim()||('N-'+Date.now());
+  var n={
+    id:empId,
+    nombre:document.getElementById('e-nom').value.trim(),
+    puesto:document.getElementById('e-pue').value.trim(),
+    area:document.getElementById('e-are').value.trim(),
+    nivel:document.getElementById('e-niv').value,
+    ubicacion:document.getElementById('e-ubi').value.trim(),
+    manager:document.getElementById('e-mgr').value.trim()||null,
+    estatus:document.getElementById('e-est').value,
+    foto:null,
+    direccion:''
+  };
+  // Calculate direccion by walking up
+  var mp={};AN.forEach(function(x){mp[String(x.id)]=x;});
+  function getDirName(nid,lim){
+    if(lim<=0)return'Dirección General';
+    var x=mp[String(nid)];if(!x)return'Sin dirección';
+    if(!x.manager)return x.direccion||x.puesto;
+    return getDirName(x.manager,lim-1);
+  }
+  n.direccion = n.manager ? getDirName(n.manager,20) : 'Dirección General';
+  if(eId){var i=AN.findIndex(function(x){return String(x.id)===String(eId);});if(i>-1)AN[i]=n;else AN.push(n);}
+  else AN.push(n);
+  closeM('modal-add');
+  document.getElementById('e-id').value='';
+  document.getElementById('m-title').textContent='Nueva Posición';
+  ['e-eid','e-nom','e-pue','e-are','e-ubi','e-mgr'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('e-niv').value='Operativo';
+  document.getElementById('e-est').value='Activo';
   bChips();applyF();sched();toast('Posición guardada','s');
+}
+function delNode(){
+  var eId=document.getElementById('e-id').value;
+  if(!eId){closeM('modal-add');return;}
+  if(!confirm('¿Eliminar esta posición del organigrama?'))return;
+  AN=AN.filter(function(n){return String(n.id)!==String(eId);});
+  AN.forEach(function(n){if(String(n.manager)===String(eId))n.manager=null;});
+  closeM('modal-add');document.getElementById('e-id').value='';
+  SEL=null;bChips();applyF();sched();toast('Posición eliminada','i');
 }
 
 /* IMPORT */
