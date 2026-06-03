@@ -8,7 +8,8 @@
     "manager": "1900",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1768",
@@ -19,7 +20,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1876",
@@ -30,7 +32,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1819",
@@ -41,7 +44,8 @@
     "manager": "1071",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1925",
@@ -52,7 +56,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1793",
@@ -63,7 +68,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "22",
@@ -74,7 +80,8 @@
     "manager": "1037",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "42",
@@ -85,7 +92,8 @@
     "manager": "1459",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1788",
@@ -96,7 +104,8 @@
     "manager": "670",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1855",
@@ -107,7 +116,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "84",
@@ -118,7 +128,8 @@
     "manager": "1459",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1939",
@@ -129,7 +140,8 @@
     "manager": "1863",
     "ubicacion": "PROYECTO NAMIQUIPA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Procesos (Los Olivos)"
   },
   {
     "id": "1813",
@@ -140,7 +152,8 @@
     "manager": "1843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1852",
@@ -151,7 +164,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1899",
@@ -162,7 +176,8 @@
     "manager": "118",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1968",
@@ -173,7 +188,8 @@
     "manager": "730",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Metalurgia"
   },
   {
     "id": "85",
@@ -184,7 +200,8 @@
     "manager": "1037",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1328",
@@ -195,7 +212,8 @@
     "manager": "730",
     "ubicacion": "UNIDAD CHOIX",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Embarques (Choix)"
   },
   {
     "id": "1816",
@@ -206,7 +224,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1905",
@@ -217,7 +236,8 @@
     "manager": "7",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "1879",
@@ -228,7 +248,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1901",
@@ -239,7 +260,8 @@
     "manager": "1863",
     "ubicacion": "PROYECTO NAMIQUIPA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Procesos (Los Olivos)"
   },
   {
     "id": "184",
@@ -250,7 +272,8 @@
     "manager": "1037",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1898",
@@ -261,7 +284,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1780",
@@ -272,7 +296,8 @@
     "manager": "7",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "1903",
@@ -283,7 +308,8 @@
     "manager": "1843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "354",
@@ -294,7 +320,8 @@
     "manager": "1037",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1716",
@@ -305,7 +332,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1666",
@@ -316,7 +344,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1928",
@@ -327,7 +356,8 @@
     "manager": "1010",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1850",
@@ -338,7 +368,8 @@
     "manager": "1843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1731",
@@ -349,7 +380,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1781",
@@ -360,7 +392,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1697",
@@ -371,7 +404,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1936",
@@ -382,7 +416,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1933",
@@ -393,7 +428,8 @@
     "manager": "1019",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1774",
@@ -404,7 +440,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1729",
@@ -415,7 +452,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1767",
@@ -426,7 +464,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1822",
@@ -437,7 +476,8 @@
     "manager": "1900",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1688",
@@ -448,7 +488,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1831",
@@ -459,7 +500,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1802",
@@ -470,7 +512,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1750",
@@ -481,7 +524,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "400",
@@ -492,7 +536,8 @@
     "manager": "1037",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1938",
@@ -503,7 +548,8 @@
     "manager": "1775",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1685",
@@ -514,7 +560,8 @@
     "manager": "1900",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1908",
@@ -525,7 +572,8 @@
     "manager": "1775",
     "ubicacion": "GEOLOGIA ZACATECAS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1907",
@@ -536,7 +584,8 @@
     "manager": "1775",
     "ubicacion": "GEOLOGIA ZACATECAS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1930",
@@ -547,7 +596,8 @@
     "manager": "1900",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1714",
@@ -558,7 +608,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1871",
@@ -569,7 +620,8 @@
     "manager": "208",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1882",
@@ -580,7 +632,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1847",
@@ -591,7 +644,8 @@
     "manager": "1843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1720",
@@ -602,7 +656,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1282",
@@ -613,7 +668,8 @@
     "manager": "7",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "1746",
@@ -624,7 +680,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1937",
@@ -635,7 +692,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1830",
@@ -646,7 +704,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1913",
@@ -657,7 +716,8 @@
     "manager": "1843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1853",
@@ -668,7 +728,8 @@
     "manager": "1900",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1872",
@@ -679,7 +740,8 @@
     "manager": "118",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1888",
@@ -690,7 +752,8 @@
     "manager": "1019",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1838",
@@ -701,7 +764,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "949",
@@ -712,7 +776,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1869",
@@ -723,7 +788,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1785",
@@ -734,7 +800,8 @@
     "manager": "1071",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1867",
@@ -745,7 +812,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "596",
@@ -756,7 +824,8 @@
     "manager": "1927",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "1873",
@@ -767,7 +836,8 @@
     "manager": "118",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1916",
@@ -778,7 +848,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1223",
@@ -789,7 +860,8 @@
     "manager": "1928",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1904",
@@ -800,7 +872,8 @@
     "manager": "118",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1935",
@@ -811,7 +884,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1660",
@@ -822,7 +896,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1740",
@@ -833,7 +908,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1775",
@@ -844,7 +920,8 @@
     "manager": "730",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1759",
@@ -855,7 +932,8 @@
     "manager": "190",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Metalurgia"
   },
   {
     "id": "1724",
@@ -866,7 +944,8 @@
     "manager": "190",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Metalurgia"
   },
   {
     "id": "1718",
@@ -877,7 +956,8 @@
     "manager": "783",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "475",
@@ -888,7 +968,8 @@
     "manager": "1037",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1057",
@@ -899,7 +980,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1849",
@@ -910,7 +992,8 @@
     "manager": "1843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1828",
@@ -921,7 +1004,8 @@
     "manager": "1900",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1863",
@@ -932,7 +1016,8 @@
     "manager": "1886",
     "ubicacion": "PROYECTO NAMIQUIPA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Procesos (Los Olivos)"
   },
   {
     "id": "1773",
@@ -943,7 +1028,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1699",
@@ -954,7 +1040,8 @@
     "manager": "670",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1860",
@@ -965,7 +1052,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1706",
@@ -976,7 +1064,8 @@
     "manager": "670",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1896",
@@ -987,7 +1076,8 @@
     "manager": "1328",
     "ubicacion": "UNIDAD CHOIX",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Embarques (Choix)"
   },
   {
     "id": "1894",
@@ -998,7 +1088,8 @@
     "manager": "1328",
     "ubicacion": "UNIDAD CHOIX",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Embarques (Choix)"
   },
   {
     "id": "1760",
@@ -1009,7 +1100,8 @@
     "manager": "208",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1016",
@@ -1020,7 +1112,8 @@
     "manager": "298",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Capital Humano"
   },
   {
     "id": "1756",
@@ -1031,7 +1124,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1677",
@@ -1042,7 +1136,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "532",
@@ -1053,7 +1148,8 @@
     "manager": "1459",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1710",
@@ -1064,7 +1160,8 @@
     "manager": "1900",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1693",
@@ -1075,7 +1172,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1840",
@@ -1086,7 +1184,8 @@
     "manager": "190",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Metalurgia"
   },
   {
     "id": "1915",
@@ -1097,7 +1196,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1031",
@@ -1108,7 +1208,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1889",
@@ -1119,7 +1220,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1183",
@@ -1130,7 +1232,8 @@
     "manager": "772",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Metalurgia"
   },
   {
     "id": "1848",
@@ -1141,7 +1244,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1577",
@@ -1152,7 +1256,8 @@
     "manager": "298",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Capital Humano"
   },
   {
     "id": "1581",
@@ -1163,7 +1268,8 @@
     "manager": "298",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Capital Humano"
   },
   {
     "id": "1604",
@@ -1174,7 +1280,8 @@
     "manager": "298",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Capital Humano"
   },
   {
     "id": "1829",
@@ -1185,7 +1292,8 @@
     "manager": "1900",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1670",
@@ -1196,7 +1304,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1770",
@@ -1207,7 +1316,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1919",
@@ -1218,7 +1328,8 @@
     "manager": "1019",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1715",
@@ -1229,7 +1340,8 @@
     "manager": "783",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "631",
@@ -1240,7 +1352,8 @@
     "manager": "1459",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1912",
@@ -1251,7 +1364,8 @@
     "manager": "221",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "1815",
@@ -1262,7 +1376,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1920",
@@ -1273,7 +1388,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1748",
@@ -1284,7 +1400,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "816",
@@ -1295,7 +1412,8 @@
     "manager": "1459",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "854",
@@ -1306,7 +1424,8 @@
     "manager": "1870",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1862",
@@ -1317,7 +1436,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1918",
@@ -1328,7 +1448,8 @@
     "manager": "298",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Capital Humano"
   },
   {
     "id": "1931",
@@ -1339,7 +1460,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1910",
@@ -1350,7 +1472,8 @@
     "manager": "1328",
     "ubicacion": "UNIDAD CHOIX",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Embarques (Choix)"
   },
   {
     "id": "826",
@@ -1361,7 +1484,8 @@
     "manager": "409",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1741",
@@ -1372,7 +1496,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1678",
@@ -1383,7 +1508,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1745",
@@ -1394,7 +1520,8 @@
     "manager": "1929",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Capital Humano"
   },
   {
     "id": "1909",
@@ -1405,7 +1532,8 @@
     "manager": "409",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "926",
@@ -1416,7 +1544,8 @@
     "manager": "1928",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "584",
@@ -1427,7 +1556,8 @@
     "manager": "1",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "1861",
@@ -1438,7 +1568,8 @@
     "manager": "756",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1803",
@@ -1449,7 +1580,8 @@
     "manager": "756",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1856",
@@ -1460,7 +1592,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1877",
@@ -1471,7 +1604,8 @@
     "manager": "756",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1",
@@ -1482,7 +1616,8 @@
     "manager": "1927",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "2",
@@ -1493,7 +1628,8 @@
     "manager": "1927",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "1778",
@@ -1504,7 +1640,8 @@
     "manager": "1",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "1763",
@@ -1515,7 +1652,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1726",
@@ -1526,7 +1664,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1690",
@@ -1537,7 +1676,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1753",
@@ -1548,7 +1688,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "870",
@@ -1559,7 +1700,8 @@
     "manager": "1459",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1875",
@@ -1570,7 +1712,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1692",
@@ -1581,7 +1724,8 @@
     "manager": "783",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1056",
@@ -1592,7 +1736,8 @@
     "manager": "1",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "1437",
@@ -1603,7 +1748,8 @@
     "manager": "1019",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1805",
@@ -1614,7 +1760,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1818",
@@ -1625,7 +1772,8 @@
     "manager": "409",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1883",
@@ -1636,7 +1784,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1051",
@@ -1647,7 +1796,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1927",
@@ -1658,7 +1808,8 @@
     "manager": "730",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "3",
@@ -1669,7 +1820,8 @@
     "manager": "1927",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "1929",
@@ -1680,7 +1832,8 @@
     "manager": "730",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Capital Humano"
   },
   {
     "id": "1734",
@@ -1691,7 +1844,8 @@
     "manager": "670",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1940",
@@ -1702,7 +1856,8 @@
     "manager": "1863",
     "ubicacion": "PROYECTO NAMIQUIPA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Procesos (Los Olivos)"
   },
   {
     "id": "1663",
@@ -1713,7 +1868,8 @@
     "manager": "670",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1689",
@@ -1724,7 +1880,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1787",
@@ -1735,7 +1892,8 @@
     "manager": "670",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1917",
@@ -1746,7 +1904,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1817",
@@ -1757,7 +1916,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1800",
@@ -1768,7 +1928,8 @@
     "manager": "1843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1695",
@@ -1779,7 +1940,8 @@
     "manager": "1900",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1841",
@@ -1790,7 +1952,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1797",
@@ -1801,7 +1964,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1934",
@@ -1812,7 +1976,8 @@
     "manager": "1863",
     "ubicacion": "PROYECTO NAMIQUIPA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Procesos (Los Olivos)"
   },
   {
     "id": "1821",
@@ -1823,7 +1988,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1762",
@@ -1834,7 +2000,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1779",
@@ -1845,7 +2012,8 @@
     "manager": "1927",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "1900",
@@ -1856,7 +2024,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1761",
@@ -1867,7 +2036,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1843",
@@ -1878,7 +2048,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1789",
@@ -1889,7 +2060,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1881",
@@ -1900,7 +2072,8 @@
     "manager": "670",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "888",
@@ -1911,7 +2084,8 @@
     "manager": "1870",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1749",
@@ -1922,7 +2096,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1874",
@@ -1933,7 +2108,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1772",
@@ -1944,7 +2120,8 @@
     "manager": "670",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "298",
@@ -1955,7 +2132,8 @@
     "manager": "1929",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Capital Humano"
   },
   {
     "id": "1646",
@@ -1966,7 +2144,8 @@
     "manager": "670",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "102",
@@ -1977,7 +2156,8 @@
     "manager": "1499",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "1820",
@@ -1988,7 +2168,8 @@
     "manager": "756",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1922",
@@ -1999,7 +2180,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1751",
@@ -2010,7 +2192,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1926",
@@ -2021,7 +2204,8 @@
     "manager": "1863",
     "ubicacion": "PROYECTO NAMIQUIPA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Procesos (Los Olivos)"
   },
   {
     "id": "1810",
@@ -2032,7 +2216,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1674",
@@ -2043,7 +2228,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1825",
@@ -2054,7 +2240,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1824",
@@ -2065,7 +2252,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "909",
@@ -2076,7 +2264,8 @@
     "manager": "1037",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1723",
@@ -2087,7 +2276,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1673",
@@ -2098,7 +2288,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1932",
@@ -2109,7 +2300,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1472",
@@ -2120,7 +2312,8 @@
     "manager": "298",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Capital Humano"
   },
   {
     "id": "1645",
@@ -2131,7 +2324,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1193",
@@ -2142,7 +2336,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1019",
@@ -2153,7 +2348,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1066",
@@ -2164,7 +2360,8 @@
     "manager": "926",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1049",
@@ -2175,7 +2372,8 @@
     "manager": "756",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "713",
@@ -2186,7 +2384,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1641",
@@ -2197,7 +2396,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1332",
@@ -2208,7 +2408,8 @@
     "manager": "1328",
     "ubicacion": "UNIDAD CHOIX",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Embarques (Choix)"
   },
   {
     "id": "703",
@@ -2219,7 +2420,8 @@
     "manager": "1499",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "937",
@@ -2230,7 +2432,8 @@
     "manager": "7",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "570",
@@ -2241,7 +2444,8 @@
     "manager": "1843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1007",
@@ -2252,7 +2456,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "369",
@@ -2263,7 +2468,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "728",
@@ -2274,7 +2480,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1037",
@@ -2285,7 +2492,8 @@
     "manager": "1010",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "648",
@@ -2296,7 +2504,8 @@
     "manager": "1499",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "1134",
@@ -2307,7 +2516,8 @@
     "manager": "1019",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "410",
@@ -2318,7 +2528,8 @@
     "manager": "7",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "1625",
@@ -2329,7 +2540,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "529",
@@ -2340,7 +2552,8 @@
     "manager": "1019",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1101",
@@ -2351,7 +2564,8 @@
     "manager": "1037",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "859",
@@ -2362,7 +2576,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1814",
@@ -2373,7 +2588,8 @@
     "manager": "1328",
     "ubicacion": "UNIDAD CHOIX",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Embarques (Choix)"
   },
   {
     "id": "640",
@@ -2384,7 +2600,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1655",
@@ -2395,7 +2612,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1487",
@@ -2406,7 +2624,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1360",
@@ -2417,7 +2636,8 @@
     "manager": "409",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1289",
@@ -2428,7 +2648,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1783",
@@ -2439,7 +2660,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1846",
@@ -2450,7 +2672,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "295",
@@ -2461,7 +2684,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "597",
@@ -2472,7 +2696,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1271",
@@ -2483,7 +2708,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "587",
@@ -2494,7 +2720,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "11",
@@ -2505,7 +2732,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1109",
@@ -2516,7 +2744,8 @@
     "manager": "1037",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1499",
@@ -2527,7 +2756,8 @@
     "manager": "1927",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "670",
@@ -2538,7 +2768,8 @@
     "manager": "1620",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1173",
@@ -2549,7 +2780,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "7",
@@ -2560,7 +2792,8 @@
     "manager": "1927",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "1556",
@@ -2571,7 +2804,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "225",
@@ -2582,7 +2816,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "793",
@@ -2593,7 +2828,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "214",
@@ -2604,7 +2840,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1704",
@@ -2615,7 +2852,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "317",
@@ -2626,7 +2864,8 @@
     "manager": "1843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1286",
@@ -2637,7 +2876,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "833",
@@ -2648,7 +2888,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "843",
@@ -2659,7 +2900,8 @@
     "manager": "1928",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "409",
@@ -2670,7 +2912,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1639",
@@ -2681,7 +2924,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1277",
@@ -2692,7 +2936,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "684",
@@ -2703,7 +2948,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1325",
@@ -2714,7 +2960,8 @@
     "manager": "1459",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "772",
@@ -2725,7 +2972,8 @@
     "manager": "1968",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Metalurgia"
   },
   {
     "id": "1459",
@@ -2736,7 +2984,8 @@
     "manager": "1037",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1216",
@@ -2747,7 +2996,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1214",
@@ -2758,7 +3008,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1735",
@@ -2769,7 +3020,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1782",
@@ -2780,7 +3032,8 @@
     "manager": "1037",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "234",
@@ -2791,7 +3044,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "418",
@@ -2802,7 +3056,8 @@
     "manager": "772",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Metalurgia"
   },
   {
     "id": "1605",
@@ -2813,7 +3068,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "646",
@@ -2824,7 +3080,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "300",
@@ -2835,7 +3092,8 @@
     "manager": "298",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Capital Humano"
   },
   {
     "id": "1857",
@@ -2846,7 +3104,8 @@
     "manager": "1037",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1858",
@@ -2857,7 +3116,8 @@
     "manager": "1870",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1128",
@@ -2868,7 +3128,8 @@
     "manager": "756",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "362",
@@ -2879,7 +3140,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1224",
@@ -2890,7 +3152,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "61",
@@ -2901,7 +3164,8 @@
     "manager": "221",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "950",
@@ -2912,7 +3176,8 @@
     "manager": "730",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Staff DG"
   },
   {
     "id": "955",
@@ -2923,7 +3188,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1200",
@@ -2934,7 +3200,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1231",
@@ -2945,7 +3212,8 @@
     "manager": "1843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1648",
@@ -2956,7 +3224,8 @@
     "manager": "409",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1327",
@@ -2967,7 +3236,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1337",
@@ -2978,7 +3248,8 @@
     "manager": "1019",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "568",
@@ -2989,7 +3260,8 @@
     "manager": "756",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "552",
@@ -3000,7 +3272,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "762",
@@ -3011,7 +3284,8 @@
     "manager": "2",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "930",
@@ -3022,7 +3296,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1166",
@@ -3033,7 +3308,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "651",
@@ -3044,7 +3320,8 @@
     "manager": "1843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1305",
@@ -3055,7 +3332,8 @@
     "manager": "1843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1353",
@@ -3066,7 +3344,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1562",
@@ -3077,7 +3356,8 @@
     "manager": "1843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1870",
@@ -3088,7 +3368,8 @@
     "manager": "1775",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "159",
@@ -3099,7 +3380,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "21",
@@ -3110,7 +3392,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "257",
@@ -3121,7 +3404,8 @@
     "manager": "756",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "799",
@@ -3132,7 +3416,8 @@
     "manager": "756",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1806",
@@ -3143,7 +3428,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1380",
@@ -3154,7 +3440,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1612",
@@ -3165,7 +3452,8 @@
     "manager": "409",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1106",
@@ -3176,7 +3464,8 @@
     "manager": "118",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "219",
@@ -3187,7 +3476,8 @@
     "manager": "1010",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "190",
@@ -3198,7 +3488,8 @@
     "manager": "1968",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Metalurgia"
   },
   {
     "id": "757",
@@ -3209,7 +3500,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "771",
@@ -3220,7 +3512,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1527",
@@ -3231,7 +3524,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "221",
@@ -3242,7 +3536,8 @@
     "manager": "1927",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "118",
@@ -3253,7 +3548,8 @@
     "manager": "1775",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "252",
@@ -3264,7 +3560,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "847",
@@ -3275,7 +3572,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "235",
@@ -3286,7 +3584,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1201",
@@ -3297,7 +3596,8 @@
     "manager": "118",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "182",
@@ -3308,7 +3608,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1024",
@@ -3319,7 +3620,8 @@
     "manager": "118",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "756",
@@ -3330,7 +3632,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "800",
@@ -3341,7 +3644,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1596",
@@ -3352,7 +3656,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1521",
@@ -3363,7 +3668,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1010",
@@ -3374,7 +3680,8 @@
     "manager": "730",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "348",
@@ -3385,7 +3692,8 @@
     "manager": "409",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1686",
@@ -3396,7 +3704,8 @@
     "manager": "1863",
     "ubicacion": "PROYECTO NAMIQUIPA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Procesos (Los Olivos)"
   },
   {
     "id": "1018",
@@ -3407,7 +3716,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "183",
@@ -3418,7 +3728,8 @@
     "manager": "1328",
     "ubicacion": "UNIDAD CHOIX",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Embarques (Choix)"
   },
   {
     "id": "1886",
@@ -3429,7 +3740,8 @@
     "manager": "730",
     "ubicacion": "",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Procesos (Los Olivos)"
   },
   {
     "id": "1514",
@@ -3440,7 +3752,8 @@
     "manager": "1929",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Capital Humano"
   },
   {
     "id": "375",
@@ -3451,7 +3764,8 @@
     "manager": "1629",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "983",
@@ -3462,7 +3776,8 @@
     "manager": "1843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "173",
@@ -3473,7 +3788,8 @@
     "manager": "926",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "555",
@@ -3484,7 +3800,8 @@
     "manager": "756",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "674",
@@ -3495,7 +3812,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1362",
@@ -3506,7 +3824,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1906",
@@ -3517,7 +3836,8 @@
     "manager": "1870",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1911",
@@ -3528,7 +3848,8 @@
     "manager": "1870",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1914",
@@ -3539,7 +3860,8 @@
     "manager": "1037",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1526",
@@ -3550,7 +3872,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1623",
@@ -3561,7 +3884,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "218",
@@ -3572,7 +3896,8 @@
     "manager": "298",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Capital Humano"
   },
   {
     "id": "1921",
@@ -3583,7 +3908,8 @@
     "manager": "1870",
     "ubicacion": "LOS OLIVOS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "783",
@@ -3594,7 +3920,8 @@
     "manager": "1620",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1341",
@@ -3605,7 +3932,8 @@
     "manager": "1223",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1304",
@@ -3616,7 +3944,8 @@
     "manager": "1499",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Administracion y Finanzas"
   },
   {
     "id": "1629",
@@ -3627,7 +3956,8 @@
     "manager": "1620",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "647",
@@ -3638,7 +3968,8 @@
     "manager": "756",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "1071",
@@ -3649,7 +3980,8 @@
     "manager": "1928",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "176",
@@ -3660,7 +3992,8 @@
     "manager": "1775",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "730",
@@ -3671,7 +4004,8 @@
     "manager": null,
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Dir. General"
   },
   {
     "id": "147",
@@ -3682,7 +4016,8 @@
     "manager": "118",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "174",
@@ -3693,7 +4028,8 @@
     "manager": "1010",
     "ubicacion": "CORPORATIVO CHIHUAHUA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "842",
@@ -3704,7 +4040,8 @@
     "manager": "1620",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "208",
@@ -3715,7 +4052,8 @@
     "manager": "1775",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1630",
@@ -3726,7 +4064,8 @@
     "manager": "842",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "866",
@@ -3737,7 +4076,8 @@
     "manager": "843",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "158",
@@ -3748,7 +4088,8 @@
     "manager": "118",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Exploraciones"
   },
   {
     "id": "1620",
@@ -3759,7 +4100,8 @@
     "manager": "1010",
     "ubicacion": "PLANTA VILLAMATAMOROS",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   },
   {
     "id": "311",
@@ -3770,6 +4112,7 @@
     "manager": "409",
     "ubicacion": "CIENEGUITA",
     "estatus": "Activo",
-    "foto": null
+    "foto": null,
+    "direccion": "Operaciones"
   }
 ]

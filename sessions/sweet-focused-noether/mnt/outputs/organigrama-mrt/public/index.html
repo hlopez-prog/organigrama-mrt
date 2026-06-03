@@ -242,11 +242,11 @@ input[type=range]{width:100%;accent-color:var(--accent);margin-bottom:8px;}
 
     <div class="filter-section">
       <div class="filter-header">
-        <span class="filter-label">🗂 Área</span>
-        <button class="filter-clear" onclick="clearGroup('area')">Limpiar</button>
+        <span class="filter-label">🏛 Dirección (Área Principal)</span>
+        <button class="filter-clear" onclick="clearGroup('direccion')">Limpiar</button>
       </div>
-      <div class="chips" id="chips-area" style="max-height:120px;overflow-y:auto"></div>
-      <div class="active-bar" id="bar-area"></div>
+      <div class="chips" id="chips-direccion"></div>
+      <div class="active-bar" id="bar-direccion"></div>
     </div>
 
     <div class="filter-section">
@@ -477,7 +477,7 @@ let importRawData = null;
 let importCols = [];
 
 // Multi-select filter state
-const filterSel = { area: new Set(), nivel: new Set(), ubicacion: new Set(), estatus: new Set() };
+const filterSel = { direccion: new Set(), nivel: new Set(), ubicacion: new Set(), estatus: new Set() };
 let searchHighlights = new Set();
 let zoomBehavior, svgSel, gSel;
 
@@ -579,12 +579,12 @@ function loadDemo() {
 //  FILTERS
 // ═══════════════════════════════════════════════
 function populateFilters() {
-  const areas  = [...new Set(allNodes.map(n=>n.area).filter(Boolean))].sort();
+  const dirs   = [...new Set(allNodes.map(n=>n.direccion).filter(Boolean))].sort();
   const ubis   = [...new Set(allNodes.map(n=>n.ubicacion).filter(Boolean))].sort();
   const niveles= ['Directivo','Gerencia','Superintendencia','Jefatura','Supervisión','Administrativo','Operativo'];
   const estatus= [...new Set(allNodes.map(n=>n.estatus||'Activo').filter(Boolean))].sort();
 
-  buildChips('chips-area',      'area',      areas);
+  buildChips('chips-direccion', 'direccion', dirs);
   buildChips('chips-ubicacion', 'ubicacion', ubis);
   buildChips('chips-nivel',     'nivel',     niveles.filter(n=>allNodes.some(x=>x.nivel===n)));
   buildChips('chips-estatus',   'estatus',   estatus);
@@ -622,7 +622,8 @@ function updateActiveBar(group) {
 
 function clearGroup(group) {
   filterSel[group].clear();
-  buildChips('chips-'+group, group, [...document.querySelectorAll('#chips-'+group+' .chip')].map(c=>c.textContent));
+  const chipId = group==='area'?'chips-direccion':'chips-'+group;
+  buildChips(chipId, group, [...document.querySelectorAll('#'+chipId+' .chip')].map(c=>c.textContent));
   updateActiveBar(group);
   applyFilters();
 }
@@ -685,7 +686,7 @@ function applyFilters() {
     visibleNodes = allNodes.filter(n => showIds.has(String(n.id)));
 
     // Apply chip filters on top of search results
-    if(filterSel.area.size)      visibleNodes = visibleNodes.filter(n => filterSel.area.has(n.area) || searchHighlights.has(String(n.id)));
+    if(filterSel.direccion.size) visibleNodes = visibleNodes.filter(n => filterSel.direccion.has(n.direccion) || searchHighlights.has(String(n.id)));
     if(filterSel.nivel.size)     visibleNodes = visibleNodes.filter(n => filterSel.nivel.has(n.nivel) || searchHighlights.has(String(n.id)));
     if(filterSel.ubicacion.size) visibleNodes = visibleNodes.filter(n => filterSel.ubicacion.has(n.ubicacion) || searchHighlights.has(String(n.id)));
     if(filterSel.estatus.size)   visibleNodes = visibleNodes.filter(n => filterSel.estatus.has(n.estatus||'Activo') || searchHighlights.has(String(n.id)));
@@ -698,7 +699,7 @@ function applyFilters() {
   // ── SIN BÚSQUEDA: aplica solo los chip filters ──
   visibleNodes = allNodes.filter(n => {
     if(!sv && n.estatus==='Vacante') return false;
-    if(filterSel.area.size      && !filterSel.area.has(n.area))             return false;
+    if(filterSel.direccion.size && !filterSel.direccion.has(n.direccion))   return false;
     if(filterSel.nivel.size     && !filterSel.nivel.has(n.nivel))           return false;
     if(filterSel.ubicacion.size && !filterSel.ubicacion.has(n.ubicacion))   return false;
     if(filterSel.estatus.size   && !filterSel.estatus.has(n.estatus||'Activo')) return false;
@@ -1114,7 +1115,7 @@ function showTooltip(e, data) {
   const reps = allNodes.filter(n=>n.manager===data.id).length;
   document.getElementById('tt-name').textContent = data.nombre||'Vacante';
   document.getElementById('tt-puesto').textContent = data.puesto||'—';
-  document.getElementById('tt-area').textContent = data.area||'—';
+  document.getElementById('tt-area').textContent = (data.direccion||data.area||'—');
   document.getElementById('tt-nivel').textContent = data.nivel||'—';
   document.getElementById('tt-rep').textContent = reps;
   document.getElementById('tt-est').textContent = data.estatus||'—';
@@ -1527,11 +1528,11 @@ function renderDashboard() {
   const vac     = allNodes.filter(n=>n.estatus==='Vacante').length;
   const ubis    = countBy(allNodes, 'ubicacion');
   const niveles = countBy(allNodes, 'nivel');
-  const areas   = countBy(allNodes.filter(n=>n.area), 'area').slice(0,12);
+  const dires   = countBy(allNodes.filter(n=>n.direccion), 'direccion');
   const dirs    = getDirectorTree();
   const maxUbi  = ubis[0]?.[1] || 1;
   const maxNiv  = niveles[0]?.[1] || 1;
-  const maxArea = areas[0]?.[1] || 1;
+  const maxDir  = dires[0]?.[1] || 1;
 
   document.getElementById('dashboard-panel').innerHTML = `
   <div style="padding:20px;overflow-y:auto;flex:1">
@@ -1583,13 +1584,13 @@ function renderDashboard() {
     </div>
 
     <div class="dash-grid-2">
-      <!-- Por Área (top 12) -->
+      <!-- Por Dirección -->
       <div class="dash-card">
-        <div class="dash-card-title">🗂 Top Áreas por Número de Colaboradores</div>
-        ${areas.map(([area, cnt], i) => `
+        <div class="dash-card-title">🏛 Colaboradores por Dirección (Área Principal)</div>
+        ${dires.map(([dir, cnt], i) => `
           <div class="bar-row">
-            <div class="bar-label" title="${area}">${area}</div>
-            <div class="bar-track"><div class="bar-fill" style="width:${Math.round(cnt/maxArea*100)}%;background:${UBI_COLORS[i%UBI_COLORS.length]}"></div></div>
+            <div class="bar-label" title="${dir}">${dir}</div>
+            <div class="bar-track"><div class="bar-fill" style="width:${Math.round(cnt/maxDir*100)}%;background:${UBI_COLORS[i%UBI_COLORS.length]}"></div></div>
             <div class="bar-count">${cnt}</div>
             <div class="bar-pct">${Math.round(cnt/total*100)}%</div>
           </div>`).join('')}
