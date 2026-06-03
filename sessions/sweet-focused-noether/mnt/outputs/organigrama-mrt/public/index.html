@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OrgChart Pro — MRT Corporativo</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>OrgChart — MRT Corporativo</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -11,1758 +11,554 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-:root {
-  --bg:#f0f4f8; --sidebar:#ffffff; --card:#ffffff; --card2:#f1f5f9;
-  --hover:#e8eef5; --border:#e2e8f0; --border2:#cbd5e1;
-  --accent:#1d4ed8; --accent2:#0891b2; --green:#059669;
-  --yellow:#d97706; --red:#dc2626; --purple:#7c3aed;
-  --text:#0f172a; --text2:#475569; --muted:#94a3b8;
-  --r:10px; --r2:6px;
-}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);display:flex;height:100vh;overflow:hidden;}
-
-/* ── SIDEBAR ── */
-#sidebar{width:260px;min-width:260px;background:var(--sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;box-shadow:2px 0 8px rgba(0,0,0,.04);}
-.logo{padding:20px 18px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
-.logo-ic{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
-.logo-t{font-size:13px;font-weight:700;} .logo-s{font-size:10px;color:var(--text2);}
-.sec{padding:16px 14px 6px;font-size:9px;font-weight:700;color:#94a3b8;letter-spacing:1.5px;text-transform:uppercase;}
-.panel{padding:10px 14px;}
-
-/* Controls */
-.ctrl-label{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:5px;display:block;}
-.ctrl-input{width:100%;background:var(--card);border:1px solid var(--border2);border-radius:var(--r2);padding:7px 10px;font-size:12px;color:var(--text);font-family:'Inter',sans-serif;outline:none;margin-bottom:8px;}
-.ctrl-input:focus{border-color:var(--accent);}
-select.ctrl-input option{background:var(--card2);}
-.search-wrap{position:relative;margin-bottom:8px;}
-.search-wrap input{padding-left:28px;}
-.search-wrap::before{content:'🔍';position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:11px;}
-
-/* Layout buttons */
-.layout-btns{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;}
-.layout-btn{background:var(--card);border:1px solid var(--border2);border-radius:var(--r2);padding:7px 4px;font-size:11px;font-weight:500;color:var(--text2);cursor:pointer;text-align:center;transition:all .2s;}
-.layout-btn:hover{background:var(--hover);color:var(--text);}
-.layout-btn.active{background:rgba(59,130,246,.2);border-color:var(--accent);color:var(--accent);}
-
-/* Color scheme buttons */
-.color-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
-.color-dot{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .2s;}
-.color-dot.active{border-color:#fff;transform:scale(1.15);}
-
-/* Btn */
-.btn{width:100%;padding:8px;border-radius:var(--r2);font-size:12px;font-weight:600;cursor:pointer;border:none;font-family:'Inter',sans-serif;margin-bottom:6px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;}
-.btn-primary{background:var(--accent);color:#fff;} .btn-primary:hover{background:#2563eb;}
-.btn-secondary{background:var(--card2);color:var(--text2);border:1px solid var(--border2);} .btn-secondary:hover{background:var(--hover);color:var(--text);}
-.btn-success{background:var(--green);color:#fff;}
-.btn-sm{padding:6px 12px;width:auto;font-size:11px;}
-.divider{border:none;border-top:1px solid var(--border);margin:10px 0;}
-
-/* Stats */
-.stat-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:12px;}
-.stat-num{font-weight:700;color:var(--accent);}
-.tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:600;}
-.tag-blue{background:rgba(29,78,216,.1);color:#1d4ed8;}
-.tag-green{background:rgba(5,150,105,.1);color:#059669;}
-.tag-yellow{background:rgba(217,119,6,.1);color:#d97706;}
-.tag-red{background:rgba(220,38,38,.1);color:#dc2626;}
-.tag-purple{background:rgba(124,58,237,.1);color:#7c3aed;}
-.tag-cyan{background:rgba(6,182,212,.15);color:#22d3ee;}
-
-/* Range */
-input[type=range]{width:100%;accent-color:var(--accent);margin-bottom:8px;}
-.range-val{font-size:11px;color:var(--text2);text-align:right;margin-top:-6px;margin-bottom:6px;}
-
-/* Checkbox */
-.check-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);margin-bottom:6px;cursor:pointer;}
-.check-row input{accent-color:var(--accent);}
-
-/* ── MAIN ── */
+body{font-family:'Inter',sans-serif;background:#f0f4f8;color:#0f172a;display:flex;height:100vh;overflow:hidden;}
+#sidebar{width:250px;min-width:250px;background:#fff;border-right:1px solid #e2e8f0;display:flex;flex-direction:column;box-shadow:2px 0 8px rgba(0,0,0,.04);}
+.logo{padding:16px;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;gap:10px;}
+.logo-ic{width:34px;height:34px;background:linear-gradient(135deg,#1d4ed8,#0891b2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.logo-t{font-size:12px;font-weight:700;}.logo-s{font-size:10px;color:#94a3b8;}
+.nav-btn{display:flex;align-items:center;gap:8px;padding:9px 14px;margin:2px 8px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:500;color:#475569;transition:all .15s;}
+.nav-btn:hover{background:#f1f5f9;color:#0f172a;}.nav-btn.active{background:#eff6ff;color:#1d4ed8;font-weight:600;}
+.sb-sep{font-size:9px;font-weight:700;color:#94a3b8;letter-spacing:1.2px;text-transform:uppercase;padding:10px 16px 3px;}
+.fg{padding:5px 12px 2px;}
+.fg-label{font-size:10px;font-weight:600;color:#64748b;margin-bottom:4px;display:flex;justify-content:space-between;}
+.fg-label button{font-size:9px;color:#1d4ed8;background:none;border:none;cursor:pointer;font-family:inherit;}
+.chips{display:flex;flex-wrap:wrap;gap:4px;max-height:90px;overflow-y:auto;padding-bottom:2px;}
+.chip{padding:3px 8px;border-radius:12px;font-size:10px;font-weight:500;cursor:pointer;border:1px solid #e2e8f0;background:#f8fafc;color:#475569;transition:all .15s;white-space:nowrap;}
+.chip:hover{border-color:#1d4ed8;color:#1d4ed8;}.chip.on{background:#1d4ed8;border-color:#1d4ed8;color:#fff;}
+.sw{padding:8px 12px;position:relative;}
+.sw::before{content:'🔍';position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:11px;}
+.sw input{width:100%;padding:7px 10px 7px 30px;border:1px solid #e2e8f0;border-radius:8px;font-size:12px;font-family:inherit;outline:none;background:#f8fafc;}
+.sw input:focus{border-color:#1d4ed8;background:#fff;}
+.sb-foot{margin-top:auto;padding:10px 12px;border-top:1px solid #e2e8f0;}
+.btn{width:100%;padding:7px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;border:none;font-family:inherit;margin-bottom:4px;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .15s;}
+.btn-blue{background:#1d4ed8;color:#fff;}.btn-blue:hover{background:#1e40af;}
+.btn-gray{background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;}.btn-gray:hover{background:#e2e8f0;}
 #main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-#topbar{height:52px;min-height:52px;background:var(--sidebar);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:12px;}
-#topbar-title{font-size:15px;font-weight:700;}
-#topbar-sub{font-size:11px;color:var(--text2);}
-#topbar-actions{margin-left:auto;display:flex;gap:8px;align-items:center;}
-.tbtn{padding:6px 14px;border-radius:var(--r2);font-size:11px;font-weight:600;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:all .2s;display:flex;align-items:center;gap:5px;}
-.tbtn-primary{background:var(--accent);color:#fff;} .tbtn-primary:hover{background:#2563eb;}
-.tbtn-secondary{background:var(--card2);color:var(--text2);border:1px solid var(--border2);} .tbtn-secondary:hover{color:var(--text);}
-.tbtn-success{background:var(--green);color:#fff;}
-.tbtn-export{background:var(--purple);color:#fff;}
-
-/* ── CANVAS ── */
-#chart-wrap{flex:1;position:relative;overflow:hidden;background:var(--bg);}
-#chart-svg{width:100%;height:100%;cursor:grab;}
-#chart-svg:active{cursor:grabbing;}
-
-/* Node cards */
-.org-node{cursor:pointer;}
-.node-card{transition:all .2s;}
-.node-card:hover .node-bg{stroke-width:2;}
-.node-bg{transition:all .2s;}
-
-/* Minimap */
-#minimap{position:absolute;bottom:16px;right:16px;width:180px;height:110px;background:rgba(255,255,255,.95);border:1px solid var(--border2);border-radius:8px;overflow:hidden;}
-#minimap-svg{width:100%;height:100%;}
-#minimap-vp{fill:rgba(29,78,216,.1);stroke:var(--accent);stroke-width:1.5;}
-
-/* Zoom controls */
-#zoom-ctrl{position:absolute;bottom:16px;left:16px;display:flex;flex-direction:column;gap:6px;}
-.zc-btn{width:32px;height:32px;background:var(--card2);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
-.zc-btn:hover{background:var(--accent);border-color:var(--accent);}
-
-/* Level legend */
-#legend{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.97);border:1px solid var(--border2);border-radius:8px;padding:12px 14px;min-width:140px;box-shadow:0 2px 8px rgba(0,0,0,.08);}
-.leg-title{font-size:9px;font-weight:700;color:var(--muted);letter-spacing:1px;margin-bottom:8px;text-transform:uppercase;}
-.leg-item{display:flex;align-items:center;gap:6px;margin-bottom:5px;font-size:11px;color:var(--text2);}
-.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
-
-/* Search highlight */
-.node-highlight .node-bg{stroke:#fbbf24!important;stroke-width:2.5!important;}
-.node-dimmed{opacity:.25;}
-
-/* Tooltip */
-#tooltip{position:absolute;background:#ffffff;border:1px solid var(--border2);border-radius:8px;padding:12px 14px;font-size:12px;pointer-events:none;display:none;z-index:100;min-width:200px;box-shadow:0 4px 20px rgba(0,0,0,.12);}
-.tt-name{font-size:13px;font-weight:700;margin-bottom:4px;}
-.tt-row{display:flex;justify-content:space-between;gap:12px;margin-top:3px;font-size:11px;}
-.tt-label{color:var(--text2);}
-
-/* Modal */
-.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
-.modal-ov.open{display:flex;}
-.modal{background:#ffffff;border:1px solid var(--border2);border-radius:14px;padding:26px;width:90%;max-width:520px;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.15);}
-.modal-title{font-size:16px;font-weight:700;margin-bottom:4px;}
-.modal-sub{font-size:12px;color:var(--text2);margin-bottom:18px;}
-.form-group{margin-bottom:12px;}
-.form-group label{display:block;font-size:11px;font-weight:600;color:var(--text2);margin-bottom:4px;}
-.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:var(--r2);padding:8px 10px;font-size:12px;color:var(--text);font-family:'Inter',sans-serif;outline:none;}
-.form-group input:focus,.form-group select:focus{border-color:var(--accent);}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);}
-.mbtn{padding:7px 16px;border-radius:var(--r2);font-size:12px;font-weight:600;cursor:pointer;border:none;font-family:'Inter',sans-serif;}
-.mbtn-primary{background:var(--accent);color:#fff;}
-.mbtn-secondary{background:var(--card2);color:var(--text2);border:1px solid var(--border2);}
-
-/* Drop zone */
-.dz{border:2px dashed var(--border2);border-radius:var(--r);padding:30px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:12px;}
-.dz:hover,.dz.over{border-color:var(--accent);background:rgba(59,130,246,.05);}
-.dz-icon{font-size:36px;margin-bottom:8px;}
-.dz-text{font-size:13px;font-weight:600;}
-.dz-sub{font-size:11px;color:var(--text2);margin-top:4px;}
-
-/* Toast */
-#toast{position:fixed;bottom:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:6px;}
-.ti{background:#ffffff;border:1px solid var(--border2);border-radius:8px;padding:10px 14px;font-size:12px;display:flex;align-items:center;gap:7px;min-width:260px;animation:sin .3s ease;box-shadow:0 4px 16px rgba(0,0,0,.1);}
-.ti.s{border-left:3px solid var(--green);} .ti.e{border-left:3px solid var(--red);} .ti.i{border-left:3px solid var(--accent);}
-@keyframes sin{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
-
-/* Progress */
-#progress-wrap{position:absolute;inset:0;background:rgba(240,244,248,.92);display:none;align-items:center;justify-content:center;flex-direction:column;z-index:500;}
-#progress-wrap.show{display:flex;}
-.prog-box{background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:28px 36px;text-align:center;}
-.prog-title{font-size:14px;font-weight:700;margin-bottom:12px;}
-.prog-bar-wrap{width:240px;height:6px;background:var(--card2);border-radius:3px;overflow:hidden;}
-.prog-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;transition:width .3s;}
-
-::-webkit-scrollbar{width:5px;height:5px;}
-::-webkit-scrollbar-track{background:#f0f4f8;}
-::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:3px;}
-
-/* ── SAVE BADGE ── */
-.save-badge{font-size:11px;font-weight:600;padding:4px 10px;border-radius:12px;transition:all .3s;}
-.badge-saving{background:rgba(245,158,11,.15);color:#fbbf24;}
-.badge-saved{background:rgba(16,185,129,.15);color:#34d399;}
-.badge-error{background:rgba(239,68,68,.15);color:#f87171;}
-
-
-/* ── DASHBOARD PREMIUM ── */
-#dashboard-panel{display:none;flex:1;overflow-y:auto;background:#f0f4f8;}
-.dash-header{background:linear-gradient(135deg,#1d4ed8 0%,#0891b2 100%);padding:28px 28px 20px;color:#fff;}
-.dash-header-title{font-size:22px;font-weight:800;letter-spacing:-.3px;}
-.dash-header-sub{font-size:12px;opacity:.8;margin-top:4px;}
-.dash-header-kpis{display:flex;gap:32px;margin-top:20px;}
-.dash-kpi{text-align:center;}
-.dash-kpi-num{font-size:36px;font-weight:800;line-height:1;}
-.dash-kpi-label{font-size:10px;opacity:.75;text-transform:uppercase;letter-spacing:.8px;margin-top:3px;}
-.dash-kpi-divider{width:1px;background:rgba(255,255,255,.25);margin:4px 0;}
-.dash-body{padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.dash-full{grid-column:1/-1;}
-.dc{background:#fff;border-radius:14px;padding:22px;box-shadow:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04);border:1px solid #e8eef5;}
-.dc-title{font-size:13px;font-weight:700;color:#0f172a;margin-bottom:2px;display:flex;align-items:center;gap:7px;}
-.dc-sub{font-size:11px;color:#94a3b8;margin-bottom:16px;}
-.dc-chart-wrap{position:relative;}
-.dir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px;}
-.dir-item{background:linear-gradient(135deg,#f8fafc,#eff6ff);border:1px solid #dbeafe;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px;transition:all .2s;}
-.dir-item:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(29,78,216,.1);}
-.dir-av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;margin-bottom:4px;}
-.dir-nm{font-size:11px;font-weight:700;color:#1e293b;line-height:1.3;}
-.dir-pt{font-size:10px;color:#64748b;margin-top:1px;line-height:1.3;}
-.dir-badge{display:inline-flex;align-items:center;gap:4px;background:#1d4ed8;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;margin-top:4px;width:fit-content;}
-
-.dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
-.dash-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
-.kpi-box{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;position:relative;overflow:hidden;}
-.kpi-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:12px 12px 0 0;}
-.kpi-box.blue::before{background:linear-gradient(90deg,#1d4ed8,#06b6d4);}
-.kpi-box.green::before{background:linear-gradient(90deg,#059669,#34d399);}
-.kpi-box.purple::before{background:linear-gradient(90deg,#7c3aed,#a78bfa);}
-.kpi-label{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;}
-.kpi-num{font-size:36px;font-weight:800;color:#0f172a;line-height:1;}
-.kpi-sub{font-size:11px;color:#64748b;margin-top:4px;}
-.dash-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
-.dash-card-title{font-size:13px;font-weight:700;color:#0f172a;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;}
-.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
-.bar-label{font-size:11px;color:#475569;width:180px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.bar-track{flex:1;height:8px;background:#f1f5f9;border-radius:4px;overflow:hidden;}
-.bar-fill{height:100%;border-radius:4px;transition:width .5s ease;}
-.bar-count{font-size:11px;font-weight:700;color:#0f172a;width:32px;text-align:right;flex-shrink:0;}
-.bar-pct{font-size:10px;color:#94a3b8;width:36px;text-align:right;flex-shrink:0;}
-.nivel-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;display:inline-block;}
-.dir-card{display:flex;align-items:center;gap:12px;padding:10px 12px;background:#f8fafc;border-radius:8px;margin-bottom:8px;border:1px solid var(--border);}
-.dir-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;}
-.dir-name{font-size:12px;font-weight:600;color:#0f172a;}
-.dir-puesto{font-size:11px;color:#64748b;margin-top:1px;}
-.dir-count{margin-left:auto;font-size:11px;font-weight:700;background:#eff6ff;color:#1d4ed8;padding:2px 8px;border-radius:10px;}
-
-/* ── FILTER CHIPS ── */
-.filter-section{margin-bottom:10px;}
-.filter-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.filter-label{font-size:11px;font-weight:600;color:var(--text2);}
-.filter-clear{font-size:10px;color:var(--accent);cursor:pointer;background:none;border:none;font-family:'Inter',sans-serif;padding:0;}
-.filter-clear:hover{text-decoration:underline;}
-.chips{display:flex;flex-wrap:wrap;gap:5px;}
-.chip{padding:4px 9px;border-radius:20px;font-size:10px;font-weight:600;cursor:pointer;border:1px solid var(--border2);background:var(--card);color:var(--text2);transition:all .18s;white-space:nowrap;user-select:none;}
-.chip:hover{border-color:var(--accent);color:var(--accent);}
-.chip.on{background:var(--accent);border-color:var(--accent);color:#fff;}
-.chip.on:hover{background:#2563eb;}
-.active-bar{font-size:10px;color:var(--text2);margin-top:4px;min-height:14px;}
-.active-bar span{color:var(--accent);font-weight:700;}
+#topbar{height:50px;min-height:50px;background:#fff;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;padding:0 16px;gap:10px;}
+#tb-title{font-size:14px;font-weight:700;}#tb-sub{font-size:11px;color:#94a3b8;}
+#tb-right{margin-left:auto;display:flex;gap:5px;align-items:center;}
+.tbtn{padding:5px 11px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .15s;display:flex;align-items:center;gap:4px;}
+.tbtn-blue{background:#1d4ed8;color:#fff;}.tbtn-gray{background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;}.tbtn-purple{background:#7c3aed;color:#fff;}
+#si{font-size:10px;font-weight:600;padding:3px 8px;border-radius:6px;}
+.si-s{background:#d1fae5;color:#059669;}.si-g{background:#fef3c7;color:#d97706;}.si-e{background:#fee2e2;color:#dc2626;}
+#vorg{flex:1;position:relative;overflow:hidden;}
+#svg{width:100%;height:100%;cursor:grab;}#svg:active{cursor:grabbing;}
+#vdash{flex:1;display:none;overflow-y:auto;}
+#vimp{flex:1;display:none;overflow-y:auto;padding:20px;}
+#overlay{position:absolute;inset:0;background:rgba(240,244,248,.92);display:flex;align-items:center;justify-content:center;z-index:50;}
+.ovbox{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:26px 34px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.08);}
+.ovt{font-size:13px;font-weight:700;margin-bottom:10px;}.ovb{width:200px;height:5px;background:#e2e8f0;border-radius:3px;overflow:hidden;margin:0 auto;}
+.ovbf{height:100%;background:linear-gradient(90deg,#1d4ed8,#0891b2);border-radius:3px;transition:width .4s;}
+.ovs{font-size:11px;color:#94a3b8;margin-top:7px;}
+#zbtn{position:absolute;bottom:14px;left:14px;display:flex;flex-direction:column;gap:5px;}
+.zb{width:30px;height:30px;background:#fff;border:1px solid #e2e8f0;border-radius:7px;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.08);transition:all .15s;}
+.zb:hover{background:#eff6ff;border-color:#1d4ed8;color:#1d4ed8;}
+#legbox{position:absolute;top:12px;right:12px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.legt{font-size:9px;font-weight:700;color:#94a3b8;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;}
+.legr{display:flex;align-items:center;gap:6px;font-size:10px;color:#475569;margin-bottom:3px;}
+.legd{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+#sres{position:absolute;top:12px;left:50%;transform:translateX(-50%);background:#1d4ed8;color:#fff;font-size:11px;font-weight:600;padding:5px 14px;border-radius:20px;display:none;white-space:nowrap;}
+/* DASHBOARD */
+.dh{background:linear-gradient(135deg,#1d4ed8,#0891b2);padding:20px 22px 16px;color:#fff;}
+.dh-t{font-size:17px;font-weight:800;}.dh-s{font-size:11px;opacity:.75;margin-top:3px;}
+.kpi-r{display:flex;gap:0;margin-top:14px;}
+.kpi-i{flex:1;text-align:center;}.kpi-i+.kpi-i{border-left:1px solid rgba(255,255,255,.2);}
+.kpi-n{font-size:26px;font-weight:800;line-height:1;}.kpi-l{font-size:9px;opacity:.7;text-transform:uppercase;letter-spacing:.7px;margin-top:3px;}
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:16px;}
+.dg-full{grid-column:1/-1;}
+.dc{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.dc h3{font-size:12px;font-weight:700;color:#0f172a;margin-bottom:2px;}
+.dc p{font-size:10px;color:#94a3b8;margin-bottom:12px;}
+.dircards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px;}
+.dirc{background:linear-gradient(135deg,#f8fafc,#eff6ff);border:1px solid #dbeafe;border-radius:10px;padding:12px;transition:all .2s;}
+.dirc:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(29,78,216,.1);}
+.dc-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;margin-bottom:6px;}
+.dc-nm{font-size:11px;font-weight:700;color:#1e293b;line-height:1.3;}
+.dc-pt{font-size:10px;color:#64748b;margin-top:2px;}
+.dc-bg{display:inline-block;background:#1d4ed8;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;margin-top:5px;}
+/* IMPORT */
+.dz{border:2px dashed #cbd5e1;border-radius:12px;padding:28px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:12px;}
+.dz:hover,.dz.ov{border-color:#1d4ed8;background:#eff6ff;}
+/* MODAL */
+.mbg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:200;backdrop-filter:blur(3px);}
+.mbg.open{display:flex;}
+.modal{background:#fff;border-radius:14px;padding:22px;width:90%;max-width:480px;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.15);}
+.modal h2{font-size:15px;font-weight:700;margin-bottom:3px;}.modal p{font-size:11px;color:#64748b;margin-bottom:14px;}
+.mfg{margin-bottom:9px;}.mfg label{display:block;font-size:10px;font-weight:600;color:#64748b;margin-bottom:3px;}
+.mfg input,.mfg select{width:100%;padding:7px 9px;border:1px solid #e2e8f0;border-radius:7px;font-size:12px;font-family:inherit;outline:none;}
+.mfg input:focus,.mfg select:focus{border-color:#1d4ed8;}
+.mfr{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.mac{display:flex;gap:7px;justify-content:flex-end;margin-top:12px;padding-top:10px;border-top:1px solid #e2e8f0;}
+.mbtn{padding:6px 14px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;border:none;font-family:inherit;}
+.mbtn-blue{background:#1d4ed8;color:#fff;}.mbtn-gray{background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;}
+/* TOOLTIP */
+#tip{position:fixed;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:11px 13px;font-size:11px;pointer-events:none;display:none;z-index:100;min-width:180px;box-shadow:0 4px 16px rgba(0,0,0,.1);}
+.tt-n{font-size:12px;font-weight:700;margin-bottom:5px;color:#0f172a;}
+.tt-r{display:flex;justify-content:space-between;gap:10px;margin-top:3px;color:#475569;}
+/* TOAST */
+#toast{position:fixed;bottom:16px;right:16px;z-index:999;display:flex;flex-direction:column;gap:5px;}
+.ti{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:9px 13px;font-size:11px;display:flex;align-items:center;gap:6px;box-shadow:0 4px 12px rgba(0,0,0,.1);animation:tin .3s ease;}
+.ti.s{border-left:3px solid #059669;}.ti.e{border-left:3px solid #dc2626;}.ti.i{border-left:3px solid #1d4ed8;}
+@keyframes tin{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+::-webkit-scrollbar{width:4px;height:4px;}::-webkit-scrollbar-track{background:#f8fafc;}::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px;}
 </style>
 </head>
 <body>
-
-<!-- ══ SIDEBAR ══ -->
 <nav id="sidebar">
   <div class="logo">
     <div class="logo-ic">🏢</div>
-    <div><div class="logo-t">OrgChart Pro</div><div class="logo-s">Minería · 343 colaboradores</div></div>
+    <div><div class="logo-t">MRT Corporativo</div><div class="logo-s" id="logo-s">Sistema RRHH</div></div>
   </div>
-
-  <div class="sec">Filtros</div>
-  <div class="panel">
-    <div class="search-wrap" style="margin-bottom:4px">
-      <input class="ctrl-input" type="text" id="f-search" placeholder="Buscar nombre o puesto..." oninput="applyFilters()">
-    </div>
-    <div id="search-info" style="font-size:10px;color:var(--text2);margin-bottom:10px;min-height:14px;padding:0 2px"></div>
-
-    <div class="filter-section">
-      <div class="filter-header">
-        <span class="filter-label">📍 Ubicación / Planta</span>
-        <button class="filter-clear" onclick="clearGroup('ubicacion')">Limpiar</button>
-      </div>
-      <div class="chips" id="chips-ubicacion"></div>
-      <div class="active-bar" id="bar-ubicacion"></div>
-    </div>
-
-    <div class="filter-section">
-      <div class="filter-header">
-        <span class="filter-label">🏛 Dirección</span>
-        <button class="filter-clear" onclick="clearGroup('direccion')">Limpiar</button>
-      </div>
-      <div class="chips" id="chips-direccion"></div>
-      <div class="active-bar" id="bar-direccion"></div>
-    </div>
-
-    <div class="filter-section">
-      <div class="filter-header">
-        <span class="filter-label">🏷 Nivel Jerárquico</span>
-        <button class="filter-clear" onclick="clearGroup('nivel')">Limpiar</button>
-      </div>
-      <div class="chips" id="chips-nivel"></div>
-      <div class="active-bar" id="bar-nivel"></div>
-    </div>
-
-    <div class="filter-section">
-      <div class="filter-header">
-        <span class="filter-label">⚡ Estatus</span>
-        <button class="filter-clear" onclick="clearGroup('estatus')">Limpiar</button>
-      </div>
-      <div class="chips" id="chips-estatus"></div>
-    </div>
-
-    <button class="btn btn-secondary" style="margin-top:8px" onclick="clearFilters()">↺ Limpiar todos los filtros</button>
+  <div style="padding:6px 8px 3px">
+    <div class="nav-btn active" id="n-org" onclick="sv('org')"><span>🏢</span>Organigrama</div>
+    <div class="nav-btn" id="n-dash" onclick="sv('dash')"><span>📊</span>Dashboard</div>
+    <div class="nav-btn" id="n-imp" onclick="sv('imp')"><span>📥</span>Importar datos</div>
   </div>
-
-  <div class="divider"></div>
-  <div class="sec">Vista</div>
-  <div class="panel">
-    <label class="ctrl-label">Diseño</label>
-    <div class="layout-btns">
-      <div class="layout-btn" id="lb-td" onclick="setLayout('top-down')">⬇ Vertical</div>
-      <div class="layout-btn active" id="lb-lr" onclick="setLayout('left-right')">➡ Horizontal</div>
-      <div class="layout-btn" id="lb-rad" onclick="setLayout('radial')">◎ Radial</div>
-      <div class="layout-btn" id="lb-com" onclick="setLayout('compact')">⊞ Compacto</div>
-    </div>
-    <label class="ctrl-label">Esquema de color</label>
-    <div class="color-btns" id="color-schemes">
-      <div class="color-dot active" style="background:linear-gradient(135deg,#3b82f6,#06b6d4)" data-scheme="blue" onclick="setColorScheme('blue')" title="Azul corporativo"></div>
-      <div class="color-dot" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)" data-scheme="purple" onclick="setColorScheme('purple')" title="Púrpura"></div>
-      <div class="color-dot" style="background:linear-gradient(135deg,#10b981,#06b6d4)" data-scheme="green" onclick="setColorScheme('green')" title="Verde"></div>
-      <div class="color-dot" style="background:linear-gradient(135deg,#f59e0b,#ef4444)" data-scheme="warm" onclick="setColorScheme('warm')" title="Cálido"></div>
-      <div class="color-dot" style="background:linear-gradient(135deg,#64748b,#94a3b8)" data-scheme="mono" onclick="setColorScheme('mono')" title="Monocromático"></div>
-    </div>
-    <label class="ctrl-label">Tamaño de nodos</label>
-    <input type="range" id="node-size" min="60" max="140" value="100" oninput="updateNodeSize(this.value)">
-    <div class="range-val" id="node-size-val">100%</div>
-    <label class="check-row"><input type="checkbox" id="show-photos" checked onchange="togglePhotos()"> Mostrar fotos/avatares</label>
-    <label class="check-row"><input type="checkbox" id="show-vacant" checked onchange="applyFilters()"> Mostrar vacantes</label>
-    <label class="check-row"><input type="checkbox" id="show-lines" checked onchange="toggleLines()"> Mostrar líneas de reporte</label>
-    <label class="check-row"><input type="checkbox" id="show-counts" checked onchange="renderChart()"> Mostrar conteo reportes</label>
+  <div class="sb-sep">Filtros</div>
+  <div class="sw"><input type="text" id="fsearch" placeholder="Buscar nombre o puesto..." oninput="applyF()"></div>
+  <div class="fg">
+    <div class="fg-label"><span>📁 Dirección</span><button onclick="clrG('dir')">Limpiar</button></div>
+    <div class="chips" id="ch-dir"></div>
   </div>
-
-  <div class="divider"></div>
-  <div class="sec">Estadísticas</div>
-  <div class="panel" id="stats-panel">
-    <div class="stat-row"><span>Total posiciones</span><span class="stat-num" id="s-total">0</span></div>
-    <div class="stat-row"><span>Activos</span><span class="stat-num" id="s-activos">0</span></div>
-    <div class="stat-row"><span>Vacantes</span><span class="stat-num" id="s-vacantes">0</span></div>
-    <div class="stat-row"><span>Niveles</span><span class="stat-num" id="s-niveles">0</span></div>
-    <div class="stat-row"><span>Áreas</span><span class="stat-num" id="s-areas">0</span></div>
-    <div class="stat-row"><span>Visibles ahora</span><span class="stat-num" id="s-visible">0</span></div>
+  <div class="fg">
+    <div class="fg-label"><span>📍 Ubicación</span><button onclick="clrG('ubi')">Limpiar</button></div>
+    <div class="chips" id="ch-ubi"></div>
   </div>
-
-  <div class="divider"></div>
-  <div class="sec">Datos</div>
-  <div class="panel">
-    <button class="btn btn-primary" onclick="openModal('modal-import')">🔄 Actualizar datos (Excel/CSV)</button>
-    <button class="btn btn-secondary" onclick="downloadTemplate()">⬇ Plantilla Excel</button>
-    <button class="btn btn-secondary" onclick="openModal('modal-add')">＋ Agregar posición</button>
-    <button class="btn btn-secondary" onclick="loadFromServer()">↺ Recargar desde servidor</button>
+  <div class="fg">
+    <div class="fg-label"><span>🏷 Nivel</span><button onclick="clrG('niv')">Limpiar</button></div>
+    <div class="chips" id="ch-niv"></div>
+  </div>
+  <div class="sb-foot">
+    <button class="btn btn-blue" onclick="openM('modal-add')">＋ Agregar posición</button>
+    <button class="btn btn-gray" onclick="clrAll()">↺ Limpiar todos los filtros</button>
+    <button class="btn btn-gray" onclick="loadData()">🔄 Recargar datos del servidor</button>
   </div>
 </nav>
 
-<!-- ══ MAIN ══ -->
 <div id="main">
   <div id="topbar">
-    <div>
-      <div id="topbar-title">Organigrama — MRT Corporativo</div>
-      <div id="topbar-sub" id="topbar-sub">MRT Corporativo · Cargando...</div>
-    </div>
-    <div id="topbar-actions">
-      <span id="save-badge" class="save-badge"></span>
-      <button class="tbtn tbtn-secondary" id="btn-dash" onclick="showDashboard()" style="background:var(--accent);color:#fff">📊 Dashboard</button>
-      <button class="tbtn tbtn-secondary" id="btn-org" onclick="hideDashboard()" style="display:none">🏢 Organigrama</button>
-      <button class="tbtn tbtn-secondary" onclick="loadFromServer()">↺ Sync</button>
-      <button class="tbtn tbtn-secondary" onclick="fitAll()">⌖ Centrar</button>
-      <button class="tbtn tbtn-secondary" onclick="expandAll()">⊕ Expandir todo</button>
-      <button class="tbtn tbtn-secondary" onclick="collapseAll()">⊖ Colapsar</button>
-      <button class="tbtn tbtn-export" onclick="exportPNG()">🖼 PNG</button>
-      <button class="tbtn tbtn-export" onclick="exportPDF()">📄 PDF</button>
-      <button class="tbtn tbtn-primary" onclick="openModal('modal-add')">＋ Posición</button>
+    <div><div id="tb-title">Organigrama — MRT Corporativo</div><div id="tb-sub">Cargando...</div></div>
+    <div id="tb-right">
+      <span id="si"></span>
+      <button class="tbtn tbtn-gray" onclick="fitC()">⌖ Centrar</button>
+      <button class="tbtn tbtn-gray" onclick="expAll()">⊕ Expandir</button>
+      <button class="tbtn tbtn-gray" onclick="colAll()">⊖ Colapsar</button>
+      <button class="tbtn tbtn-purple" onclick="xPDF()">📄 PDF</button>
+      <button class="tbtn tbtn-blue" onclick="xPNG()">🖼 PNG</button>
     </div>
   </div>
-
-  <div id="chart-wrap">
-    <svg id="chart-svg"></svg>
-    <div id="legend">
-      <div class="leg-title">Nivel jerárquico</div>
-      <div id="legend-items"></div>
+  <div id="vorg">
+    <svg id="svg"></svg>
+    <div id="zbtn">
+      <button class="zb" onclick="dZ(1.25)">+</button>
+      <button class="zb" onclick="dZ(.8)">−</button>
+      <button class="zb" onclick="fitC()">⌖</button>
     </div>
-    <div id="zoom-ctrl">
-      <button class="zc-btn" onclick="doZoom(1.25)" title="Acercar">+</button>
-      <button class="zc-btn" onclick="doZoom(0.8)" title="Alejar">−</button>
-      <button class="zc-btn" onclick="fitAll()" title="Centrar">⌖</button>
-      <button class="zc-btn" onclick="doZoom(1)" title="100%" style="font-size:10px">1:1</button>
-    </div>
-    <div id="minimap"><svg id="minimap-svg"><rect id="minimap-vp" class="minimap-vp"></rect></svg></div>
-    <div id="tooltip">
-      <div class="tt-name" id="tt-name"></div>
-      <div class="tt-row"><span class="tt-label">Puesto</span><span id="tt-puesto"></span></div>
-      <div class="tt-row"><span class="tt-label">Área</span><span id="tt-area"></span></div>
-      <div class="tt-row"><span class="tt-label">Nivel</span><span id="tt-nivel"></span></div>
-      <div class="tt-row"><span class="tt-label">Reportes</span><span id="tt-rep"></span></div>
-      <div class="tt-row"><span class="tt-label">Estatus</span><span id="tt-est"></span></div>
+    <div id="legbox"><div class="legt">Nivel Jerárquico</div><div id="legit"></div></div>
+    <div id="sres"></div>
+    <div id="overlay">
+      <div class="ovbox">
+        <div class="ovt" id="ovt">Conectando...</div>
+        <div class="ovb"><div class="ovbf" id="ovbf" style="width:10%"></div></div>
+        <div class="ovs" id="ovs">Por favor espera</div>
+      </div>
     </div>
   </div>
-</div>
-
-<!-- ══ PROGRESS ══ -->
-<div id="progress-wrap">
-  <div class="prog-box">
-    <div class="prog-title" id="prog-title">Procesando...</div>
-    <div class="prog-bar-wrap"><div class="prog-bar" id="prog-bar" style="width:0%"></div></div>
-    <div style="font-size:11px;color:var(--text2);margin-top:8px" id="prog-sub"></div>
+  <div id="vdash"></div>
+  <div id="vimp">
+    <div style="max-width:660px;margin:0 auto">
+      <h2 style="font-size:15px;font-weight:700;margin-bottom:4px">Importar / Actualizar datos</h2>
+      <p style="font-size:12px;color:#64748b;margin-bottom:14px">Sube un archivo Excel o CSV con los colaboradores</p>
+      <div class="dz" id="dz" onclick="document.getElementById('ffile').click()">
+        <input type="file" id="ffile" accept=".xlsx,.xls,.csv" style="display:none" onchange="hFile(event)">
+        <div style="font-size:34px;margin-bottom:7px">📊</div>
+        <div style="font-size:13px;font-weight:600">Arrastra tu archivo aquí o haz clic</div>
+        <div style="font-size:11px;color:#94a3b8;margin-top:3px">Soporta .xlsx · .xls · .csv</div>
+      </div>
+      <div id="imp-prev"></div>
+      <div style="margin-top:14px"><button class="btn btn-gray" style="width:auto;padding:7px 14px" onclick="dlTpl()">⬇ Descargar plantilla Excel</button></div>
+    </div>
   </div>
 </div>
 
-<!-- ══ MODAL: IMPORT ══ -->
-<div class="modal-ov" id="modal-import">
+<div id="tip"><div class="tt-n" id="tt-n"></div><div class="tt-r"><span style="color:#94a3b8">Puesto</span><span id="tt-p"></span></div><div class="tt-r"><span style="color:#94a3b8">Dirección</span><span id="tt-d"></span></div><div class="tt-r"><span style="color:#94a3b8">Ubicación</span><span id="tt-u"></span></div><div class="tt-r"><span style="color:#94a3b8">Nivel</span><span id="tt-nv"></span></div><div class="tt-r"><span style="color:#94a3b8">Reportes</span><span id="tt-r"></span></div></div>
+
+<div class="mbg" id="modal-add">
   <div class="modal">
-    <div class="modal-title">Actualizar Base de Datos</div>
-    <div class="modal-sub">Carga tu archivo Excel o CSV actualizado. Los datos nuevos reemplazarán o se fusionarán con los existentes.</div>
-    <div class="dz" id="drop-zone" onclick="document.getElementById('file-inp').click()">
-      <input type="file" id="file-inp" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleFile(event)">
-      <div class="dz-icon">📊</div>
-      <div class="dz-text">Arrastra aquí tu archivo Excel</div>
-      <div class="dz-sub">.xlsx · .xls · .csv · máx. 10 MB</div>
-    </div>
-    <div id="import-preview" style="display:none">
-      <div style="font-size:12px;color:var(--text2);margin-bottom:8px" id="import-info"></div>
-      <div style="overflow-x:auto;max-height:200px;font-size:11px;" id="import-table"></div>
-      <div style="margin-top:10px;">
-        <label class="ctrl-label">Columna: Nombre</label>
-        <select class="ctrl-input" id="map-nombre"></select>
-        <label class="ctrl-label">Columna: Puesto</label>
-        <select class="ctrl-input" id="map-puesto"></select>
-        <label class="ctrl-label">Columna: Área</label>
-        <select class="ctrl-input" id="map-area"></select>
-        <label class="ctrl-label">Columna: Nivel</label>
-        <select class="ctrl-input" id="map-nivel"></select>
-        <label class="ctrl-label">Columna: Reporta a (ID o Nombre del jefe)</label>
-        <select class="ctrl-input" id="map-manager"></select>
-        <label class="ctrl-label">Columna: ID empleado (opcional)</label>
-        <select class="ctrl-input" id="map-id"></select>
-        <label class="ctrl-label">Columna: Ubicación (opcional)</label>
-        <select class="ctrl-input" id="map-ubicacion"></select>
-        <label class="ctrl-label">Columna: Estatus (opcional)</label>
-        <select class="ctrl-input" id="map-estatus"></select>
-      </div>
-    </div>
-    <div class="modal-actions">
-      <button class="mbtn mbtn-secondary" onclick="closeModal('modal-import')">Cancelar</button>
-      <button class="mbtn mbtn-primary" id="btn-confirm-import" style="display:none" onclick="confirmImport()">✓ Importar y visualizar</button>
-    </div>
+    <h2 id="m-title">Nueva Posición</h2><p>Completa los datos del colaborador</p>
+    <input type="hidden" id="e-id">
+    <div class="mfr"><div class="mfg"><label>Nombre completo</label><input type="text" id="e-nom" placeholder="JUAN GARCIA"></div><div class="mfg"><label>No. Empleado</label><input type="text" id="e-eid" placeholder="1001"></div></div>
+    <div class="mfr"><div class="mfg"><label>Puesto</label><input type="text" id="e-pue" placeholder="Gerente de Área"></div><div class="mfg"><label>Nivel</label><select id="e-niv"><option>Directivo</option><option>Gerencia</option><option>Superintendencia</option><option>Jefatura</option><option>Supervisión</option><option>Administrativo</option><option selected>Operativo</option></select></div></div>
+    <div class="mfr"><div class="mfg"><label>Área / Departamento</label><input type="text" id="e-are" placeholder="Operaciones"></div><div class="mfg"><label>Ubicación</label><input type="text" id="e-ubi" placeholder="CIENEGUITA"></div></div>
+    <div class="mfr"><div class="mfg"><label>Reporta a (ID del jefe)</label><input type="text" id="e-mgr" placeholder="730"></div><div class="mfg"><label>Estatus</label><select id="e-est"><option>Activo</option><option>Vacante</option><option>Inactivo</option></select></div></div>
+    <div class="mac"><button class="mbtn mbtn-gray" onclick="closeM('modal-add')">Cancelar</button><button class="mbtn mbtn-blue" onclick="saveN()">Guardar</button></div>
   </div>
 </div>
-
-<!-- ══ MODAL: ADD POSITION ══ -->
-<div class="modal-ov" id="modal-add">
-  <div class="modal">
-    <div class="modal-title" id="add-modal-title">Nueva Posición</div>
-    <div class="modal-sub">Agrega un nodo al organigrama</div>
-    <input type="hidden" id="edit-id">
-    <div class="form-row">
-      <div class="form-group"><label>Nombre completo</label><input type="text" id="add-nombre" placeholder="Juan García López"></div>
-      <div class="form-group"><label>ID / No. Empleado</label><input type="text" id="add-id" placeholder="MRT-001"></div>
-    </div>
-    <div class="form-row">
-      <div class="form-group"><label>Puesto</label><input type="text" id="add-puesto" placeholder="Gerente de Área"></div>
-      <div class="form-group"><label>Área</label><input type="text" id="add-area" placeholder="Operaciones"></div>
-    </div>
-    <div class="form-row">
-      <div class="form-group"><label>Nivel</label>
-        <select id="add-nivel"><option>Directivo</option><option>Gerencia</option><option>Jefatura</option><option>Supervisión</option><option>Operativo</option></select>
-      </div>
-      <div class="form-group"><label>Estatus</label>
-        <select id="add-estatus"><option>Activo</option><option>Vacante</option><option>Inactivo</option></select>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group"><label>Ubicación / Planta</label><input type="text" id="add-ubicacion" placeholder="Oficina Central"></div>
-      <div class="form-group"><label>Reporta a (ID del jefe)</label>
-        <select id="add-manager"><option value="">— Sin jefe directo (raíz) —</option></select>
-      </div>
-    </div>
-    <div class="form-group"><label>Foto URL (opcional)</label><input type="text" id="add-foto" placeholder="https://..."></div>
-    <div class="modal-actions">
-      <button class="mbtn mbtn-secondary" onclick="closeModal('modal-add')">Cancelar</button>
-      <button class="mbtn mbtn-primary" onclick="savePosition()">Guardar</button>
-    </div>
-  </div>
-</div>
-
-<!-- ══ MODAL: NODE DETAIL ══ -->
-<div class="modal-ov" id="modal-detail">
-  <div class="modal" style="max-width:480px">
-    <div id="detail-content"></div>
-    <div class="modal-actions">
-      <button class="mbtn mbtn-secondary" onclick="closeModal('modal-detail')">Cerrar</button>
-      <button class="mbtn" style="background:var(--red);color:#fff" onclick="deleteNode()">🗑 Eliminar</button>
-      <button class="mbtn mbtn-primary" onclick="editNode()">✏ Editar</button>
-    </div>
-  </div>
-</div>
-
 <div id="toast"></div>
 
 <script>
-// ═══════════════════════════════════════════════
-//  DATA & STATE
-// ═══════════════════════════════════════════════
-let allNodes = [];
-let visibleNodes = [];
-let collapsed = new Set();
-let selectedId = null;
-let currentLayout = 'left-right';
-let nodeScale = 1;
-let showPhotos = true;
-let showLines = true;
-let importRawData = null;
-let importCols = [];
+var AN=[],VN=[],COL=new Set(),SEL=null,HL=new Set(),ZB,SV,GV,ST=null,CV='org';
+var AC={dir:new Set(),ubi:new Set(),niv:new Set()};
+var NC={'Directivo':'#1d4ed8','Gerencia':'#0891b2','Superintendencia':'#0f766e','Jefatura':'#059669','Supervisión':'#7c3aed','Administrativo':'#9333ea','Operativo':'#64748b'};
+var PAL=['#1d4ed8','#0891b2','#059669','#7c3aed','#d97706','#dc2626','#0f766e','#9333ea','#0e7490'];
+var _CH={};
 
-// Multi-select filter state
-const filterSel = { direccion: new Set(), nivel: new Set(), ubicacion: new Set(), estatus: new Set() };
-let searchHighlights = new Set();
-let zoomBehavior, svgSel, gSel;
-
-const SCHEMES = {
-  blue:   {Directivo:'#1d4ed8',Gerencia:'#3b82f6',Superintendencia:'#0284c7',Jefatura:'#06b6d4',Supervisión:'#0ea5e9',Administrativo:'#7c3aed',Operativo:'#10b981'},
-  purple: {Directivo:'#6d28d9',Gerencia:'#8b5cf6',Superintendencia:'#7c3aed',Jefatura:'#a855f7',Supervisión:'#c084fc',Administrativo:'#ec4899',Operativo:'#06b6d4'},
-  green:  {Directivo:'#065f46',Gerencia:'#059669',Superintendencia:'#0f766e',Jefatura:'#10b981',Supervisión:'#34d399',Administrativo:'#3b82f6',Operativo:'#6ee7b7'},
-  warm:   {Directivo:'#991b1b',Gerencia:'#dc2626',Superintendencia:'#c2410c',Jefatura:'#ea580c',Supervisión:'#d97706',Administrativo:'#ca8a04',Operativo:'#65a30d'},
-  mono:   {Directivo:'#1e293b',Gerencia:'#334155',Superintendencia:'#475569',Jefatura:'#64748b',Supervisión:'#94a3b8',Administrativo:'#7c3aed',Operativo:'#cbd5e1'},
-};
-let currentScheme = 'blue';
-
-function nodeColor(nivel) {
-  return SCHEMES[currentScheme][nivel] || '#3b82f6';
+function sv(v){
+  CV=v;
+  document.getElementById('vorg').style.display=v==='org'?'block':'none';
+  document.getElementById('vdash').style.display=v==='dash'?'block':'none';
+  document.getElementById('vimp').style.display=v==='imp'?'block':'none';
+  ['org','dash','imp'].forEach(function(x){document.getElementById('n-'+x).classList.toggle('active',x===v);});
+  var tt={org:'Organigrama — MRT Corporativo',dash:'Dashboard Ejecutivo RRHH',imp:'Importar / Actualizar datos'};
+  document.getElementById('tb-title').textContent=tt[v];
+  if(v==='dash')rdash();
+  if(v==='org'&&VN.length)setTimeout(rChart,50);
 }
 
-// ═══════════════════════════════════════════════
-//  DEMO DATA (large org ~50 nodes)
-// ═══════════════════════════════════════════════
-function loadDemo() {
-  const areas = ['Operaciones','Finanzas','RRHH','Tecnología','Seguridad','Mantenimiento','Logística','Comercial'];
-  const niveles = ['Directivo','Gerencia','Jefatura','Supervisión','Operativo'];
-  const ubicaciones = ['Oficina Central','Planta Norte','Planta Sur','Corporativo'];
-  allNodes = [];
-  let id = 1;
-  // Root
-  allNodes.push({id:'N001',nombre:'Pedro Ramírez García',puesto:'Director General',area:'Dirección',nivel:'Directivo',manager:null,estatus:'Activo',ubicacion:'Corporativo'});
-  // Level 1 Directors
-  const dirs = [
-    {nombre:'Mario Gutiérrez López',puesto:'Dir. Operaciones',area:'Operaciones'},
-    {nombre:'Ricardo Morales Vega',puesto:'Dir. Finanzas',area:'Finanzas'},
-    {nombre:'Héctor López Hdz.',puesto:'Dir. RRHH',area:'RRHH'},
-    {nombre:'Sandra Fuentes Cruz',puesto:'Dir. Tecnología',area:'Tecnología'},
-    {nombre:'Roberto Salinas P.',puesto:'Dir. Comercial',area:'Comercial'},
-  ];
-  dirs.forEach((d,i) => {
-    const nid = 'N00'+(i+2);
-    allNodes.push({id:nid,nombre:d.nombre,puesto:d.puesto,area:d.area,nivel:'Directivo',manager:'N001',estatus:'Activo',ubicacion:'Corporativo'});
-  });
-  // Level 2 Gerencias
-  const gerMgrs = ['N002','N002','N002','N003','N003','N004','N004','N005','N005','N006'];
-  const gerData = [
-    {nombre:'Laura Sánchez Cruz',puesto:'Gte. Producción',area:'Operaciones'},
-    {nombre:'Carlos Mendoza Ríos',puesto:'Gte. Mantenimiento',area:'Mantenimiento'},
-    {nombre:'Ana Rdz. Pérez',puesto:'Gte. Seguridad',area:'Seguridad'},
-    {nombre:'Jorge Flores Mtz.',puesto:'Gte. Contabilidad',area:'Finanzas'},
-    {nombre:'Valeria Torres M.',puesto:'Gte. Tesorería',area:'Finanzas'},
-    {nombre:'Patricia Torres M.',puesto:'Gte. Reclutamiento',area:'RRHH'},
-    {nombre:'Luis Castro Reyes',puesto:'Gte. Compensaciones',area:'RRHH'},
-    {nombre:'Daniela Vega Leal',puesto:'Gte. Sistemas',area:'Tecnología'},
-    {nombre:'Marcos Ortiz P.',puesto:'Gte. Infraestructura',area:'Tecnología'},
-    {nombre:'Sofía Vargas León',puesto:'Gte. Ventas',area:'Comercial'},
-  ];
-  gerData.forEach((g,i) => {
-    const nid = 'N0'+(10+i+1);
-    allNodes.push({id:nid,nombre:g.nombre,puesto:g.puesto,area:g.area,nivel:'Gerencia',manager:gerMgrs[i],estatus:'Activo',ubicacion:ubicaciones[i%4]});
-  });
-  // Level 3 Jefaturas
-  const jefMgrs = ['N011','N011','N012','N012','N013','N014','N015','N016','N017','N018','N019','N020'];
-  const jefData = [
-    {nombre:'Roberto Jiménez A.',puesto:'Jefe Turno A',area:'Operaciones'},
-    {nombre:'Diana Morales R.',puesto:'Jefa Calidad',area:'Operaciones'},
-    {nombre:'Fernando Ruiz S.',puesto:'Jefe Eléctrico',area:'Mantenimiento'},
-    {nombre:'Carmen López T.',puesto:'Jefa Mecánica',area:'Mantenimiento'},
-    {nombre:'Eduardo Vega P.',puesto:'Jefe Guardias',area:'Seguridad'},
-    {nombre:'Ximena Castro L.',puesto:'Jefa Contabilidad',area:'Finanzas'},
-    {nombre:'Omar Flores G.',puesto:'Jefe Nómina',area:'RRHH'},
-    {nombre:'Paola Reyes M.',puesto:'Jefa Selección',area:'RRHH'},
-    {nombre:'Iván Torres H.',puesto:'Jefe Desarrollo',area:'Tecnología'},
-    {nombre:'Renata Salinas V.',puesto:'Jefa Servidores',area:'Tecnología'},
-    {nombre:'Aldo Méndez C.',puesto:'Jefe Ventas Norte',area:'Comercial'},
-    {nombre:'Gabriela Ponce F.',puesto:'Jefa Ventas Sur',area:'Comercial'},
-  ];
-  jefData.forEach((j,i) => {
-    const nid = 'N0'+(20+i+1);
-    allNodes.push({id:nid,nombre:j.nombre,puesto:j.puesto,area:j.area,nivel:'Jefatura',manager:jefMgrs[i],estatus:i===3?'Vacante':'Activo',ubicacion:ubicaciones[i%4]});
-  });
-  // Level 4 Supervisores
-  const supMgrs = ['N021','N021','N022','N023','N024','N025','N026','N027','N028','N029','N030','N031','N032'];
-  for(let i=0;i<13;i++){
-    const nid='N0'+(40+i+1);
-    allNodes.push({id:nid,nombre:'Sup. '+['Alberto','Brenda','César','Diana','Ernesto','Fabiola','Guillermo','Helena','Isaac','Julia','Kevin','Laura','Miguel'][i]+' '+['Rios','Soto','Luna','Cruz','Peña','Vega','Mora','Silva','Ruiz','Leal','Park','Díaz','Rojas'][i],
-      puesto:'Supervisor '+(i+1),area:['Operaciones','Mantenimiento','Seguridad','Finanzas','RRHH','Tecnología','Comercial'][i%7],nivel:'Supervisión',
-      manager:supMgrs[i],estatus:i===7?'Inactivo':'Activo',ubicacion:ubicaciones[i%4]});
-  }
-  // Level 5 Operativos
-  const opMgrs = allNodes.filter(n=>n.nivel==='Supervisión').map(n=>n.id);
-  ['Ana','Beto','Carlos','Dani','Elena','Felipe','Gaby','Hugo','Irene','José','Karen','Leo'].forEach((nm,i)=>{
-    allNodes.push({id:'N0'+(60+i+1),nombre:nm+' Op. '+(i+1),puesto:'Operador '+(i+1),
-      area:['Operaciones','Mantenimiento','Seguridad'][i%3],nivel:'Operativo',
-      manager:opMgrs[i%opMgrs.length],estatus:'Activo',ubicacion:ubicaciones[i%4]});
-  });
-  populateFilters();
-  applyFilters();
-  toast('Demo cargado: '+allNodes.length+' posiciones','s');
+function showOv(t,p,s){
+  document.getElementById('overlay').style.display='flex';
+  document.getElementById('ovt').textContent=t||'Cargando...';
+  document.getElementById('ovbf').style.width=(p||10)+'%';
+  document.getElementById('ovs').textContent=s||'';
+}
+function hideOv(){document.getElementById('overlay').style.display='none';}
+
+function loadData(){
+  showOv('Conectando al servidor...',15,'Obteniendo datos de colaboradores');
+  fetch('/api/nodes').then(function(r){return r.json();}).then(function(res){
+    AN=Array.isArray(res)?res:(Array.isArray(res.data)?res.data:[]);
+    showOv('Construyendo organigrama...',70,AN.length+' colaboradores encontrados');
+    bChips();applyF();
+    document.getElementById('tb-sub').textContent='MRT Corporativo · '+AN.length+' colaboradores';
+    document.getElementById('logo-s').textContent=AN.length+' colaboradores';
+    setTimeout(hideOv,400);
+    toast(AN.length+' colaboradores cargados','s');
+  }).catch(function(e){hideOv();toast('Error: '+e.message,'e');});
 }
 
-// ═══════════════════════════════════════════════
-//  FILTERS
-// ═══════════════════════════════════════════════
-function populateFilters() {
-  const dirs   = [...new Set(allNodes.map(n=>n.direccion).filter(Boolean))].sort();
-  const ubis   = [...new Set(allNodes.map(n=>n.ubicacion).filter(Boolean))].sort();
-  const niveles= ['Directivo','Gerencia','Superintendencia','Jefatura','Supervisión','Administrativo','Operativo'];
-  const estatus= [...new Set(allNodes.map(n=>n.estatus||'Activo').filter(Boolean))].sort();
-
-  buildChips('chips-direccion', 'direccion', dirs);
-  buildChips('chips-ubicacion', 'ubicacion', ubis);
-  buildChips('chips-nivel',     'nivel',     niveles.filter(n=>allNodes.some(x=>x.nivel===n)));
-  buildChips('chips-estatus',   'estatus',   estatus);
-  updateStats();
+function sched(){
+  clearTimeout(ST);setSI('g');
+  ST=setTimeout(function(){
+    fetch('/api/nodes',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(AN)})
+      .then(function(){setSI('s');setTimeout(function(){setSI('');},2500);})
+      .catch(function(e){setSI('e');toast('Error al guardar: '+e.message,'e');});
+  },1000);
+}
+function setSI(s){
+  var el=document.getElementById('si');
+  var m={g:{t:'💾 Guardando...',c:'si-g'},s:{t:'✓ Guardado',c:'si-s'},e:{t:'⚠ Error',c:'si-e'},'':{t:'',c:''}};
+  var x=m[s]||m[''];el.textContent=x.t;el.className=x.c;
 }
 
-function buildChips(containerId, group, values) {
-  const c = document.getElementById(containerId);
-  if(!c) return;
-  c.innerHTML = values.map(v => {
-    const on = filterSel[group].has(v) ? 'on' : '';
-    return `<div class="chip ${on}" onclick="toggleChip(this,'${group}','${v.replace(/'/g,"\'")}')">${v}</div>`;
-  }).join('');
+/* CHIPS */
+function bChips(){
+  var dirs=uniq(AN.map(function(n){return n.direccion||'';})).filter(Boolean).sort();
+  var ubis=uniq(AN.map(function(n){return n.ubicacion||'';})).filter(Boolean).sort();
+  var nivs=['Directivo','Gerencia','Superintendencia','Jefatura','Supervisión','Administrativo','Operativo'].filter(function(n){return AN.some(function(x){return x.nivel===n;});});
+  rChips('ch-dir','dir',dirs);rChips('ch-ubi','ubi',ubis);rChips('ch-niv','niv',nivs);
 }
+function rChips(cid,g,vals){
+  var c=document.getElementById(cid);if(!c)return;c.innerHTML='';
+  vals.forEach(function(v){
+    var d=document.createElement('div');
+    d.className='chip'+(AC[g].has(v)?' on':'');d.textContent=v;
+    d.onclick=function(){AC[g].has(v)?(AC[g].delete(v),d.classList.remove('on')):(AC[g].add(v),d.classList.add('on'));applyF();};
+    c.appendChild(d);
+  });
+}
+function clrG(g){AC[g].clear();rChips('ch-'+g,g,Array.from(document.querySelectorAll('#ch-'+g+' .chip')).map(function(c){return c.textContent;}));applyF();}
+function clrAll(){['dir','ubi','niv'].forEach(function(g){AC[g].clear();});document.getElementById('fsearch').value='';HL.clear();bChips();applyF();toast('Filtros limpiados','i');}
+function uniq(a){return a.filter(function(v,i,x){return x.indexOf(v)===i;});}
 
-function toggleChip(el, group, value) {
-  if(filterSel[group].has(value)) {
-    filterSel[group].delete(value);
-    el.classList.remove('on');
+/* SEARCH + FILTER */
+function getDes(id){
+  var r=new Set(),q=[String(id)];
+  while(q.length){var c=q.shift();if(r.has(c))continue;r.add(c);AN.forEach(function(n){if(String(n.manager)===c)q.push(String(n.id));});}
+  return r;
+}
+function getAnc(id){
+  var r=new Set(),mp={};AN.forEach(function(n){mp[String(n.id)]=n;});
+  var c=mp[String(id)],lim=0;
+  while(c&&c.manager&&lim++<25){r.add(String(c.manager));c=mp[String(c.manager)];}
+  return r;
+}
+function applyF(){
+  var q=(document.getElementById('fsearch').value||'').toLowerCase().trim();
+  HL.clear();
+  if(q){
+    var mt=AN.filter(function(n){return(n.nombre||'').toLowerCase().indexOf(q)>-1||(n.puesto||'').toLowerCase().indexOf(q)>-1;});
+    if(!mt.length){VN=[];updTB();if(CV==='org')rChart();return;}
+    var ids=new Set();
+    mt.forEach(function(m){HL.add(String(m.id));getAnc(m.id).forEach(function(x){ids.add(x);});ids.add(String(m.id));getDes(m.id).forEach(function(x){ids.add(x);});});
+    VN=AN.filter(function(n){return ids.has(String(n.id));});
+    var sr=document.getElementById('sres');sr.style.display='block';sr.textContent=mt.length+' encontrado(s) · '+VN.length+' nodos visibles';
   } else {
-    filterSel[group].add(value);
-    el.classList.add('on');
-  }
-  updateActiveBar(group);
-  applyFilters();
-}
-
-function updateActiveBar(group) {
-  const bar = document.getElementById('bar-'+group);
-  if(!bar) return;
-  const sel = filterSel[group];
-  if(sel.size === 0) { bar.innerHTML = ''; return; }
-  bar.innerHTML = `Mostrando: <span>${[...sel].join(', ')}</span>`;
-}
-
-function clearGroup(group) {
-  filterSel[group].clear();
-  buildChips('chips-'+group, group, [...document.querySelectorAll('#chips-'+group+' .chip')].map(c=>c.textContent));
-  updateActiveBar(group);
-  applyFilters();
-}
-
-// ── Helpers para búsqueda de organigrama completo ──
-function getAllDescendants(nodeId) {
-  const result = new Set();
-  const queue = [nodeId];
-  while(queue.length) {
-    const id = queue.shift();
-    if(result.has(id)) continue;
-    result.add(id);
-    allNodes.filter(n => String(n.manager) === String(id)).forEach(n => queue.push(n.id));
-  }
-  return result;
-}
-
-function getAllAncestors(nodeId) {
-  const result = new Set();
-  const idMap = new Map(allNodes.map(n => [String(n.id), n]));
-  let cur = idMap.get(String(nodeId));
-  let limit = 0;
-  while(cur && cur.manager && limit++ < 20) {
-    result.add(String(cur.manager));
-    cur = idMap.get(String(cur.manager));
-  }
-  return result;
-}
-
-function applyFilters() {
-  const q   = (document.getElementById('f-search').value||'').toLowerCase().trim();
-  const sv  = document.getElementById('show-vacant') && document.getElementById('show-vacant').checked;
-  searchHighlights = new Set();
-
-  // ── BÚSQUEDA: muestra organigrama completo de la persona ──
-  if(q) {
-    const matches = allNodes.filter(n =>
-      (n.nombre||'').toLowerCase().includes(q) ||
-      (n.puesto||'').toLowerCase().includes(q)
-    );
-
-    if(matches.length === 0) {
-      visibleNodes = [];
-      updateStats();
-      try { renderChart(); } catch(e){ hideProgress(); }
-      return;
-    }
-
-    const showIds = new Set();
-    matches.forEach(m => {
-      searchHighlights.add(String(m.id));
-      // Toda la cadena hacia arriba (jefes)
-      getAllAncestors(m.id).forEach(id => showIds.add(id));
-      // El nodo mismo
-      showIds.add(String(m.id));
-      // Todo su equipo hacia abajo
-      getAllDescendants(m.id).forEach(id => showIds.add(id));
+    document.getElementById('sres').style.display='none';
+    VN=AN.filter(function(n){
+      if(AC.dir.size&&!AC.dir.has(n.direccion||''))return false;
+      if(AC.ubi.size&&!AC.ubi.has(n.ubicacion||''))return false;
+      if(AC.niv.size&&!AC.niv.has(n.nivel||''))return false;
+      return true;
     });
-
-    visibleNodes = allNodes.filter(n => showIds.has(String(n.id)));
-
-    // Apply chip filters on top of search results
-    if(filterSel.direccion.size) visibleNodes = visibleNodes.filter(n => filterSel.direccion.has(n.direccion) || searchHighlights.has(String(n.id)));
-    if(filterSel.nivel.size)     visibleNodes = visibleNodes.filter(n => filterSel.nivel.has(n.nivel) || searchHighlights.has(String(n.id)));
-    if(filterSel.ubicacion.size) visibleNodes = visibleNodes.filter(n => filterSel.ubicacion.has(n.ubicacion) || searchHighlights.has(String(n.id)));
-    if(filterSel.estatus.size)   visibleNodes = visibleNodes.filter(n => filterSel.estatus.has(n.estatus||'Activo') || searchHighlights.has(String(n.id)));
-    if(!sv) visibleNodes = visibleNodes.filter(n => n.estatus !== 'Vacante' || searchHighlights.has(String(n.id)));
-    updateStats();
-    try { renderChart(); } catch(e){ console.error('render err:',e); hideProgress(); }
-    return;
+    if(AC.dir.size||AC.ubi.size||AC.niv.size){
+      var ids2=new Set(VN.map(function(n){return String(n.id);}));
+      var add=[];
+      VN.forEach(function(n){getAnc(n.id).forEach(function(aid){if(!ids2.has(aid)){ids2.add(aid);var a=AN.find(function(x){return String(x.id)===aid;});if(a)add.push(a);}});});
+      add.forEach(function(n){VN.push(n);});
+    }
   }
-
-  // ── SIN BÚSQUEDA: aplica solo los chip filters ──
-  visibleNodes = allNodes.filter(n => {
-    if(!sv && n.estatus==='Vacante') return false;
-    if(filterSel.direccion.size && !filterSel.direccion.has(n.direccion))   return false;
-    if(filterSel.nivel.size     && !filterSel.nivel.has(n.nivel))           return false;
-    if(filterSel.ubicacion.size && !filterSel.ubicacion.has(n.ubicacion))   return false;
-    if(filterSel.estatus.size   && !filterSel.estatus.has(n.estatus||'Activo')) return false;
-    return true;
-  });
-
-  updateStats();
-  try { renderChart(); } catch(e){ console.error('render err:',e); hideProgress(); }
+  updTB();if(CV==='org')rChart();
 }
+function updTB(){document.getElementById('tb-sub').textContent='MRT Corporativo · '+AN.length+' total · '+VN.length+' visibles';}
 
-function clearFilters() {
-  document.getElementById('f-search').value = '';
-  Object.keys(filterSel).forEach(g => { filterSel[g].clear(); updateActiveBar(g); });
-  searchHighlights = new Set();
-  document.getElementById('show-vacant').checked = true;
-  // Re-render chips without selections
-  populateFilters();
-  applyFilters();
-  toast('Todos los filtros limpiados','i');
-}
-
-function updateStats() {
-  document.getElementById('s-total').textContent = allNodes.length;
-  document.getElementById('s-activos').textContent = allNodes.filter(n=>n.estatus==='Activo').length;
-  document.getElementById('s-vacantes').textContent = allNodes.filter(n=>n.estatus==='Vacante').length;
-  document.getElementById('s-niveles').textContent = new Set(allNodes.map(n=>n.nivel)).size;
-  document.getElementById('s-areas').textContent = new Set(allNodes.map(n=>n.area)).size;
-  document.getElementById('s-visible').textContent = visibleNodes.length;
-  const tsEl = document.getElementById('topbar-sub');
-  if(tsEl) tsEl.textContent = `MRT Corporativo · ${allNodes.length} posiciones · ${visibleNodes.length} visibles`;
-  const si = document.getElementById('search-info');
-  const q2 = (document.getElementById('f-search')?.value||'').trim();
-  if(si) {
-    if(q2 && searchHighlights.size > 0)
-      si.innerHTML = `<span style="color:var(--accent)">✓ ${searchHighlights.size} encontrado(s)</span> · ${visibleNodes.length} nodos visibles`;
-    else if(q2 && visibleNodes.length === 0)
-      si.innerHTML = `<span style="color:var(--red)">✗ Sin resultados para "${q2}"</span>`;
-    else si.innerHTML = '';
-  }
-}
-
-// ═══════════════════════════════════════════════
-//  RENDER CHART
-// ═══════════════════════════════════════════════
-const NW = 190, NH = 84; // node base width/height
-
-function renderChart() {
-  const wrap = document.getElementById('chart-wrap');
-  const W = wrap.clientWidth, H = wrap.clientHeight;
-  const svg = d3.select('#chart-svg');
-  svg.selectAll('*').remove();
-  if(!visibleNodes.length) {
-    svg.append('text').attr('x',W/2).attr('y',H/2).attr('text-anchor','middle').attr('fill','#475569').attr('font-size',14).text('No hay datos — importa Excel o carga el demo');
-    return;
-  }
-  // Build hierarchy
-  const idSet = new Set(visibleNodes.map(n=>n.id));
-  const roots = visibleNodes.filter(n=>!n.manager||!idSet.has(n.manager));
-  if(!roots.length) {
-    g.append('text').attr('x',W/2).attr('y',H/2).attr('text-anchor','middle')
-      .attr('fill','#f59e0b').attr('font-size',13)
-      .text('No se encontraron nodos raíz — revisa que un colaborador no tenga Reporta_A_ID');
-    return;
-  }
-  let root;
-  if(roots.length===1) {
-    root = d3.hierarchy(roots[0], d => collapsed.has(d.id)?null:visibleNodes.filter(n=>n.manager===d.id));
-  } else {
-    const fake = {id:'__root__',nombre:'Organización',puesto:'',nivel:'Directivo',manager:null,_fake:true};
-    root = d3.hierarchy(fake, d => d._fake ? roots : (collapsed.has(d.id)?null:visibleNodes.filter(n=>n.manager===d.id)));
-  }
-
-  // Layout
-  const nw = NW*nodeScale, nh = NH*nodeScale;
-  let treeLayout;
-  if(currentLayout==='radial') {
-    const r = Math.min(W,H)*0.42;
-    treeLayout = d3.cluster().size([2*Math.PI, r]).separation((a,b)=>( a.parent===b.parent?1:2)/a.depth);
-  } else if(currentLayout==='left-right') {
-    treeLayout = d3.tree().nodeSize([nh+16, nw+60]);
-  } else if(currentLayout==='compact') {
-    treeLayout = d3.tree().nodeSize([nh+8, nw+30]);
-  } else {
-    treeLayout = d3.tree().nodeSize([nw+24, nh+50]);
-  }
-  treeLayout(root);
-
-  // SVG setup
+/* ORG CHART */
+var NW=180,NH=76;
+function rChart(){
+  var wrap=document.getElementById('vorg'),W=wrap.clientWidth,H=wrap.clientHeight;
+  var svg=d3.select('#svg');svg.selectAll('*').remove();
+  if(!VN.length){svg.append('text').attr('x',W/2).attr('y',H/2).attr('text-anchor','middle').attr('fill','#94a3b8').attr('font-size',13).text('Sin resultados — ajusta los filtros o búsqueda');bLeg([]);return;}
+  var idS=new Set(VN.map(function(n){return String(n.id);}));
+  var roots=VN.filter(function(n){return!n.manager||!idS.has(String(n.manager));});
+  var rd=roots.length===1?roots[0]:{id:'__r',_f:true};
+  function ch(d){if(COL.has(String(d.id)))return null;var c=VN.filter(function(n){return String(n.manager)===String(d.id);});return c.length?c:null;}
+  var root=d3.hierarchy(rd,function(d){return d._f?roots:ch(d);});
+  var tr=d3.tree().nodeSize([NW+20,NH+50]);tr(root);
   svg.attr('width',W).attr('height',H);
-  const g = svg.append('g');
-  zoomBehavior = d3.zoom().scaleExtent([0.05,3]).on('zoom', e=>{ g.attr('transform',e.transform); updateMinimap(e.transform,W,H); });
-  svg.call(zoomBehavior);
-  svgSel = svg; gSel = g;
-
-  // Links
-  if(showLines) {
-    const linkGen = currentLayout==='radial'
-      ? d3.linkRadial().angle(d=>d.x).radius(d=>d.y)
-      : currentLayout==='left-right' || currentLayout==='compact'
-        ? d3.linkHorizontal().x(d=>d.y).y(d=>d.x)
-        : d3.linkVertical().x(d=>d.x).y(d=>d.y);
-
-    g.selectAll('.link').data(root.links().filter(l=>!l.source.data._fake)).enter()
-      .append('path').attr('class','link').attr('fill','none')
-      .attr('stroke','#cbd5e1').attr('stroke-width',1.5).attr('d',linkGen);
-  }
-
-  // Nodes
-  const node = g.selectAll('.org-node')
-    .data(root.descendants().filter(d=>!d.data._fake)).enter()
-    .append('g').attr('class','org-node')
-    .attr('transform', d => {
-      if(currentLayout==='radial') return `rotate(${d.x*180/Math.PI-90}) translate(${d.y},0)`;
-      if(currentLayout==='left-right'||currentLayout==='compact') return `translate(${d.y},${d.x})`;
-      return `translate(${d.x},${d.y})`;
-    })
-    .on('click', (e,d) => { e.stopPropagation(); nodeClick(d.data); })
-    .on('dblclick', (e,d) => { e.stopPropagation(); toggleCollapse(d.data.id); })
-    .on('mouseover', (e,d) => showTooltip(e,d.data))
-    .on('mouseout', hideTooltip);
-
-  const hw = nw/2, hh = nh/2;
-  const vacantPat = g.append('defs').append('pattern').attr('id','vac-stripe').attr('patternUnits','userSpaceOnUse').attr('width',8).attr('height',8);
-  vacantPat.append('path').attr('d','M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2').attr('stroke','#94a3b8').attr('stroke-width',1).attr('opacity',.5);
-
-  node.each(function(d) {
-    const n = d.data, sel = d3.select(this);
-    const col = nodeColor(n.nivel);
-    const isVacant = n.estatus==='Vacante';
-    const isInactive = n.estatus==='Inactivo';
-    const alpha = isInactive ? '33' : '22';
-
-    // Shadow
-    sel.append('rect').attr('x',-hw+2).attr('y',-hh+2).attr('width',nw).attr('height',nh).attr('rx',10).attr('fill','rgba(0,0,0,.06)');
-
-    // Card background
-    const isHighlight = searchHighlights.has(String(n.id));
-    const bg = sel.append('rect').attr('class','node-bg').attr('x',-hw).attr('y',-hh).attr('width',nw).attr('height',nh)
-      .attr('rx',10)
-      .attr('fill', isHighlight ? col+'22' : isVacant?'url(#vac-stripe)':'#ffffff')
-      .attr('stroke', isHighlight ? col : n.id===selectedId ? col : col+'88')
-      .attr('stroke-width', isHighlight ? 3 : n.id===selectedId ? 2.5 : 1);
-    if(isHighlight) {
-      sel.append('rect').attr('x',-hw).attr('y',-hh).attr('width',nw).attr('height',4).attr('rx',2).attr('fill',col);
+  var g=svg.append('g');
+  ZB=d3.zoom().scaleExtent([0.05,3]).on('zoom',function(e){g.attr('transform',e.transform);});
+  svg.call(ZB);SV=svg;GV=g;
+  g.selectAll('.lk').data(root.links().filter(function(l){return!l.source.data._f;})).enter()
+    .append('path').attr('fill','none').attr('stroke','#e2e8f0').attr('stroke-width',1.5)
+    .attr('d',d3.linkVertical().x(function(d){return d.x;}).y(function(d){return d.y;}));
+  var nd=g.selectAll('.nd').data(root.descendants().filter(function(d){return!d.data._f;})).enter()
+    .append('g').attr('transform',function(d){return'translate('+d.x+','+d.y+')';}).style('cursor','pointer')
+    .on('click',function(e,d){e.stopPropagation();SEL=d.data.id;rChart();toast((d.data.nombre||'Vacante'),'i');})
+    .on('dblclick',function(e,d){e.stopPropagation();var sid=String(d.data.id);COL.has(sid)?COL.delete(sid):COL.add(sid);rChart();})
+    .on('mouseover',function(e,d){showTip(e,d.data);}).on('mouseout',function(){document.getElementById('tip').style.display='none';});
+  var hw=NW/2,hh=NH/2;
+  var isH=function(d){return HL.has(String(d.data.id));};
+  var isS=function(d){return String(d.data.id)===String(SEL);};
+  nd.append('rect').attr('x',-hw+2).attr('y',-hh+2).attr('width',NW).attr('height',NH).attr('rx',10).attr('fill','rgba(0,0,0,.05)');
+  nd.append('rect').attr('x',-hw).attr('y',-hh).attr('width',NW).attr('height',NH).attr('rx',10)
+    .attr('fill',function(d){return isH(d)?'#eff6ff':'#fff';})
+    .attr('stroke',function(d){return isS(d)?'#1d4ed8':isH(d)?'#3b82f6':(NC[d.data.nivel]||'#e2e8f0');})
+    .attr('stroke-width',function(d){return(isS(d)||isH(d))?2.5:1;});
+  nd.append('rect').attr('x',-hw).attr('y',-hh).attr('width',NW).attr('height',3).attr('rx',2).attr('fill',function(d){return NC[d.data.nivel]||'#94a3b8';});
+  nd.append('circle').attr('cx',-hw+20).attr('cy',0).attr('r',14).attr('fill',function(d){return(NC[d.data.nivel]||'#94a3b8')+'22';});
+  nd.append('text').attr('x',-hw+20).attr('y',5).attr('text-anchor','middle').attr('font-size',10).attr('font-weight',700)
+    .attr('fill',function(d){return NC[d.data.nivel]||'#94a3b8';})
+    .text(function(d){return(d.data.nombre||'').split(' ').filter(function(w){return w.length>1;}).map(function(w){return w[0];}).slice(0,2).join('');});
+  nd.append('text').attr('x',-hw+40).attr('y',-13).attr('fill','#0f172a').attr('font-size',10).attr('font-weight',600)
+    .text(function(d){var n=d.data.nombre||'';return n.length>19?n.slice(0,18)+'…':n;});
+  nd.append('text').attr('x',-hw+40).attr('y',2).attr('fill','#64748b').attr('font-size',9)
+    .text(function(d){var p=d.data.puesto||'';return p.length>21?p.slice(0,20)+'…':p;});
+  nd.append('rect').attr('x',-hw+40).attr('y',9).attr('width',function(d){return Math.min((d.data.nivel||'').length*6+8,85);}).attr('height',12).attr('rx',6)
+    .attr('fill',function(d){return(NC[d.data.nivel]||'#94a3b8')+'18';});
+  nd.append('text').attr('x',-hw+44).attr('y',18).attr('font-size',8).attr('font-weight',600)
+    .attr('fill',function(d){return NC[d.data.nivel]||'#94a3b8';})
+    .text(function(d){return d.data.nivel||'';});
+  nd.each(function(d){
+    var ch2=VN.filter(function(n){return String(n.manager)===String(d.data.id);}).length;
+    if(ch2>0){
+      var s=d3.select(this);
+      s.append('circle').attr('cx',hw-10).attr('cy',-hh+10).attr('r',9).attr('fill',NC[d.data.nivel]||'#94a3b8');
+      s.append('text').attr('x',hw-10).attr('y',-hh+14).attr('text-anchor','middle').attr('fill','#fff').attr('font-size',8).attr('font-weight',700).text(ch2);
+      if(COL.has(String(d.data.id))){s.append('circle').attr('cx',0).attr('cy',hh).attr('r',8).attr('fill',NC[d.data.nivel]||'#94a3b8');s.append('text').attr('x',0).attr('y',hh+4).attr('text-anchor','middle').attr('fill','#fff').attr('font-size',10).attr('font-weight',700).text('+');}
     }
-
-    // Color top bar
-    sel.append('rect').attr('x',-hw).attr('y',-hh).attr('width',nw).attr('height',4).attr('rx',2).attr('fill',col);
-
-    // Avatar circle
-    if(showPhotos) {
-      sel.append('circle').attr('cx',-hw+22).attr('cy',0).attr('r',17).attr('fill',col+'44');
-      if(n.foto) {
-        const clip = g.select('defs').empty() ? g.append('defs') : g.select('defs');
-        const cid = 'clip-'+n.id;
-        clip.append('clipPath').attr('id',cid).append('circle').attr('cx',-hw+22).attr('cy',0).attr('r',16);
-        sel.append('image').attr('href',n.foto).attr('x',-hw+6).attr('y',-16).attr('width',32).attr('height',32).attr('clip-path',`url(#${cid})`);
-      } else {
-        const initials = (n.nombre||'').split(' ').filter(w=>w.length>1).map(w=>w[0]).slice(0,2).join('');
-        sel.append('text').attr('x',-hw+22).attr('y',5).attr('text-anchor','middle').attr('fill',col).attr('font-size',12).attr('font-weight',700).text(initials);
-      }
-    }
-
-    // Name
-    const tx = showPhotos ? -hw+44 : -hw+10;
-    const maxNameW = showPhotos ? nw-54 : nw-20;
-    const nameStr = truncText(n.nombre||'Vacante', Math.floor(maxNameW/7));
-    sel.append('text').attr('x',tx).attr('y',-12).attr('fill', isVacant?'#64748b':isInactive?'#94a3b8':'#0f172a').attr('font-size',11).attr('font-weight',600).text(nameStr);
-
-    // Puesto
-    const puestoStr = truncText(n.puesto||'', Math.floor(maxNameW/6.5));
-    sel.append('text').attr('x',tx).attr('y',4).attr('fill','#475569').attr('font-size',10).text(puestoStr);
-
-    // Area tag
-    const areaStr = truncText(n.area||'', 16);
-    const areaW = Math.min(areaStr.length*6.5+12, maxNameW*0.6);
-    sel.append('rect').attr('x',tx).attr('y',12).attr('width',areaW).attr('height',14).attr('rx',7).attr('fill',col+'22');
-    sel.append('text').attr('x',tx+6).attr('y',23).attr('fill',col).attr('font-size',9).attr('font-weight',600).text(areaStr);
-
-    // Reports count badge
-    const childCnt = visibleNodes.filter(x=>x.manager===n.id).length;
-    const showCounts = document.getElementById('show-counts').checked;
-    if(showCounts && childCnt>0) {
-      sel.append('circle').attr('cx',hw-10).attr('cy',-hh+10).attr('r',9).attr('fill',col);
-      sel.append('text').attr('x',hw-10).attr('y',-hh+14).attr('text-anchor','middle').attr('fill','#fff').attr('font-size',9).attr('font-weight',700).text(childCnt);
-    }
-
-    // Collapse indicator
-    if(collapsed.has(n.id) && childCnt>0) {
-      sel.append('circle').attr('cx',0).attr('cy',hh).attr('r',8).attr('fill',col);
-      sel.append('text').attr('x',0).attr('y',hh+4).attr('text-anchor','middle').attr('fill','#fff').attr('font-size',10).attr('font-weight',700).text('+');
-    }
-
-    // Vacant overlay
-    if(isVacant) {
-      sel.append('text').attr('x',hw-8).attr('y',hh-8).attr('text-anchor','end').attr('fill','#f59e0b').attr('font-size',9).attr('font-weight',700).text('VACANTE');
-    }
-    if(isInactive) {
-      sel.append('text').attr('x',hw-8).attr('y',hh-8).attr('text-anchor','end').attr('fill','#ef4444').attr('font-size',9).attr('font-weight',700).text('INACTIVO');
-    }
+    if(d.data.estatus==='Vacante')d3.select(this).append('text').attr('x',hw-4).attr('y',hh-5).attr('text-anchor','end').attr('fill','#d97706').attr('font-size',8).attr('font-weight',700).text('VACANTE');
   });
-
-  // Center
-  fitAll(false);
-  buildLegend();
-  buildMinimap(g, W, H);
+  bLeg(VN);fitC(false);
+}
+function bLeg(nodes){
+  var nivs=uniq(nodes.map(function(n){return n.nivel;}).filter(Boolean));
+  var c=document.getElementById('legit');c.innerHTML='';
+  nivs.forEach(function(nv){var d=document.createElement('div');d.className='legr';d.innerHTML='<div class="legd" style="background:'+(NC[nv]||'#94a3b8')+'"></div>'+nv;c.appendChild(d);});
+}
+function fitC(anim){
+  if(!SV||!GV||!ZB)return;
+  var wrap=document.getElementById('vorg'),W=wrap.clientWidth,H=wrap.clientHeight;
+  try{var bb=GV.node().getBBox();if(!bb.width)return;
+    var sc=Math.min(.88*W/bb.width,.88*H/bb.height,2);
+    var tx=W/2-sc*(bb.x+bb.width/2),ty=H/2-sc*(bb.y+bb.height/2);
+    var t=d3.zoomIdentity.translate(tx,ty).scale(sc);
+    if(anim===false)SV.call(ZB.transform,t);else SV.transition().duration(600).call(ZB.transform,t);
+  }catch(e){}
+}
+function dZ(f){if(SV&&ZB)SV.transition().duration(300).call(ZB.scaleBy,f);}
+function expAll(){COL.clear();rChart();toast('Todo expandido','i');}
+function colAll(){
+  var cs=new Set(AN.map(function(n){return String(n.manager);}).filter(Boolean));
+  AN.forEach(function(n){if(cs.has(String(n.id)))COL.add(String(n.id));});
+  rChart();toast('Todo colapsado','i');
 }
 
-function truncText(str, maxLen) { return str.length>maxLen ? str.slice(0,maxLen-1)+'…' : str; }
-
-// ═══════════════════════════════════════════════
-//  INTERACTIONS
-// ═══════════════════════════════════════════════
-function nodeClick(data) {
-  selectedId = data.id;
-  renderChart();
-  showDetail(data);
+/* TOOLTIP */
+function showTip(e,d){
+  var t=document.getElementById('tip');
+  var r=AN.filter(function(n){return String(n.manager)===String(d.id);}).length;
+  document.getElementById('tt-n').textContent=d.nombre||'Vacante';
+  document.getElementById('tt-p').textContent=d.puesto||'—';
+  document.getElementById('tt-d').textContent=d.direccion||'—';
+  document.getElementById('tt-u').textContent=d.ubicacion||'—';
+  document.getElementById('tt-nv').textContent=d.nivel||'—';
+  document.getElementById('tt-r').textContent=r;
+  t.style.display='block';t.style.left=(e.clientX+14)+'px';t.style.top=(e.clientY-10)+'px';
 }
 
-function toggleCollapse(id) {
-  if(collapsed.has(id)) collapsed.delete(id); else collapsed.add(id);
-  renderChart();
-}
+/* DASHBOARD */
+function cntBy(arr,k){var m={};arr.forEach(function(n){var v=n[k]||'Sin definir';m[v]=(m[v]||0)+1;});return Object.keys(m).map(function(k2){return[k2,m[k2]];}).sort(function(a,b){return b[1]-a[1];});}
+function dirTree(){return AN.filter(function(n){return n.nivel==='Directivo';}).map(function(d){var s=getDes(d.id);return{nombre:d.nombre,puesto:d.puesto,nivel:d.nivel,sz:s.size-1};}).sort(function(a,b){return b.sz-a.sz;});}
+function dstCharts(){Object.keys(_CH).forEach(function(k){try{_CH[k].destroy();}catch(e){}});_CH={};}
 
-function expandAll()  { collapsed.clear(); renderChart(); toast('Todo expandido','i'); }
+function rdash(){
+  dstCharts();
+  var tot=AN.length,act=AN.filter(function(n){return n.estatus==='Activo';}).length,vac=AN.filter(function(n){return n.estatus==='Vacante';}).length;
+  var ubis=cntBy(AN.filter(function(n){return n.ubicacion;}),   'ubicacion');
+  var nivs=cntBy(AN,'nivel');
+  var dirs=cntBy(AN.filter(function(n){return n.direccion;}),'direccion');
+  var dts=dirTree();
+  var now=new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric'});
 
-function autoCollapseDeep() {
-  // Build depth map
-  const idMap = {};
-  allNodes.forEach(n => idMap[n.id] = n);
-  function depth(n, visited = new Set()) {
-    if(!n || visited.has(n.id)) return 0;
-    visited.add(n.id);
-    if(!n.manager || !idMap[n.manager]) return 0;
-    return 1 + depth(idMap[n.manager], visited);
-  }
-  // Collapse nodes at depth 2+ that have children
-  const childSet = new Set(allNodes.map(n=>n.manager).filter(Boolean));
-  allNodes.forEach(n => {
-    const d = depth(n);
-    if(d >= 2 && childSet.has(n.id)) collapsed.add(n.id);
-  });
-}
-function collapseAll(){
-  allNodes.forEach(n => { if(visibleNodes.filter(x=>x.manager===n.id).length) collapsed.add(n.id); });
-  renderChart(); toast('Todo colapsado','i');
-}
-
-function showDetail(data) {
-  const reports = allNodes.filter(n=>n.manager===data.id);
-  const mgr = allNodes.find(n=>n.id===data.manager);
-  const col = nodeColor(data.nivel);
-  document.getElementById('detail-content').innerHTML = `
-    <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
-      <div style="width:52px;height:52px;border-radius:50%;background:${col}44;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:${col};flex-shrink:0">
-        ${(data.nombre||'').split(' ').filter(w=>w.length>1).map(w=>w[0]).slice(0,2).join('')}
-      </div>
-      <div>
-        <div style="font-size:17px;font-weight:700">${data.nombre||'Vacante'}</div>
-        <div style="font-size:12px;color:var(--text2);margin-top:2px">${data.puesto||''}</div>
-        <div style="margin-top:5px"><span class="tag" style="background:${col}22;color:${col}">${data.nivel||''}</span>
-        ${data.estatus==='Vacante'?'<span class="tag tag-yellow" style="margin-left:4px">Vacante</span>':data.estatus==='Inactivo'?'<span class="tag tag-red" style="margin-left:4px">Inactivo</span>':'<span class="tag tag-green" style="margin-left:4px">Activo</span>'}</div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
-      <div style="background:var(--card2);border-radius:8px;padding:12px;font-size:12px;">
-        <div style="font-size:9px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase">Información</div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="color:var(--text2)">ID</span><span style="font-family:monospace">${data.id||'—'}</span></div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="color:var(--text2)">Área</span><span>${data.area||'—'}</span></div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="color:var(--text2)">Ubicación</span><span>${data.ubicacion||'—'}</span></div>
-        <div style="display:flex;justify-content:space-between"><span style="color:var(--text2)">Reporta a</span><span>${mgr?mgr.nombre:'—'}</span></div>
-      </div>
-      <div style="background:var(--card2);border-radius:8px;padding:12px;font-size:12px;">
-        <div style="font-size:9px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase">Equipo</div>
-        <div style="font-size:24px;font-weight:800;color:${col}">${reports.length}</div>
-        <div style="color:var(--text2);margin-bottom:8px">reportes directos</div>
-        ${reports.slice(0,4).map(r=>`<div style="font-size:11px;color:var(--text2);margin-bottom:3px">· ${r.nombre}</div>`).join('')}
-        ${reports.length>4?`<div style="font-size:10px;color:var(--muted)">... y ${reports.length-4} más</div>`:''}
-      </div>
-    </div>`;
-  document.getElementById('detail-content').setAttribute('data-id', data.id);
-  openModal('modal-detail');
-}
-
-function deleteNode() {
-  const id = document.getElementById('detail-content').getAttribute('data-id');
-  if(!id) return;
-  if(!confirm('¿Eliminar esta posición del organigrama?')) return;
-  allNodes = allNodes.filter(n=>n.id!==id);
-  allNodes.forEach(n=>{ if(n.manager===id) n.manager=null; });
-  closeModal('modal-detail');
-  applyFilters();
-  scheduleSave();
-  toast('Posición eliminada y guardada','i');
-}
-
-function editNode() {
-  const id = document.getElementById('detail-content').getAttribute('data-id');
-  const n = allNodes.find(x=>x.id===id);
-  if(!n) return;
-  closeModal('modal-detail');
-  document.getElementById('add-modal-title').textContent='Editar Posición';
-  document.getElementById('edit-id').value = id;
-  document.getElementById('add-nombre').value = n.nombre||'';
-  document.getElementById('add-id').value = n.id||'';
-  document.getElementById('add-puesto').value = n.puesto||'';
-  document.getElementById('add-area').value = n.area||'';
-  document.getElementById('add-nivel').value = n.nivel||'Operativo';
-  document.getElementById('add-estatus').value = n.estatus||'Activo';
-  document.getElementById('add-ubicacion').value = n.ubicacion||'';
-  document.getElementById('add-foto').value = n.foto||'';
-  populateManagerSelect(id);
-  document.getElementById('add-manager').value = n.manager||'';
-  openModal('modal-add');
-}
-
-// ═══════════════════════════════════════════════
-//  LAYOUT & VISUAL
-// ═══════════════════════════════════════════════
-function setLayout(l) {
-  currentLayout = l;
-  document.querySelectorAll('.layout-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('lb-'+(l==='top-down'?'td':l==='left-right'?'lr':l==='radial'?'rad':'com')).classList.add('active');
-  collapsed.clear();
-  renderChart();
-}
-
-function setColorScheme(s) {
-  currentScheme = s;
-  document.querySelectorAll('.color-dot').forEach(d=>d.classList.remove('active'));
-  document.querySelector(`[data-scheme="${s}"]`).classList.add('active');
-  renderChart();
-  buildLegend();
-}
-
-function updateNodeSize(v) {
-  nodeScale = v/100;
-  document.getElementById('node-size-val').textContent = v+'%';
-  renderChart();
-}
-
-function togglePhotos() { showPhotos = document.getElementById('show-photos').checked; renderChart(); }
-function toggleLines()  { showLines  = document.getElementById('show-lines').checked;  renderChart(); }
-
-function buildLegend() {
-  const levels = [...new Set(visibleNodes.map(n=>n.nivel).filter(Boolean))];
-  document.getElementById('legend-items').innerHTML = levels.map(l=>`
-    <div class="leg-item"><div class="leg-dot" style="background:${nodeColor(l)}"></div>${l}</div>`).join('');
-}
-
-// ═══════════════════════════════════════════════
-//  ZOOM
-// ═══════════════════════════════════════════════
-function doZoom(factor) {
-  if(!svgSel||!zoomBehavior) return;
-  svgSel.transition().duration(350).call(zoomBehavior.scaleBy, factor);
-}
-
-function fitAll(animate=true) {
-  if(!svgSel||!gSel||!zoomBehavior) return;
-  const wrap = document.getElementById('chart-wrap');
-  const W = wrap.clientWidth, H = wrap.clientHeight;
-  try {
-    const bbox = gSel.node().getBBox();
-    if(!bbox.width||!bbox.height) return;
-    const scale = Math.min(0.9*W/bbox.width, 0.9*H/bbox.height, 2);
-    const tx = W/2 - scale*(bbox.x+bbox.width/2);
-    const ty = H/2 - scale*(bbox.y+bbox.height/2);
-    const t = d3.zoomIdentity.translate(tx,ty).scale(scale);
-    (animate?svgSel.transition().duration(600):svgSel).call(zoomBehavior.transform, t);
-  } catch(e){}
-}
-
-// ═══════════════════════════════════════════════
-//  MINIMAP
-// ═══════════════════════════════════════════════
-function buildMinimap(g, W, H) {
-  const mm = document.getElementById('minimap-svg');
-  const mw = 180, mh = 110;
-  try {
-    const bbox = g.node().getBBox();
-    if(!bbox.width) return;
-    const sc = Math.min(mw/bbox.width, mh/bbox.height)*0.85;
-    const tx = (mw - bbox.width*sc)/2 - bbox.x*sc;
-    const ty = (mh - bbox.height*sc)/2 - bbox.y*sc;
-    d3.select(mm).selectAll('*').remove();
-    const mg = d3.select(mm).append('g').attr('transform',`translate(${tx},${ty}) scale(${sc})`);
-    d3.select('#chart-svg').selectAll('.link').each(function(){ mg.append('path').attr('d',d3.select(this).attr('d')).attr('fill','none').attr('stroke','#1e2d45').attr('stroke-width',1.5/sc); });
-    d3.select('#chart-svg').selectAll('.org-node').each(function(d){ const tr=d3.select(this).attr('transform'); mg.append('rect').attr('transform',tr).attr('x',-NW*nodeScale/2).attr('y',-NH*nodeScale/2).attr('width',NW*nodeScale).attr('height',NH*nodeScale).attr('rx',4).attr('fill',nodeColor(d.data.nivel)).attr('opacity',.7); });
-  } catch(e){}
-}
-
-function updateMinimap(transform, W, H) {
-  const mm = document.getElementById('minimap');
-  const mw=mm.clientWidth, mh=mm.clientHeight;
-  try {
-    const bbox = gSel.node().getBBox();
-    const sc = Math.min(mw/bbox.width, mh/bbox.height)*0.85;
-    const tx2 = (mw-bbox.width*sc)/2-bbox.x*sc;
-    const ty2 = (mh-bbox.height*sc)/2-bbox.y*sc;
-    const vx = (-transform.x/transform.k)*sc+tx2;
-    const vy = (-transform.y/transform.k)*sc+ty2;
-    const vw = (W/transform.k)*sc, vh = (H/transform.k)*sc;
-    d3.select('#minimap-vp').attr('x',vx).attr('y',vy).attr('width',vw).attr('height',vh);
-  } catch(e){}
-}
-
-// ═══════════════════════════════════════════════
-//  TOOLTIP
-// ═══════════════════════════════════════════════
-function showTooltip(e, data) {
-  const t = document.getElementById('tooltip');
-  const reps = allNodes.filter(n=>n.manager===data.id).length;
-  document.getElementById('tt-name').textContent = data.nombre||'Vacante';
-  document.getElementById('tt-puesto').textContent = data.puesto||'—';
-  document.getElementById('tt-area').textContent = (data.direccion||data.area||'—');
-  document.getElementById('tt-nivel').textContent = data.nivel||'—';
-  document.getElementById('tt-rep').textContent = reps;
-  document.getElementById('tt-est').textContent = data.estatus||'—';
-  t.style.display='block';
-  t.style.left=(e.offsetX+14)+'px';
-  t.style.top=(e.offsetY-10)+'px';
-}
-function hideTooltip() { document.getElementById('tooltip').style.display='none'; }
-
-// ═══════════════════════════════════════════════
-//  EXCEL IMPORT
-// ═══════════════════════════════════════════════
-const dz = document.getElementById('drop-zone');
-dz.addEventListener('dragover', e=>{ e.preventDefault(); dz.classList.add('over'); });
-dz.addEventListener('dragleave', ()=>dz.classList.remove('over'));
-dz.addEventListener('drop', e=>{ e.preventDefault(); dz.classList.remove('over'); processFile(e.dataTransfer.files[0]); });
-
-function handleFile(e) { processFile(e.target.files[0]); }
-
-function processFile(file) {
-  if(!file) return;
-  showProgress('Leyendo archivo...', 20);
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      showProgress('Procesando datos...', 60);
-      const wb = XLSX.read(e.target.result, {type:'binary'});
-      const ws = wb.Sheets[wb.SheetNames[0]];
-      const data = XLSX.utils.sheet_to_json(ws, {defval:''});
-      if(!data.length) { hideProgress(); toast('El archivo está vacío','e'); return; }
-      importRawData = data;
-      importCols = Object.keys(data[0]);
-      showProgress('Listo', 100);
-      setTimeout(()=>{ hideProgress(); showImportPreview(data, file.name); }, 400);
-    } catch(err) { hideProgress(); toast('Error al leer: '+err.message,'e'); }
-  };
-  reader.readAsBinaryString(file);
-}
-
-function showImportPreview(data, name) {
-  document.getElementById('import-info').textContent = `📄 ${name} — ${data.length} filas · ${importCols.length} columnas`;
-  // Preview table
-  const rows = data.slice(0,4);
-  let html = `<table style="border-collapse:collapse;width:100%"><thead><tr>${importCols.map(c=>`<th style="padding:4px 8px;border-bottom:1px solid var(--border2);text-align:left;color:var(--muted);white-space:nowrap">${c}</th>`).join('')}</tr></thead><tbody>`;
-  rows.forEach(r=>{ html+=`<tr>${importCols.map(c=>`<td style="padding:3px 8px;border-bottom:1px solid var(--border);white-space:nowrap;max-width:100px;overflow:hidden;text-overflow:ellipsis">${r[c]}</td>`).join('')}</tr>`; });
-  html += '</tbody></table>';
-  document.getElementById('import-table').innerHTML = html;
-  // Column mapping selects
-  ['nombre','puesto','area','nivel','manager','id','ubicacion','estatus'].forEach(f=>{
-    const sel = document.getElementById('map-'+f);
-    sel.innerHTML = '<option value="">— No incluida —</option>'+importCols.map(c=>`<option value="${c}" ${autoMatch(c,f)?'selected':''}>${c}</option>`).join('');
-  });
-  document.getElementById('import-preview').style.display='block';
-  document.getElementById('btn-confirm-import').style.display='block';
-}
-
-function autoMatch(col, field) {
-  const c = col.toLowerCase().replace(/[\s_\-\.]/g,'');
-  const maps = {nombre:['nombre','name','empleado','colaborador','trabajador'],puesto:['puesto','cargo','posicion','position','titulo','title','job'],area:['area','departamento','dept','dpto','division'],nivel:['nivel','level','jerarquia','grado'],manager:['manager','jefe','reportaa','supervisor','boss','reporte'],id:['id','numero','no','emp','empleadoid','idempleado'],ubicacion:['ubicacion','planta','location','sede','oficina'],estatus:['estatus','status','estado','activo']};
-  return (maps[field]||[]).some(k=>c.includes(k));
-}
-
-async function confirmImport() {
-  if(!importRawData) return;
-  showProgress('Importando posiciones...', 10);
-  const get = f => document.getElementById('map-'+f).value;
-  const newNodes = [];
-  importRawData.forEach((row,i) => {
-    showProgress(`Importando ${i+1}/${importRawData.length}...`, Math.round(i/importRawData.length*80)+10);
-    const id = (get('id')&&row[get('id')])?String(row[get('id')]).trim():`IMP-${String(i+1).padStart(4,'0')}`;
-    newNodes.push({
-      id, nombre:get('nombre')?String(row[get('nombre')]||'').trim():'',
-      puesto: get('puesto')?String(row[get('puesto')]||'').trim():'',
-      area:   get('area')  ?String(row[get('area')]  ||'').trim():'',
-      nivel:  get('nivel') ?String(row[get('nivel')] ||'').trim():'Operativo',
-      manager:get('manager')?String(row[get('manager')]||'').trim()||null:null,
-      ubicacion:get('ubicacion')?String(row[get('ubicacion')]||'').trim():'',
-      estatus:get('estatus')?String(row[get('estatus')]||'').trim():'Activo',
-    });
-  });
-  // Merge or replace
-  if(allNodes.length && confirm(`¿Agregar a los ${allNodes.length} nodos existentes? OK=Agregar, Cancelar=Reemplazar`)) {
-    const existIds = new Set(allNodes.map(n=>n.id));
-    newNodes.forEach(n=>{ if(existIds.has(n.id)) { Object.assign(allNodes.find(x=>x.id===n.id),n); } else allNodes.push(n); });
-  } else {
-    allNodes = newNodes;
-  }
-  showProgress('Guardando en servidor...', 90);
-  if(allNodes.length && confirm(`¿Agregar a los ${allNodes.length} nodos existentes? OK=Agregar, Cancelar=Reemplazar`)) {
-    const existIds = new Set(allNodes.map(n=>n.id));
-    newNodes.forEach(n=>{ if(existIds.has(n.id)) { Object.assign(allNodes.find(x=>x.id===n.id),n); } else allNodes.push(n); });
-  } else {
-    allNodes = newNodes;
-  }
-  try {
-    await apiPut('/api/nodes', allNodes);
-    showProgress('Listo', 100);
-    setTimeout(()=>{ hideProgress(); populateFilters(); applyFilters(); closeModal('modal-import'); toast(`${newNodes.length} posiciones importadas y guardadas en el servidor`,'s'); }, 300);
-  } catch(e) {
-    hideProgress();
-    toast('Importado localmente pero error al guardar en servidor: '+e.message,'e');
-    populateFilters(); applyFilters(); closeModal('modal-import');
-  }
-}
-
-// ═══════════════════════════════════════════════
-//  SAVE POSITION
-// ═══════════════════════════════════════════════
-function populateManagerSelect(excludeId='') {
-  const sel = document.getElementById('add-manager');
-  sel.innerHTML = '<option value="">— Sin jefe directo (raíz) —</option>';
-  allNodes.filter(n=>n.id!==excludeId).forEach(n=>{
-    sel.innerHTML += `<option value="${n.id}">${n.nombre||n.id} — ${n.puesto||''}</option>`;
-  });
-}
-
-function savePosition() {
-  const editId = document.getElementById('edit-id').value;
-  const newId = document.getElementById('add-id').value.trim() || ('POS-'+Date.now());
-  const node = {
-    id: editId||newId,
-    nombre:   document.getElementById('add-nombre').value.trim(),
-    puesto:   document.getElementById('add-puesto').value.trim(),
-    area:     document.getElementById('add-area').value.trim(),
-    nivel:    document.getElementById('add-nivel').value,
-    estatus:  document.getElementById('add-estatus').value,
-    ubicacion:document.getElementById('add-ubicacion').value.trim(),
-    manager:  document.getElementById('add-manager').value||null,
-    foto:     document.getElementById('add-foto').value.trim()||null,
-  };
-  if(!node.nombre && node.estatus!=='Vacante') { toast('El nombre es obligatorio','e'); return; }
-  if(editId) {
-    const idx = allNodes.findIndex(n=>n.id===editId);
-    if(idx>-1) allNodes[idx] = node; else allNodes.push(node);
-  } else {
-    allNodes.push(node);
-  }
-  closeModal('modal-add');
-  document.getElementById('edit-id').value='';
-  document.getElementById('add-modal-title').textContent='Nueva Posición';
-  populateFilters(); applyFilters();
-  scheduleSave();
-  toast(editId ? 'Posición actualizada y guardada' : 'Posición agregada y guardada', 's');
-}
-
-// ═══════════════════════════════════════════════
-//  EXPORT
-// ═══════════════════════════════════════════════
-async function exportPNG() {
-  showProgress('Generando imagen PNG...', 30);
-  try {
-    const svg = document.getElementById('chart-svg');
-    const clone = svg.cloneNode(true);
-    clone.style.background='#0b0f1a';
-    clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
-    // Embed font
-    const styleEl = document.createElement('style');
-    styleEl.textContent = "text{font-family:'Inter',Arial,sans-serif;}";
-    clone.insertBefore(styleEl, clone.firstChild);
-    const serializer = new XMLSerializer();
-    const svgStr = serializer.serializeToString(clone);
-    const canvas = document.createElement('canvas');
-    const scale = 2; // retina
-    canvas.width  = svg.clientWidth*scale;
-    canvas.height = svg.clientHeight*scale;
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle='#0b0f1a'; ctx.fillRect(0,0,canvas.width,canvas.height);
-    const img = new Image();
-    img.onload = () => {
-      ctx.drawImage(img,0,0,canvas.width,canvas.height);
-      showProgress('Descargando...', 90);
-      const a=document.createElement('a');
-      a.download='organigrama_'+Date.now()+'.png';
-      a.href=canvas.toDataURL('image/png',1.0);
-      a.click();
-      hideProgress(); toast('Imagen PNG descargada','s');
-    };
-    img.onerror = () => { hideProgress(); exportPNGFallback(); };
-    img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svgStr);
-  } catch(e) { hideProgress(); exportPNGFallback(); }
-}
-
-async function exportPNGFallback() {
-  showProgress('Capturando pantalla...', 40);
-  try {
-    const wrap = document.getElementById('chart-wrap');
-    const canvas = await html2canvas(wrap, {backgroundColor:'#0b0f1a',scale:2,logging:false,useCORS:true});
-    showProgress('Descargando...', 90);
-    const a=document.createElement('a'); a.download='organigrama_'+Date.now()+'.png'; a.href=canvas.toDataURL('image/png'); a.click();
-    hideProgress(); toast('Imagen PNG descargada','s');
-  } catch(e){ hideProgress(); toast('Error al exportar imagen: '+e.message,'e'); }
-}
-
-async function exportPDF() {
-  showProgress('Preparando PDF ejecutivo...', 15);
-  try {
-    const { jsPDF } = window.jspdf;
-
-    // Page setup — A3 landscape for wide org charts
-    const orientation = visibleNodes.length > 40 ? 'landscape' : 'portrait';
-    const pageSize = visibleNodes.length > 80 ? 'a3' : 'a4';
-    const doc = new jsPDF({ orientation, unit: 'mm', format: pageSize });
-
-    const PW = doc.internal.pageSize.getWidth();
-    const PH = doc.internal.pageSize.getHeight();
-    const margin = 14;
-
-    // ── HEADER ──
-    doc.setFillColor(29, 78, 216);
-    doc.rect(0, 0, PW, 18, 'F');
-    doc.setTextColor(255,255,255);
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(13);
-    doc.text('MRT CORPORATIVO — ORGANIGRAMA FUNCIONAL', margin, 12);
-    doc.setFontSize(8);
-    doc.setFont('helvetica','normal');
-    const now = new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric'});
-    doc.text(`Generado: ${now}  ·  Total: ${allNodes.length} colaboradores  ·  Visibles: ${visibleNodes.length}`, PW-margin, 12, {align:'right'});
-
-    showProgress('Generando nodos del organigrama...', 35);
-
-    // ── CAPTURE ORG CHART as image and embed ──
-    const wrap = document.getElementById('chart-wrap');
-    const canvas = await html2canvas(wrap, {
-      backgroundColor:'#f0f4f8', scale:2, logging:false, useCORS:true,
-      width: wrap.clientWidth, height: wrap.clientHeight
-    });
-    showProgress('Insertando organigrama en PDF...', 65);
-
-    const imgData = canvas.toDataURL('image/png', 1.0);
-    const imgW = PW - margin*2;
-    const imgH = (canvas.height / canvas.width) * imgW;
-    const maxImgH = PH - 30 - margin; // below header, above footer
-
-    if(imgH <= maxImgH) {
-      doc.addImage(imgData, 'PNG', margin, 22, imgW, imgH);
-    } else {
-      // Scale to fit
-      const scale2 = maxImgH / imgH;
-      doc.addImage(imgData, 'PNG', margin, 22, imgW*scale2, maxImgH);
-    }
-
-    showProgress('Agregando leyenda y pie de página...', 85);
-
-    // ── LEGEND ──
-    const levels = [...new Set(visibleNodes.map(n=>n.nivel).filter(Boolean))];
-    const COLORS_PDF = {
-      Directivo:[29,78,216], Gerencia:[59,130,246], Superintendencia:[2,132,199],
-      Jefatura:[6,182,212], Supervisión:[16,185,129], Administrativo:[124,58,237], Operativo:[100,116,139]
-    };
-    let lx = margin;
-    const ly = PH - 10;
-    doc.setFontSize(6.5);
-    levels.forEach(lv => {
-      const col = COLORS_PDF[lv] || [100,116,139];
-      doc.setFillColor(...col);
-      doc.roundedRect(lx, ly-4, 3, 3, 0.5, 0.5, 'F');
-      doc.setTextColor(50,50,50);
-      doc.text(lv, lx+4.5, ly-1.5);
-      lx += doc.getTextWidth(lv) + 10;
-    });
-
-    // ── FOOTER ──
-    doc.setDrawColor(200,210,220);
-    doc.line(margin, PH-13, PW-margin, PH-13);
-    doc.setTextColor(150,150,150);
-    doc.setFontSize(7);
-    doc.text('Documento confidencial — MRT Corporativo — Uso interno RRHH', margin, PH-7);
-    doc.text(`Página 1`, PW-margin, PH-7, {align:'right'});
-
-    showProgress('Descargando...', 95);
-    doc.save(`Organigrama_MRT_${new Date().toISOString().slice(0,10)}.pdf`);
-    hideProgress();
-    toast('PDF descargado correctamente','s');
-  } catch(e) {
-    hideProgress();
-    console.error('PDF error:', e);
-    toast('Error al generar PDF: ' + e.message, 'e');
-  }
-}
-
-// ═══════════════════════════════════════════════
-//  TEMPLATE DOWNLOAD
-// ═══════════════════════════════════════════════
-function downloadTemplate() {
-  const cols = ['ID_Empleado','Nombre_Completo','Puesto','Area','Nivel','Reporta_A_ID','Ubicacion','Estatus','Foto_URL'];
-  const ejemplo = [
-    ['MRT-001','Pedro Ramírez García','Director General','Dirección','Directivo','','Corporativo','Activo',''],
-    ['MRT-002','Mario Gutiérrez López','Director de Operaciones','Operaciones','Directivo','MRT-001','Corporativo','Activo',''],
-    ['MRT-003','Laura Sánchez Cruz','Gerente de Producción','Operaciones','Gerencia','MRT-002','Planta Norte','Activo',''],
-    ['MRT-004','Carlos Mendoza Ríos','Jefe de Turno A','Operaciones','Jefatura','MRT-003','Planta Norte','Activo',''],
-    ['MRT-005','Ana Rodríguez Pérez','Supervisor Seguridad','Seguridad','Supervisión','MRT-002','Planta Norte','Vacante',''],
-    ['MRT-006','Jorge Flores Martínez','Operador Sr.','Operaciones','Operativo','MRT-004','Planta Norte','Activo',''],
-  ];
-  const ws = XLSX.utils.aoa_to_sheet([cols,...ejemplo]);
-  ws['!cols'] = cols.map(()=>({wch:22}));
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb,'Organigrama',ws);
-  // Instructions sheet
-  const inst = [
-    ['INSTRUCCIONES DE USO — PLANTILLA ORGANIGRAMA'],[''],
-    ['COLUMNAS OBLIGATORIAS:'],
-    ['ID_Empleado','Identificador único por persona (ej: MRT-001). No duplicar.'],
-    ['Nombre_Completo','Nombre y apellidos del colaborador o "VACANTE" si es plaza disponible.'],
-    ['Puesto','Nombre del puesto o cargo.'],
-    ['Area','Área o departamento al que pertenece.'],
-    ['Nivel','Uno de: Directivo / Gerencia / Jefatura / Supervisión / Operativo'],
-    ['Reporta_A_ID','ID del jefe directo. Dejar en blanco solo para el Director General (raíz).'],
-    [''],['COLUMNAS OPCIONALES:'],
-    ['Ubicacion','Planta, sucursal u oficina donde trabaja.'],
-    ['Estatus','Activo / Vacante / Inactivo'],
-    ['Foto_URL','URL pública de la foto del colaborador (opcional).'],
-    [''],['NOTAS:'],
-    ['- El campo Reporta_A_ID debe contener un ID que exista en la columna ID_Empleado.'],
-    ['- Solo puede haber UNA persona sin Reporta_A_ID (la raíz del organigrama).'],
-    ['- El archivo puede tener hasta 5,000 filas.'],
-    ['- Guarda el archivo como .xlsx o .csv antes de importar.'],
-  ];
-  const ws2 = XLSX.utils.aoa_to_sheet(inst);
-  ws2['!cols'] = [{wch:28},{wch:70}];
-  XLSX.utils.book_append_sheet(wb,'Instrucciones',ws2);
-  XLSX.writeFile(wb,'plantilla_organigrama_MRT.xlsx');
-  toast('Plantilla descargada','s');
-}
-
-// ═══════════════════════════════════════════════
-//  MODAL / PROGRESS / TOAST
-// ═══════════════════════════════════════════════
-function openModal(id) {
-  if(id==='modal-add') populateManagerSelect();
-  document.getElementById(id).classList.add('open');
-}
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.modal-ov').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m) m.classList.remove('open'); }));
-
-function showProgress(msg, pct) {
-  document.getElementById('prog-title').textContent=msg;
-  document.getElementById('prog-bar').style.width=pct+'%';
-  document.getElementById('progress-wrap').classList.add('show');
-}
-function hideProgress() { document.getElementById('progress-wrap').classList.remove('show'); }
-
-function toast(msg, type='i') {
-  const c=document.getElementById('toast');
-  const t=document.createElement('div');
-  t.className=`ti ${type}`;
-  t.innerHTML=`${type==='s'?'✓':type==='e'?'✗':'ℹ'} ${msg}`;
-  c.appendChild(t);
-  setTimeout(()=>t.remove(),3500);
-}
-
-// ═══════════════════════════════════════════════
-//  KEYBOARD SHORTCUTS
-// ═══════════════════════════════════════════════
-document.addEventListener('keydown', e => {
-  if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT'||e.target.tagName==='TEXTAREA') return;
-  if(e.key==='f'||e.key==='F') fitAll();
-  if(e.key==='+'||e.key==='=') doZoom(1.2);
-  if(e.key==='-') doZoom(0.8);
-  if(e.key==='e') expandAll();
-  if(e.key==='c') collapseAll();
-  if(e.key==='Escape') { document.querySelectorAll('.modal-ov.open').forEach(m=>m.classList.remove('open')); hideTooltip(); }
-});
-
-
-// ═══════════════════════════════════════════════
-//  DASHBOARD
-// ═══════════════════════════════════════════════
-const NIVEL_COLORS_DASH = {
-  Directivo:'#1d4ed8', Gerencia:'#3b82f6', Superintendencia:'#0891b2',
-  Jefatura:'#06b6d4', Supervisión:'#059669', Administrativo:'#7c3aed', Operativo:'#94a3b8'
-};
-const UBI_COLORS = ['#1d4ed8','#0891b2','#059669','#d97706','#7c3aed','#dc2626','#64748b'];
-
-function showDashboard() {
-  document.getElementById('chart-wrap').style.display = 'none';
-  document.getElementById('dashboard-panel').style.display = 'flex';
-  document.getElementById('dashboard-panel').style.flexDirection = 'column';
-  document.getElementById('btn-dash').style.display = 'none';
-  document.getElementById('btn-org').style.display = 'flex';
-  document.getElementById('topbar-title').textContent = 'Dashboard RRHH';
-  renderDashboard();
-}
-
-function hideDashboard() {
-  document.getElementById('chart-wrap').style.display = 'block';
-  document.getElementById('dashboard-panel').style.display = 'none';
-  document.getElementById('btn-dash').style.display = 'flex';
-  document.getElementById('btn-org').style.display = 'none';
-  document.getElementById('topbar-title').textContent = 'Organigrama — MRT Corporativo';
-}
-
-function countBy(arr, key) {
-  const m = {};
-  arr.forEach(n => { const v = n[key]||'Sin definir'; m[v]=(m[v]||0)+1; });
-  return Object.entries(m).sort((a,b)=>b[1]-a[1]);
-}
-
-function getDirectorTree() {
-  const dirs = allNodes.filter(n => n.nivel === 'Directivo');
-  return dirs.map(d => {
-    const subs = getAllDescendants(d.id);
-    return { ...d, teamSize: subs.size - 1 };
-  }).sort((a,b) => b.teamSize - a.teamSize);
-}
-
-let _dashCharts = {};
-
-function destroyDashCharts() {
-  Object.values(_dashCharts).forEach(c => { try{ c.destroy(); }catch(e){} });
-  _dashCharts = {};
-}
-
-function renderDashboard() {
-  destroyDashCharts();
-  var total   = allNodes.length;
-  var activos = allNodes.filter(function(n){return n.estatus==='Activo';}).length;
-  var vac     = allNodes.filter(function(n){return n.estatus==='Vacante';}).length;
-  var ubis    = countBy(allNodes.filter(function(n){return n.ubicacion;}), 'ubicacion');
-  var niveles = countBy(allNodes, 'nivel');
-  var dires   = countBy(allNodes.filter(function(n){return n.direccion;}), 'direccion');
-  var dirs    = getDirectorTree();
-  var now     = new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric'});
-
-  var PALETTE  = ['#1d4ed8','#0891b2','#059669','#7c3aed','#d97706','#dc2626','#0f766e','#9333ea','#c2410c'];
-  var NIV_COL  = {Directivo:'#1d4ed8',Gerencia:'#0891b2',Superintendencia:'#0f766e',Jefatura:'#059669','Supervisión':'#7c3aed',Administrativo:'#9333ea',Operativo:'#94a3b8'};
-
-  // Build director cards HTML using concatenation (no nested template literals)
-  var dirCardsHtml = dirs.map(function(d,i){
-    var col = NIV_COL[d.nivel]||'#1d4ed8';
-    var ini = (d.nombre||'').split(' ').filter(function(w){return w.length>1;}).map(function(w){return w[0];}).slice(0,2).join('');
-    var nm  = (d.nombre||'').split(' ').slice(0,3).join(' ');
-    return '<div class="dir-item">' +
-      '<div class="dir-av" style="background:'+col+'">'+ini+'</div>' +
-      '<div class="dir-nm">'+nm+'</div>' +
-      '<div class="dir-pt">'+d.puesto+'</div>' +
-      '<div class="dir-badge">&#128101; '+d.teamSize+' personas</div>' +
-      '</div>';
+  var dcH=dts.map(function(d){
+    var col=NC[d.nivel]||'#1d4ed8';
+    var ini=(d.nombre||'').split(' ').filter(function(w){return w.length>1;}).map(function(w){return w[0];}).slice(0,2).join('');
+    var nm=(d.nombre||'').split(' ').slice(0,3).join(' ');
+    return'<div class="dirc"><div class="dc-av" style="background:'+col+'">'+ini+'</div><div class="dc-nm">'+nm+'</div><div class="dc-pt">'+d.puesto+'</div><div class="dc-bg">'+d.sz+' personas</div></div>';
   }).join('');
 
-  // KPI banner HTML
-  var kpiHtml =
-    '<div class="dash-kpi"><div class="dash-kpi-num">'+total+'</div><div class="dash-kpi-label">Colaboradores</div></div>' +
-    '<div class="dash-kpi-divider"></div>' +
-    '<div class="dash-kpi"><div class="dash-kpi-num">'+activos+'</div><div class="dash-kpi-label">Activos</div></div>' +
-    '<div class="dash-kpi-divider"></div>' +
-    '<div class="dash-kpi"><div class="dash-kpi-num">'+vac+'</div><div class="dash-kpi-label">Vacantes</div></div>' +
-    '<div class="dash-kpi-divider"></div>' +
-    '<div class="dash-kpi"><div class="dash-kpi-num">'+ubis.length+'</div><div class="dash-kpi-label">Ubicaciones</div></div>' +
-    '<div class="dash-kpi-divider"></div>' +
-    '<div class="dash-kpi"><div class="dash-kpi-num">'+dires.length+'</div><div class="dash-kpi-label">Direcciones</div></div>' +
-    '<div class="dash-kpi-divider"></div>' +
-    '<div class="dash-kpi"><div class="dash-kpi-num">'+dirs.filter(function(d){return d.nivel==='Directivo';}).length+'</div><div class="dash-kpi-label">Directivos</div></div>';
+  document.getElementById('vdash').innerHTML=
+    '<div class="dh"><div class="dh-t">Dashboard Ejecutivo RRHH</div><div class="dh-s">MRT Corporativo &middot; '+now+'</div>'
+    +'<div class="kpi-r">'
+      +'<div class="kpi-i"><div class="kpi-n">'+tot+'</div><div class="kpi-l">Total</div></div>'
+      +'<div class="kpi-i"><div class="kpi-n">'+act+'</div><div class="kpi-l">Activos</div></div>'
+      +'<div class="kpi-i"><div class="kpi-n">'+vac+'</div><div class="kpi-l">Vacantes</div></div>'
+      +'<div class="kpi-i"><div class="kpi-n">'+ubis.length+'</div><div class="kpi-l">Ubicaciones</div></div>'
+      +'<div class="kpi-i"><div class="kpi-n">'+dirs.length+'</div><div class="kpi-l">Direcciones</div></div>'
+      +'<div class="kpi-i"><div class="kpi-n">'+dts.filter(function(d){return d.nivel==='Directivo';}).length+'</div><div class="kpi-l">Directivos</div></div>'
+    +'</div></div>'
+    +'<div class="dg">'
+      +'<div class="dc"><h3>Distribución por Dirección</h3><p>Colaboradores por área principal</p><div style="height:250px"><canvas id="c-dir"></canvas></div></div>'
+      +'<div class="dc"><h3>Headcount por Planta</h3><p>Colaboradores por instalación</p><div style="height:250px"><canvas id="c-ubi"></canvas></div></div>'
+      +'<div class="dc"><h3>Distribución por Nivel</h3><p>Estructura organizacional</p><div style="height:230px"><canvas id="c-niv"></canvas></div></div>'
+      +'<div class="dc"><h3>Ubicaciones — Detalle</h3><p>Comparativo de headcount</p><div style="height:230px"><canvas id="c-ub2"></canvas></div></div>'
+      +'<div class="dc dg-full"><h3>Tamaño de Organización por Dirección</h3><p>Total de colaboradores bajo cada director</p><div style="height:190px"><canvas id="c-dts"></canvas></div></div>'
+      +'<div class="dc dg-full"><h3>Directivos MRT Corporativo</h3><p>Líderes y su equipo</p><div class="dircards">'+dcH+'</div></div>'
+    +'</div>';
 
-  document.getElementById('dashboard-panel').innerHTML =
-    '<div class="dash-header">' +
-      '<div class="dash-header-title">&#128202; Dashboard Ejecutivo RRHH</div>' +
-      '<div class="dash-header-sub">MRT Corporativo &middot; Actualizado: '+now+'</div>' +
-      '<div class="dash-header-kpis">'+kpiHtml+'</div>' +
-    '</div>' +
-    '<div class="dash-body">' +
-      '<div class="dc"><div class="dc-title">&#127963; Distribución por Dirección</div><div class="dc-sub">Proporción de colaboradores por área principal</div><div class="dc-chart-wrap" style="height:260px"><canvas id="ch-dir"></canvas></div></div>' +
-      '<div class="dc"><div class="dc-title">&#128205; Distribución por Planta / Ubicación</div><div class="dc-sub">Headcount por instalación</div><div class="dc-chart-wrap" style="height:260px"><canvas id="ch-ubi"></canvas></div></div>' +
-      '<div class="dc"><div class="dc-title">&#127991; Colaboradores por Nivel Jerárquico</div><div class="dc-sub">Estructura de la organización por nivel</div><div class="dc-chart-wrap" style="height:240px"><canvas id="ch-nivel"></canvas></div></div>' +
-      '<div class="dc"><div class="dc-title">&#128202; Headcount por Planta — Detalle</div><div class="dc-sub">Número exacto de personas por instalación</div><div class="dc-chart-wrap" style="height:240px"><canvas id="ch-ubi2"></canvas></div></div>' +
-      '<div class="dc dash-full"><div class="dc-title">&#128202; Tamaño de Organización por Dirección</div><div class="dc-sub">Colaboradores bajo cada director</div><div class="dc-chart-wrap" style="height:200px"><canvas id="ch-dirs"></canvas></div></div>' +
-      '<div class="dc dash-full"><div class="dc-title">&#127919; Directivos MRT Corporativo</div><div class="dc-sub">Líderes y tamaño de su equipo</div><div class="dir-grid">'+dirCardsHtml+'</div></div>' +
-    '</div>';
+  Chart.defaults.font.family="'Inter',sans-serif";Chart.defaults.color='#64748b';
+  var cp={id:'cp',afterDraw:function(ch){if(ch.config.type!=='doughnut')return;var ctx=ch.ctx,ca=ch.chartArea,tot2=ch.data.datasets[0].data.reduce(function(a,b){return a+b;},0);ctx.save();ctx.font='bold 22px Inter';ctx.fillStyle='#0f172a';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(tot2,ca.left+ca.width/2,ca.top+ca.height/2-6);ctx.font='9px Inter';ctx.fillStyle='#94a3b8';ctx.fillText('total',ca.left+ca.width/2,ca.top+ca.height/2+11);ctx.restore();}};
+  var dopt={cutout:'63%',animation:{animateScale:true,duration:900},plugins:{legend:{position:'right',labels:{boxWidth:10,padding:8,font:{size:10}}}}};
+  var ttFn=function(t2){return{callbacks:{label:function(ctx){return' '+ctx.label+': '+ctx.raw+' ('+Math.round(ctx.raw/t2*100)+'%)';}}}; };
 
-  Chart.defaults.font.family = "'Inter', sans-serif";
-  Chart.defaults.color = '#64748b';
+  setTimeout(function(){var c=document.getElementById('c-dir');if(!c)return;_CH.d1=new Chart(c,{type:'doughnut',data:{labels:dirs.map(function(x){return x[0];}),datasets:[{data:dirs.map(function(x){return x[1];}),backgroundColor:PAL,borderWidth:2,borderColor:'#fff',hoverOffset:10}]},options:Object.assign({},dopt,{plugins:Object.assign({},dopt.plugins,{tooltip:ttFn(tot)})}),plugins:[cp]});},100);
+  setTimeout(function(){var c=document.getElementById('c-ubi');if(!c)return;_CH.d2=new Chart(c,{type:'doughnut',data:{labels:ubis.map(function(x){return x[0];}),datasets:[{data:ubis.map(function(x){return x[1];}),backgroundColor:PAL.slice(1),borderWidth:2,borderColor:'#fff',hoverOffset:10}]},options:Object.assign({},dopt,{plugins:Object.assign({},dopt.plugins,{tooltip:ttFn(tot)})}),plugins:[cp]});},200);
+  setTimeout(function(){var c=document.getElementById('c-niv');if(!c)return;_CH.d3=new Chart(c,{type:'bar',data:{labels:nivs.map(function(x){return x[0];}),datasets:[{data:nivs.map(function(x){return x[1];}),backgroundColor:nivs.map(function(x){return(NC[x[0]]||'#94a3b8')+'cc';}),borderColor:nivs.map(function(x){return NC[x[0]]||'#94a3b8';}),borderWidth:1.5,borderRadius:8,borderSkipped:false}]},options:{animation:{duration:800},plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9,weight:'600'}}},y:{grid:{color:'#f1f5f9'},ticks:{font:{size:9}},beginAtZero:true}}}});},300);
+  setTimeout(function(){var c=document.getElementById('c-ub2');if(!c)return;_CH.d4=new Chart(c,{type:'bar',data:{labels:ubis.map(function(x){return x[0];}),datasets:[{data:ubis.map(function(x){return x[1];}),backgroundColor:PAL.map(function(p){return p+'cc';}),borderColor:PAL,borderWidth:1.5,borderRadius:6,borderSkipped:false}]},options:{indexAxis:'y',animation:{duration:900},plugins:{legend:{display:false}},scales:{x:{grid:{color:'#f1f5f9'},ticks:{font:{size:9}},beginAtZero:true},y:{grid:{display:false},ticks:{font:{size:9,weight:'500'}}}}}});},400);
+  setTimeout(function(){var c=document.getElementById('c-dts');if(!c)return;_CH.d5=new Chart(c,{type:'bar',data:{labels:dts.map(function(d){return(d.nombre||'').split(' ').slice(0,2).join(' ');}),datasets:[{data:dts.map(function(d){return d.sz;}),backgroundColor:PAL.map(function(p){return p+'cc';}),borderColor:PAL,borderWidth:1.5,borderRadius:8,borderSkipped:false}]},options:{animation:{duration:1000},plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9,weight:'600'},maxRotation:30}},y:{grid:{color:'#f1f5f9'},ticks:{font:{size:9}},beginAtZero:true}}}});},500);
+}
 
-  var pluginCenter = {
-    id:'centerText',
-    afterDraw: function(chart) {
-      if(chart.config.type!=='doughnut') return;
-      var ctx2 = chart.ctx;
-      var ca = chart.chartArea;
-      var tot = chart.data.datasets[0].data.reduce(function(a,b){return a+b;},0);
-      ctx2.save();
-      ctx2.font = 'bold 26px Inter';
-      ctx2.fillStyle = '#0f172a';
-      ctx2.textAlign = 'center';
-      ctx2.textBaseline = 'middle';
-      ctx2.fillText(tot, ca.left+ca.width/2, ca.top+ca.height/2-8);
-      ctx2.font = '10px Inter';
-      ctx2.fillStyle = '#94a3b8';
-      ctx2.fillText('total', ca.left+ca.width/2, ca.top+ca.height/2+12);
-      ctx2.restore();
-    }
+/* CRUD */
+function saveN(){
+  var eId=document.getElementById('e-id').value;
+  var n={id:document.getElementById('e-eid').value.trim()||('N'+Date.now()),nombre:document.getElementById('e-nom').value.trim(),puesto:document.getElementById('e-pue').value.trim(),area:document.getElementById('e-are').value.trim(),nivel:document.getElementById('e-niv').value,ubicacion:document.getElementById('e-ubi').value.trim(),manager:document.getElementById('e-mgr').value.trim()||null,estatus:document.getElementById('e-est').value,foto:null};
+  if(eId){var i=AN.findIndex(function(x){return String(x.id)===String(eId);});if(i>-1)AN[i]=n;else AN.push(n);}else AN.push(n);
+  closeM('modal-add');document.getElementById('e-id').value='';
+  bChips();applyF();sched();toast('Posición guardada','s');
+}
+
+/* IMPORT */
+var _ID=null;
+var dz=document.getElementById('dz');
+dz.addEventListener('dragover',function(e){e.preventDefault();dz.classList.add('ov');});
+dz.addEventListener('dragleave',function(){dz.classList.remove('ov');});
+dz.addEventListener('drop',function(e){e.preventDefault();dz.classList.remove('ov');if(e.dataTransfer.files[0])pFile(e.dataTransfer.files[0]);});
+function hFile(e){if(e.target.files[0])pFile(e.target.files[0]);}
+function pFile(f){
+  var rd=new FileReader();
+  rd.onload=function(e){
+    try{
+      var wb=XLSX.read(e.target.result,{type:'binary'});
+      var ws=wb.Sheets[wb.SheetNames[0]];
+      _ID=XLSX.utils.sheet_to_json(ws,{defval:''});
+      if(!_ID.length){toast('Archivo vacío','e');return;}
+      var cols=Object.keys(_ID[0]);
+      var h='<div style="margin-top:14px"><div style="font-size:12px;font-weight:700;margin-bottom:7px">Vista previa — '+f.name+' ('+_ID.length+' filas)</div><div style="overflow-x:auto;font-size:10px;border:1px solid #e2e8f0;border-radius:8px"><table style="border-collapse:collapse"><thead><tr>';
+      cols.slice(0,7).forEach(function(c){h+='<th style="padding:5px 9px;border-bottom:1px solid #e2e8f0;color:#64748b;white-space:nowrap">'+c+'</th>';});
+      h+='</tr></thead><tbody>';
+      _ID.slice(0,4).forEach(function(r){h+='<tr>';cols.slice(0,7).forEach(function(c){h+='<td style="padding:4px 9px;border-bottom:1px solid #f1f5f9">'+r[c]+'</td>';});h+='</tr>';});
+      h+='</tbody></table></div><div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-gray" style="width:auto;padding:6px 12px" onclick="document.getElementById(\'imp-prev\').innerHTML=\'\'">Cancelar</button><button class="btn btn-blue" style="width:auto;padding:6px 12px" onclick="cfImp()">Confirmar importación</button></div></div>';
+      document.getElementById('imp-prev').innerHTML=h;
+    }catch(err){toast('Error: '+err.message,'e');}
   };
-
-  // CHART 1: Donut Direcciones
-  setTimeout(function(){
-    var c1 = document.getElementById('ch-dir'); if(!c1) return;
-    _dashCharts.dir = new Chart(c1, {
-      type:'doughnut',
-      data:{ labels:dires.map(function(d){return d[0];}), datasets:[{data:dires.map(function(d){return d[1];}),backgroundColor:PALETTE,borderWidth:2,borderColor:'#fff',hoverOffset:8}] },
-      options:{ cutout:'65%', animation:{animateScale:true,duration:800},
-        plugins:{ legend:{position:'right',labels:{boxWidth:12,padding:10,font:{size:11}}},
-          tooltip:{callbacks:{label:function(ctx){ return ' '+ctx.label+': '+ctx.raw+' ('+Math.round(ctx.raw/total*100)+'%)'; }}} }
-      }, plugins:[pluginCenter]
-    });
-  }, 50);
-
-  // CHART 2: Donut Ubicaciones
-  setTimeout(function(){
-    var c2 = document.getElementById('ch-ubi'); if(!c2) return;
-    _dashCharts.ubi = new Chart(c2, {
-      type:'doughnut',
-      data:{ labels:ubis.map(function(d){return d[0];}), datasets:[{data:ubis.map(function(d){return d[1];}),backgroundColor:PALETTE.slice(2),borderWidth:2,borderColor:'#fff',hoverOffset:8}] },
-      options:{ cutout:'65%', animation:{animateScale:true,duration:900},
-        plugins:{ legend:{position:'right',labels:{boxWidth:12,padding:8,font:{size:11}}},
-          tooltip:{callbacks:{label:function(ctx){ return ' '+ctx.label+': '+ctx.raw+' ('+Math.round(ctx.raw/total*100)+'%)'; }}} }
-      }, plugins:[pluginCenter]
-    });
-  }, 100);
-
-  // CHART 3: Bar Niveles
-  setTimeout(function(){
-    var c3 = document.getElementById('ch-nivel'); if(!c3) return;
-    _dashCharts.nivel = new Chart(c3, {
-      type:'bar',
-      data:{ labels:niveles.map(function(d){return d[0];}), datasets:[{label:'Colaboradores',data:niveles.map(function(d){return d[1];}),backgroundColor:niveles.map(function(d){return (NIV_COL[d[0]]||'#94a3b8')+'cc';}),borderColor:niveles.map(function(d){return NIV_COL[d[0]]||'#94a3b8';}),borderWidth:1.5,borderRadius:8,borderSkipped:false}] },
-      options:{ animation:{duration:800}, plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw+' colaboradores ('+Math.round(ctx.raw/total*100)+'%)';}}}},
-        scales:{ x:{grid:{display:false},ticks:{font:{size:10,weight:'600'}}}, y:{grid:{color:'#f1f5f9'},ticks:{font:{size:10}},beginAtZero:true} }
-      }
-    });
-  }, 150);
-
-  // CHART 4: Horizontal Bar Ubicaciones
-  setTimeout(function(){
-    var c4 = document.getElementById('ch-ubi2'); if(!c4) return;
-    _dashCharts.ubi2 = new Chart(c4, {
-      type:'bar',
-      data:{ labels:ubis.map(function(d){return d[0];}), datasets:[{label:'Personas',data:ubis.map(function(d){return d[1];}),backgroundColor:PALETTE.map(function(c){return c+'cc';}),borderColor:PALETTE,borderWidth:1.5,borderRadius:6,borderSkipped:false}] },
-      options:{ indexAxis:'y', animation:{duration:900}, plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw+' personas';}}}},
-        scales:{ x:{grid:{color:'#f1f5f9'},ticks:{font:{size:10}},beginAtZero:true}, y:{grid:{display:false},ticks:{font:{size:10,weight:'500'}}} }
-      }
-    });
-  }, 200);
-
-  // CHART 5: Bar Directivos
-  setTimeout(function(){
-    var c5 = document.getElementById('ch-dirs'); if(!c5) return;
-    var dLabels = dirs.map(function(d){return (d.nombre||'').split(' ').slice(0,2).join(' ');});
-    var dData   = dirs.map(function(d){return d.teamSize;});
-    _dashCharts.dirs = new Chart(c5, {
-      type:'bar',
-      data:{ labels:dLabels, datasets:[{label:'Equipo',data:dData,backgroundColor:PALETTE.map(function(c){return c+'cc';}),borderColor:PALETTE,borderWidth:1.5,borderRadius:8,borderSkipped:false}] },
-      options:{ animation:{duration:1000}, plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw+' personas en su organización';}}}},
-        scales:{ x:{grid:{display:false},ticks:{font:{size:10,weight:'600'},maxRotation:30}}, y:{grid:{color:'#f1f5f9'},ticks:{font:{size:10}},beginAtZero:true} }
-      }
-    });
-  }, 250);
+  rd.readAsBinaryString(f);
+}
+function cfImp(){
+  if(!_ID)return;
+  var cols=Object.keys(_ID[0]);
+  function fc(ks){return cols.find(function(c){return ks.some(function(k){return c.toLowerCase().indexOf(k.toLowerCase())>-1;});})||'';}
+  var iC=fc(['ID_Empleado','id']),nC=fc(['Nombre','nombre']),pC=fc(['Puesto','puesto']),aC=fc(['rea','Area']);
+  var vC=fc(['Nivel','nivel']),mC=fc(['Reporta','manager']),uC=fc(['bicaci','ubicacion']),eC=fc(['Estatus','status']);
+  var nn=_ID.filter(function(r){return r[iC];}).map(function(r,i){
+    var nv=String(r[vC]||'Operativo').trim();if(nv.indexOf('Supervisi')>-1)nv='Supervisión';
+    return{id:String(r[iC]||'IMP-'+i),nombre:String(r[nC]||''),puesto:String(r[pC]||''),area:String(r[aC]||''),nivel:nv,manager:String(r[mC]||'').trim()||null,ubicacion:String(r[uC]||''),estatus:String(r[eC]||'Activo'),foto:null};
+  });
+  if(AN.length&&confirm('OK=Fusionar con datos existentes, Cancelar=Reemplazar todo')){
+    var mp={};AN.forEach(function(n){mp[String(n.id)]=n;});nn.forEach(function(n){mp[String(n.id)]=n;});AN=Object.values(mp);
+  }else{AN=nn;}
+  bChips();applyF();sched();document.getElementById('imp-prev').innerHTML='';
+  toast(nn.length+' registros importados','s');sv('org');
+}
+function dlTpl(){
+  var cols=['ID_Empleado','Nombre_Completo','Puesto','Area','Nivel','Reporta_A_ID','Ubicacion','Estatus'];
+  var ex=[['730','AYUB VALDES OMAR','Director General','Direccion General','Directivo','','CORPORATIVO CHIHUAHUA','Activo'],['1010','MENERA GOMEZ JOSE','Director de Operaciones','Operaciones','Directivo','730','CORPORATIVO CHIHUAHUA','Activo'],['1928','GUARDIOLA MENDOZA ALEJANDRO','Gerente de Unidad','Operaciones','Gerencia','1010','CIENEGUITA','Activo']];
+  var ws=XLSX.utils.aoa_to_sheet([cols].concat(ex));var wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Organigrama');
+  XLSX.writeFile(wb,'plantilla_MRT.xlsx');toast('Plantilla descargada','s');
 }
 
-
-// ═══════════════════════════════════════════════
-//  API — Conexión al servidor persistente
-// ═══════════════════════════════════════════════
-const API = '';
-
-async function apiGet(path) {
-  const r = await fetch(API + path);
-  if(!r.ok) throw new Error('HTTP ' + r.status);
-  return r.json();
+/* EXPORT */
+async function xPNG(){
+  toast('Generando imagen...','i');
+  try{var c=await html2canvas(document.getElementById('vorg'),{backgroundColor:'#f0f4f8',scale:2,logging:false});var a=document.createElement('a');a.download='organigrama_MRT_'+new Date().toISOString().slice(0,10)+'.png';a.href=c.toDataURL('image/png');a.click();toast('PNG descargado','s');}
+  catch(e){toast('Error: '+e.message,'e');}
 }
-async function apiPut(path, body) {
-  const r = await fetch(API + path, {method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
-  if(!r.ok) throw new Error('HTTP ' + r.status);
-  return r.json();
-}
-
-let saveTimer = null;
-function scheduleSave() {
-  clearTimeout(saveTimer);
-  showSaveBadge('saving');
-  saveTimer = setTimeout(saveAllNodes, 800);
-}
-async function saveAllNodes() {
-  try {
-    await apiPut('/api/nodes', allNodes);
-    showSaveBadge('saved');
-    setTimeout(()=>showSaveBadge('idle'), 2500);
-  } catch(e) {
-    showSaveBadge('error');
-    toast('Error al guardar: ' + e.message, 'e');
-  }
-}
-function showSaveBadge(state) {
-  const el = document.getElementById('save-badge');
-  if(!el) return;
-  const s = {idle:{text:'',cls:''},saving:{text:'💾 Guardando...',cls:'badge-saving'},saved:{text:'✓ Guardado',cls:'badge-saved'},error:{text:'⚠ Error',cls:'badge-error'}}[state]||{text:'',cls:''};
-  el.textContent = s.text; el.className = 'save-badge ' + s.cls;
+async function xPDF(){
+  toast('Generando PDF...','i');
+  try{
+    var jp=window.jspdf,doc=new jp.jsPDF({orientation:'landscape',unit:'mm',format:'a3'});
+    var PW=doc.internal.pageSize.getWidth(),PH=doc.internal.pageSize.getHeight();
+    doc.setFillColor(29,78,216);doc.rect(0,0,PW,16,'F');
+    doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(11);
+    doc.text('MRT CORPORATIVO — ORGANIGRAMA FUNCIONAL',12,11);
+    doc.setFontSize(7);doc.setFont('helvetica','normal');
+    doc.text('Fecha: '+new Date().toLocaleDateString('es-MX')+'  ·  '+AN.length+' colaboradores',PW-12,11,{align:'right'});
+    var c=await html2canvas(document.getElementById('vorg'),{backgroundColor:'#f0f4f8',scale:1.5,logging:false});
+    var img=c.toDataURL('image/png',1),iw=PW-24,ih=(c.height/c.width)*iw,mH=PH-24;
+    if(ih>mH){var sc=mH/ih;iw*=sc;ih=mH;}
+    doc.addImage(img,'PNG',12,20,iw,ih);
+    doc.setDrawColor(220,220,220);doc.line(12,PH-12,PW-12,PH-12);
+    doc.setTextColor(150,150,150);doc.setFontSize(7);doc.text('Documento confidencial — MRT Corporativo — Uso interno RRHH',12,PH-7);
+    doc.save('Organigrama_MRT_'+new Date().toISOString().slice(0,10)+'.pdf');
+    toast('PDF descargado','s');
+  }catch(e){toast('Error PDF: '+e.message,'e');}
 }
 
-async function loadFromServer() {
-  showProgress('Conectando al servidor...', 20);
-  try {
-    const res = await apiGet('/api/nodes');
-    allNodes = (res.data || res || []);
-    if(!Array.isArray(allNodes)) allNodes = [];
-    showProgress('Construyendo organigrama...', 70);
-    // Auto-collapse deep nodes for large orgs (>100 nodes)
-    if(allNodes.length > 100) autoCollapseDeep();
-    populateFilters();
-    applyFilters();
-    hideProgress();
-    document.querySelector('.logo-s').textContent = 'Minería · ' + allNodes.length + ' colaboradores';
-    document.getElementById('topbar-sub').textContent = 'MRT Corporativo · ' + allNodes.length + ' posiciones';
-    toast(allNodes.length + ' colaboradores cargados', 's');
-  } catch(e) {
-    hideProgress();
-    console.error('Error cargando datos:', e);
-    toast('Error al conectar: ' + e.message, 'e');
-  }
-}
+/* MODAL / TOAST */
+function openM(id){document.getElementById(id).classList.add('open');}
+function closeM(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.mbg').forEach(function(m){m.addEventListener('click',function(e){if(e.target===m)m.classList.remove('open');});});
+function toast(msg,type){var c=document.getElementById('toast'),t=document.createElement('div');t.className='ti '+(type||'i');t.textContent=(type==='s'?'✓ ':type==='e'?'✗ ':'ℹ ')+msg;c.appendChild(t);setTimeout(function(){t.remove();},3500);}
 
-// ═══════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════
-window.addEventListener('DOMContentLoaded', () => {
-  loadFromServer();
-  window.addEventListener('resize', () => { if(visibleNodes.length) renderChart(); });
+/* INIT */
+window.addEventListener('DOMContentLoaded',function(){
+  loadData();
+  window.addEventListener('resize',function(){if(VN.length&&CV==='org')fitC();});
+  document.addEventListener('keydown',function(e){
+    if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT')return;
+    if(e.key==='f'||e.key==='F')fitC();
+    if(e.key==='+'||e.key==='=')dZ(1.2);if(e.key==='-')dZ(.8);
+    if(e.key==='Escape')document.querySelectorAll('.mbg.open').forEach(function(m){m.classList.remove('open');});
+  });
 });
 </script>
 </body>
