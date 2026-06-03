@@ -1553,235 +1553,148 @@ function destroyDashCharts() {
 
 function renderDashboard() {
   destroyDashCharts();
-  const total   = allNodes.length;
-  const activos = allNodes.filter(n=>n.estatus==='Activo').length;
-  const vac     = allNodes.filter(n=>n.estatus==='Vacante').length;
-  const ubis    = countBy(allNodes.filter(n=>n.ubicacion), 'ubicacion');
-  const niveles = countBy(allNodes, 'nivel');
-  const dires   = countBy(allNodes.filter(n=>n.direccion), 'direccion');
-  const dirs    = getDirectorTree();
-  const now     = new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric'});
+  var total   = allNodes.length;
+  var activos = allNodes.filter(function(n){return n.estatus==='Activo';}).length;
+  var vac     = allNodes.filter(function(n){return n.estatus==='Vacante';}).length;
+  var ubis    = countBy(allNodes.filter(function(n){return n.ubicacion;}), 'ubicacion');
+  var niveles = countBy(allNodes, 'nivel');
+  var dires   = countBy(allNodes.filter(function(n){return n.direccion;}), 'direccion');
+  var dirs    = getDirectorTree();
+  var now     = new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric'});
 
-  const PALETTE  = ['#1d4ed8','#0891b2','#059669','#7c3aed','#d97706','#dc2626','#0f766e','#9333ea','#c2410c'];
-  const NIV_COL  = {Directivo:'#1d4ed8',Gerencia:'#0891b2',Superintendencia:'#0f766e',Jefatura:'#059669',Supervisión:'#7c3aed',Administrativo:'#9333ea',Operativo:'#94a3b8'};
+  var PALETTE  = ['#1d4ed8','#0891b2','#059669','#7c3aed','#d97706','#dc2626','#0f766e','#9333ea','#c2410c'];
+  var NIV_COL  = {Directivo:'#1d4ed8',Gerencia:'#0891b2',Superintendencia:'#0f766e',Jefatura:'#059669','Supervisión':'#7c3aed',Administrativo:'#9333ea',Operativo:'#94a3b8'};
 
-  document.getElementById('dashboard-panel').innerHTML = `
-    <div class="dash-header">
-      <div class="dash-header-title">📊 Dashboard Ejecutivo RRHH</div>
-      <div class="dash-header-sub">MRT Corporativo · Actualizado: ${now}</div>
-      <div class="dash-header-kpis">
-        <div class="dash-kpi"><div class="dash-kpi-num">${total}</div><div class="dash-kpi-label">Colaboradores</div></div>
-        <div class="dash-kpi-divider"></div>
-        <div class="dash-kpi"><div class="dash-kpi-num">${activos}</div><div class="dash-kpi-label">Activos</div></div>
-        <div class="dash-kpi-divider"></div>
-        <div class="dash-kpi"><div class="dash-kpi-num">${vac}</div><div class="dash-kpi-label">Vacantes</div></div>
-        <div class="dash-kpi-divider"></div>
-        <div class="dash-kpi"><div class="dash-kpi-num">${ubis.length}</div><div class="dash-kpi-label">Ubicaciones</div></div>
-        <div class="dash-kpi-divider"></div>
-        <div class="dash-kpi"><div class="dash-kpi-num">${dires.length}</div><div class="dash-kpi-label">Direcciones</div></div>
-        <div class="dash-kpi-divider"></div>
-        <div class="dash-kpi"><div class="dash-kpi-num">${dirs.filter(d=>d.nivel==='Directivo').length}</div><div class="dash-kpi-label">Directivos</div></div>
-      </div>
-    </div>
-    <div class="dash-body">
-      <!-- Donut Dirección -->
-      <div class="dc">
-        <div class="dc-title">🏛 Distribución por Dirección</div>
-        <div class="dc-sub">Proporción de colaboradores por área principal</div>
-        <div class="dc-chart-wrap" style="height:260px"><canvas id="ch-dir"></canvas></div>
-      </div>
-      <!-- Donut Ubicación -->
-      <div class="dc">
-        <div class="dc-title">📍 Distribución por Planta / Ubicación</div>
-        <div class="dc-sub">Headcount por instalación</div>
-        <div class="dc-chart-wrap" style="height:260px"><canvas id="ch-ubi"></canvas></div>
-      </div>
-      <!-- Bar Nivel -->
-      <div class="dc">
-        <div class="dc-title">🏷 Colaboradores por Nivel Jerárquico</div>
-        <div class="dc-sub">Estructura de la organización por nivel</div>
-        <div class="dc-chart-wrap" style="height:240px"><canvas id="ch-nivel"></canvas></div>
-      </div>
-      <!-- Horizontal bar Ubicación detalle -->
-      <div class="dc">
-        <div class="dc-title">📊 Headcount por Planta — Detalle</div>
-        <div class="dc-sub">Número exacto de personas por instalación</div>
-        <div class="dc-chart-wrap" style="height:240px"><canvas id="ch-ubi2"></canvas></div>
-      </div>
-      <!-- Directors full width -->
-      <div class="dc dash-full">
-        <div class="dc-title">👔 Estructura Directiva — Tamaño de Organización</div>
-        <div class="dc-sub">Cada directivo y el total de colaboradores bajo su mando</div>
-        <div class="dc-chart-wrap" style="height:200px"><canvas id="ch-dirs"></canvas></div>
-      </div>
-      <!-- Director cards -->
-      <div class="dc dash-full">
-        <div class="dc-title">🎯 Directivos MRT Corporativo</div>
-        <div class="dc-sub">Líderes y tamaño de su equipo</div>
-        <div class="dir-grid">
-          ${dirs.map((d,i) => {
-            const col = NIV_COL[d.nivel]||'#1d4ed8';
-            const ini = (d.nombre||'').split(' ').filter(w=>w.length>1).map(w=>w[0]).slice(0,2).join('');
-            const nm  = (d.nombre||'').split(' ').slice(0,3).join(' ');
-            return \`<div class="dir-item">
-              <div class="dir-av" style="background:\${col}">\${ini}</div>
-              <div class="dir-nm">\${nm}</div>
-              <div class="dir-pt">\${d.puesto}</div>
-              <div class="dir-badge">👥 \${d.teamSize} personas</div>
-            </div>\`;
-          }).join('')}
-        </div>
-      </div>
-    </div>`;
+  // Build director cards HTML using concatenation (no nested template literals)
+  var dirCardsHtml = dirs.map(function(d,i){
+    var col = NIV_COL[d.nivel]||'#1d4ed8';
+    var ini = (d.nombre||'').split(' ').filter(function(w){return w.length>1;}).map(function(w){return w[0];}).slice(0,2).join('');
+    var nm  = (d.nombre||'').split(' ').slice(0,3).join(' ');
+    return '<div class="dir-item">' +
+      '<div class="dir-av" style="background:'+col+'">'+ini+'</div>' +
+      '<div class="dir-nm">'+nm+'</div>' +
+      '<div class="dir-pt">'+d.puesto+'</div>' +
+      '<div class="dir-badge">&#128101; '+d.teamSize+' personas</div>' +
+      '</div>';
+  }).join('');
 
-  // Chart.js global defaults
+  // KPI banner HTML
+  var kpiHtml =
+    '<div class="dash-kpi"><div class="dash-kpi-num">'+total+'</div><div class="dash-kpi-label">Colaboradores</div></div>' +
+    '<div class="dash-kpi-divider"></div>' +
+    '<div class="dash-kpi"><div class="dash-kpi-num">'+activos+'</div><div class="dash-kpi-label">Activos</div></div>' +
+    '<div class="dash-kpi-divider"></div>' +
+    '<div class="dash-kpi"><div class="dash-kpi-num">'+vac+'</div><div class="dash-kpi-label">Vacantes</div></div>' +
+    '<div class="dash-kpi-divider"></div>' +
+    '<div class="dash-kpi"><div class="dash-kpi-num">'+ubis.length+'</div><div class="dash-kpi-label">Ubicaciones</div></div>' +
+    '<div class="dash-kpi-divider"></div>' +
+    '<div class="dash-kpi"><div class="dash-kpi-num">'+dires.length+'</div><div class="dash-kpi-label">Direcciones</div></div>' +
+    '<div class="dash-kpi-divider"></div>' +
+    '<div class="dash-kpi"><div class="dash-kpi-num">'+dirs.filter(function(d){return d.nivel==='Directivo';}).length+'</div><div class="dash-kpi-label">Directivos</div></div>';
+
+  document.getElementById('dashboard-panel').innerHTML =
+    '<div class="dash-header">' +
+      '<div class="dash-header-title">&#128202; Dashboard Ejecutivo RRHH</div>' +
+      '<div class="dash-header-sub">MRT Corporativo &middot; Actualizado: '+now+'</div>' +
+      '<div class="dash-header-kpis">'+kpiHtml+'</div>' +
+    '</div>' +
+    '<div class="dash-body">' +
+      '<div class="dc"><div class="dc-title">&#127963; Distribución por Dirección</div><div class="dc-sub">Proporción de colaboradores por área principal</div><div class="dc-chart-wrap" style="height:260px"><canvas id="ch-dir"></canvas></div></div>' +
+      '<div class="dc"><div class="dc-title">&#128205; Distribución por Planta / Ubicación</div><div class="dc-sub">Headcount por instalación</div><div class="dc-chart-wrap" style="height:260px"><canvas id="ch-ubi"></canvas></div></div>' +
+      '<div class="dc"><div class="dc-title">&#127991; Colaboradores por Nivel Jerárquico</div><div class="dc-sub">Estructura de la organización por nivel</div><div class="dc-chart-wrap" style="height:240px"><canvas id="ch-nivel"></canvas></div></div>' +
+      '<div class="dc"><div class="dc-title">&#128202; Headcount por Planta — Detalle</div><div class="dc-sub">Número exacto de personas por instalación</div><div class="dc-chart-wrap" style="height:240px"><canvas id="ch-ubi2"></canvas></div></div>' +
+      '<div class="dc dash-full"><div class="dc-title">&#128202; Tamaño de Organización por Dirección</div><div class="dc-sub">Colaboradores bajo cada director</div><div class="dc-chart-wrap" style="height:200px"><canvas id="ch-dirs"></canvas></div></div>' +
+      '<div class="dc dash-full"><div class="dc-title">&#127919; Directivos MRT Corporativo</div><div class="dc-sub">Líderes y tamaño de su equipo</div><div class="dir-grid">'+dirCardsHtml+'</div></div>' +
+    '</div>';
+
   Chart.defaults.font.family = "'Inter', sans-serif";
   Chart.defaults.color = '#64748b';
 
-  const pluginDatalabels = {
+  var pluginCenter = {
     id:'centerText',
-    afterDraw(chart) {
+    afterDraw: function(chart) {
       if(chart.config.type!=='doughnut') return;
-      const {ctx,data,chartArea:{top,left,width,height}} = chart;
-      const total2 = data.datasets[0].data.reduce((a,b)=>a+b,0);
-      ctx.save();
-      ctx.font = 'bold 28px Inter';
-      ctx.fillStyle = '#0f172a';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(total2, left+width/2, top+height/2-8);
-      ctx.font = '11px Inter';
-      ctx.fillStyle = '#94a3b8';
-      ctx.fillText('total', left+width/2, top+height/2+14);
-      ctx.restore();
+      var ctx2 = chart.ctx;
+      var ca = chart.chartArea;
+      var tot = chart.data.datasets[0].data.reduce(function(a,b){return a+b;},0);
+      ctx2.save();
+      ctx2.font = 'bold 26px Inter';
+      ctx2.fillStyle = '#0f172a';
+      ctx2.textAlign = 'center';
+      ctx2.textBaseline = 'middle';
+      ctx2.fillText(tot, ca.left+ca.width/2, ca.top+ca.height/2-8);
+      ctx2.font = '10px Inter';
+      ctx2.fillStyle = '#94a3b8';
+      ctx2.fillText('total', ca.left+ca.width/2, ca.top+ca.height/2+12);
+      ctx2.restore();
     }
   };
 
-  // ── CHART 1: Donut Direcciones ──
-  setTimeout(()=>{
-    const c1 = document.getElementById('ch-dir');
-    if(!c1) return;
+  // CHART 1: Donut Direcciones
+  setTimeout(function(){
+    var c1 = document.getElementById('ch-dir'); if(!c1) return;
     _dashCharts.dir = new Chart(c1, {
-      type: 'doughnut',
-      data: {
-        labels: dires.map(([d])=>d),
-        datasets:[{ data: dires.map(([,v])=>v), backgroundColor: PALETTE, borderWidth: 2, borderColor: '#fff', hoverOffset: 8 }]
-      },
-      options: {
-        cutout: '65%', animation:{animateScale:true,duration:800},
-        plugins: {
-          legend:{position:'right', labels:{boxWidth:12,padding:10,font:{size:11}}},
-          tooltip:{callbacks:{label:ctx=>\` \${ctx.label}: \${ctx.raw} (\${Math.round(ctx.raw/total*100)}%)\`}}
-        }
-      },
-      plugins:[pluginDatalabels]
+      type:'doughnut',
+      data:{ labels:dires.map(function(d){return d[0];}), datasets:[{data:dires.map(function(d){return d[1];}),backgroundColor:PALETTE,borderWidth:2,borderColor:'#fff',hoverOffset:8}] },
+      options:{ cutout:'65%', animation:{animateScale:true,duration:800},
+        plugins:{ legend:{position:'right',labels:{boxWidth:12,padding:10,font:{size:11}}},
+          tooltip:{callbacks:{label:function(ctx){ return ' '+ctx.label+': '+ctx.raw+' ('+Math.round(ctx.raw/total*100)+'%)'; }}} }
+      }, plugins:[pluginCenter]
     });
-  },50);
+  }, 50);
 
-  // ── CHART 2: Donut Ubicaciones ──
-  setTimeout(()=>{
-    const c2 = document.getElementById('ch-ubi');
-    if(!c2) return;
+  // CHART 2: Donut Ubicaciones
+  setTimeout(function(){
+    var c2 = document.getElementById('ch-ubi'); if(!c2) return;
     _dashCharts.ubi = new Chart(c2, {
-      type: 'doughnut',
-      data: {
-        labels: ubis.map(([u])=>u),
-        datasets:[{ data: ubis.map(([,v])=>v), backgroundColor: PALETTE.slice(2), borderWidth: 2, borderColor: '#fff', hoverOffset: 8 }]
-      },
-      options: {
-        cutout: '65%', animation:{animateScale:true,duration:900},
-        plugins:{
-          legend:{position:'right', labels:{boxWidth:12,padding:8,font:{size:11}}},
-          tooltip:{callbacks:{label:ctx=>\` \${ctx.label}: \${ctx.raw} (\${Math.round(ctx.raw/total*100)}%)\`}}
-        }
-      },
-      plugins:[pluginDatalabels]
+      type:'doughnut',
+      data:{ labels:ubis.map(function(d){return d[0];}), datasets:[{data:ubis.map(function(d){return d[1];}),backgroundColor:PALETTE.slice(2),borderWidth:2,borderColor:'#fff',hoverOffset:8}] },
+      options:{ cutout:'65%', animation:{animateScale:true,duration:900},
+        plugins:{ legend:{position:'right',labels:{boxWidth:12,padding:8,font:{size:11}}},
+          tooltip:{callbacks:{label:function(ctx){ return ' '+ctx.label+': '+ctx.raw+' ('+Math.round(ctx.raw/total*100)+'%)'; }}} }
+      }, plugins:[pluginCenter]
     });
-  },100);
+  }, 100);
 
-  // ── CHART 3: Bar Niveles ──
-  setTimeout(()=>{
-    const c3 = document.getElementById('ch-nivel');
-    if(!c3) return;
+  // CHART 3: Bar Niveles
+  setTimeout(function(){
+    var c3 = document.getElementById('ch-nivel'); if(!c3) return;
     _dashCharts.nivel = new Chart(c3, {
-      type: 'bar',
-      data: {
-        labels: niveles.map(([n])=>n),
-        datasets:[{
-          label:'Colaboradores',
-          data: niveles.map(([,v])=>v),
-          backgroundColor: niveles.map(([n])=> (NIV_COL[n]||'#94a3b8')+'cc'),
-          borderColor:     niveles.map(([n])=> NIV_COL[n]||'#94a3b8'),
-          borderWidth:1.5, borderRadius:8, borderSkipped:false
-        }]
-      },
-      options: {
-        animation:{duration:800},
-        plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>\`\${ctx.raw} colaboradores (\${Math.round(ctx.raw/total*100)}%)\`}}},
-        scales:{
-          x:{grid:{display:false},ticks:{font:{size:10,weight:'600'}}},
-          y:{grid:{color:'#f1f5f9'},ticks:{font:{size:10}},beginAtZero:true}
-        }
+      type:'bar',
+      data:{ labels:niveles.map(function(d){return d[0];}), datasets:[{label:'Colaboradores',data:niveles.map(function(d){return d[1];}),backgroundColor:niveles.map(function(d){return (NIV_COL[d[0]]||'#94a3b8')+'cc';}),borderColor:niveles.map(function(d){return NIV_COL[d[0]]||'#94a3b8';}),borderWidth:1.5,borderRadius:8,borderSkipped:false}] },
+      options:{ animation:{duration:800}, plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw+' colaboradores ('+Math.round(ctx.raw/total*100)+'%)';}}}},
+        scales:{ x:{grid:{display:false},ticks:{font:{size:10,weight:'600'}}}, y:{grid:{color:'#f1f5f9'},ticks:{font:{size:10}},beginAtZero:true} }
       }
     });
-  },150);
+  }, 150);
 
-  // ── CHART 4: Horizontal bar Ubicaciones ──
-  setTimeout(()=>{
-    const c4 = document.getElementById('ch-ubi2');
-    if(!c4) return;
+  // CHART 4: Horizontal Bar Ubicaciones
+  setTimeout(function(){
+    var c4 = document.getElementById('ch-ubi2'); if(!c4) return;
     _dashCharts.ubi2 = new Chart(c4, {
-      type: 'bar',
-      data: {
-        labels: ubis.map(([u])=>u),
-        datasets:[{
-          label:'Personas',
-          data: ubis.map(([,v])=>v),
-          backgroundColor: PALETTE.map(c=>c+'cc'),
-          borderColor: PALETTE,
-          borderWidth:1.5, borderRadius:6, borderSkipped:false
-        }]
-      },
-      options: {
-        indexAxis:'y', animation:{duration:900},
-        plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>\`\${ctx.raw} personas\`}}},
-        scales:{
-          x:{grid:{color:'#f1f5f9'},ticks:{font:{size:10}},beginAtZero:true},
-          y:{grid:{display:false},ticks:{font:{size:10,weight:'500'}}}
-        }
+      type:'bar',
+      data:{ labels:ubis.map(function(d){return d[0];}), datasets:[{label:'Personas',data:ubis.map(function(d){return d[1];}),backgroundColor:PALETTE.map(function(c){return c+'cc';}),borderColor:PALETTE,borderWidth:1.5,borderRadius:6,borderSkipped:false}] },
+      options:{ indexAxis:'y', animation:{duration:900}, plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw+' personas';}}}},
+        scales:{ x:{grid:{color:'#f1f5f9'},ticks:{font:{size:10}},beginAtZero:true}, y:{grid:{display:false},ticks:{font:{size:10,weight:'500'}}} }
       }
     });
-  },200);
+  }, 200);
 
-  // ── CHART 5: Bar Directivos ──
-  setTimeout(()=>{
-    const c5 = document.getElementById('ch-dirs');
-    if(!c5) return;
-    const dLabels = dirs.map(d=>(d.nombre||'').split(' ').slice(0,2).join(' '));
-    const dData   = dirs.map(d=>d.teamSize);
+  // CHART 5: Bar Directivos
+  setTimeout(function(){
+    var c5 = document.getElementById('ch-dirs'); if(!c5) return;
+    var dLabels = dirs.map(function(d){return (d.nombre||'').split(' ').slice(0,2).join(' ');});
+    var dData   = dirs.map(function(d){return d.teamSize;});
     _dashCharts.dirs = new Chart(c5, {
       type:'bar',
-      data:{
-        labels:dLabels,
-        datasets:[{
-          label:'Equipo',
-          data:dData,
-          backgroundColor:PALETTE.map(c=>c+'cc'),
-          borderColor:PALETTE,
-          borderWidth:1.5, borderRadius:8, borderSkipped:false
-        }]
-      },
-      options:{
-        animation:{duration:1000},
-        plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>\`\${ctx.raw} personas en su organización\`}}},
-        scales:{
-          x:{grid:{display:false},ticks:{font:{size:10,weight:'600'},maxRotation:30}},
-          y:{grid:{color:'#f1f5f9'},ticks:{font:{size:10}},beginAtZero:true}
-        }
+      data:{ labels:dLabels, datasets:[{label:'Equipo',data:dData,backgroundColor:PALETTE.map(function(c){return c+'cc';}),borderColor:PALETTE,borderWidth:1.5,borderRadius:8,borderSkipped:false}] },
+      options:{ animation:{duration:1000}, plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return ctx.raw+' personas en su organización';}}}},
+        scales:{ x:{grid:{display:false},ticks:{font:{size:10,weight:'600'},maxRotation:30}}, y:{grid:{color:'#f1f5f9'},ticks:{font:{size:10}},beginAtZero:true} }
       }
     });
-  },250);
+  }, 250);
 }
+
 
 // ═══════════════════════════════════════════════
 //  API — Conexión al servidor persistente
