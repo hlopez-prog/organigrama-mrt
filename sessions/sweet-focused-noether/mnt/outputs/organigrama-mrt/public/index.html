@@ -117,6 +117,34 @@ body{font-family:'Inter',sans-serif;background:#f0f4f8;color:#0f172a;display:fle
 .ti{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:9px 13px;font-size:11px;display:flex;align-items:center;gap:6px;box-shadow:0 4px 12px rgba(0,0,0,.1);animation:tin .3s ease;}
 .ti.s{border-left:3px solid #059669;}.ti.e{border-left:3px solid #dc2626;}.ti.i{border-left:3px solid #1d4ed8;}
 @keyframes tin{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* ═══ LOGIN SCREEN ═══ */
+#login-screen{position:fixed;inset:0;background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#0f172a 100%);display:flex;align-items:center;justify-content:center;z-index:9999;}
+.login-box{background:#fff;border-radius:20px;padding:40px 44px;width:380px;box-shadow:0 30px 80px rgba(0,0,0,.4);}
+.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+.login-logo-ic{width:48px;height:48px;background:linear-gradient(135deg,#1d4ed8,#0891b2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;}
+.login-logo-t{font-size:18px;font-weight:800;color:#0f172a;}
+.login-logo-s{font-size:11px;color:#94a3b8;}
+.login-title{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:4px;}
+.login-sub{font-size:12px;color:#64748b;margin-bottom:24px;}
+.lfg{margin-bottom:14px;}
+.lfg label{display:block;font-size:11px;font-weight:600;color:#475569;margin-bottom:5px;}
+.lfg input{width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;outline:none;background:#f8fafc;color:#0f172a;transition:border-color .2s;}
+.lfg input:focus{border-color:#1d4ed8;background:#fff;}
+.login-btn{width:100%;padding:11px;background:#1d4ed8;color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;margin-top:6px;}
+.login-btn:hover{background:#1e40af;transform:translateY(-1px);}
+.login-btn:active{transform:translateY(0);}
+.login-err{background:#fee2e2;color:#dc2626;border-radius:8px;padding:9px 12px;font-size:12px;margin-top:10px;display:none;}
+.login-roles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px;padding-top:16px;border-top:1px solid #f1f5f9;}
+.role-info{background:#f8fafc;border-radius:8px;padding:10px;font-size:10px;}
+.role-info strong{display:block;font-size:11px;font-weight:700;color:#0f172a;margin-bottom:3px;}
+.role-info span{color:#64748b;}
+/* Role badge in topbar */
+#role-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;margin-right:4px;}
+.rb-admin{background:#dbeafe;color:#1d4ed8;}.rb-user{background:#dcfce7;color:#166534;}
+#logout-btn{font-size:11px;color:#64748b;background:none;border:1px solid #e2e8f0;border-radius:7px;padding:4px 10px;cursor:pointer;font-family:inherit;transition:all .15s;}
+#logout-btn:hover{background:#fee2e2;color:#dc2626;border-color:#fca5a5;}
+
 ::-webkit-scrollbar{width:4px;height:4px;}::-webkit-scrollbar-track{background:#f8fafc;}::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px;}
 </style>
 </head>
@@ -130,7 +158,7 @@ body{font-family:'Inter',sans-serif;background:#f0f4f8;color:#0f172a;display:fle
   <div style="padding:6px 8px 2px">
     <div class="nav-btn active" id="n-org" onclick="goV('org')"><span>🏢</span>Organigrama</div>
     <div class="nav-btn" id="n-dash" onclick="goV('dash')"><span>📊</span>Dashboard</div>
-    <div class="nav-btn" id="n-imp" onclick="goV('imp')"><span>📥</span>Importar datos</div>
+    <div class="nav-btn admin-only" id="n-imp" onclick="goV('imp')"><span>📥</span>Importar datos</div>
   </div>
   <div class="sep">Filtros</div>
   <div class="sw"><input type="text" id="fsq" placeholder="Buscar nombre o puesto..." oninput="applyF()"></div>
@@ -147,7 +175,7 @@ body{font-family:'Inter',sans-serif;background:#f0f4f8;color:#0f172a;display:fle
     <div class="chips-c" id="c-niv"></div>
   </div>
   <div class="sb-ft">
-    <button class="btn btn-p" onclick="openAdd()">＋ Agregar posición</button>
+    <button class="btn btn-p admin-only" onclick="openAdd()">＋ Agregar posición</button>
     <button class="btn btn-g" onclick="clrAll()">↺ Limpiar todos los filtros</button>
     <button class="btn btn-g" onclick="loadData()">🔄 Recargar datos del servidor</button>
   </div>
@@ -157,6 +185,8 @@ body{font-family:'Inter',sans-serif;background:#f0f4f8;color:#0f172a;display:fle
   <div id="tb">
     <div><div id="tb-t">Organigrama — MRT Corporativo</div><div id="tb-s">Cargando...</div></div>
     <div id="tb-r">
+      <span id="role-badge"></span>
+      <button id="logout-btn" onclick="doLogout()">Salir</button>
       <span id="si"></span>
       <div class="lbg">
         <button class="lbtn" id="lb-td" onclick="setL('td')" title="Vertical">⬇</button>
@@ -170,6 +200,7 @@ body{font-family:'Inter',sans-serif;background:#f0f4f8;color:#0f172a;display:fle
       <button class="tbtn tbtn-g" onclick="colAll()" title="Colapsar">⊖</button>
       <button class="tbtn tbtn-v" onclick="xPDF()">📄 PDF</button>
       <button class="tbtn tbtn-p" onclick="xPNG()">🖼 PNG</button>
+      <button class="tbtn tbtn-g admin-only" onclick="goV('imp')">📥 Importar</button>
     </div>
   </div>
   <div id="vorg">
@@ -301,7 +332,7 @@ function hideOv() { document.getElementById('ov').style.display = 'none'; }
 // ════════════════════════════════
 function loadData() {
   showOv('Conectando al servidor...', 15, 'Obteniendo colaboradores');
-  fetch('/api/nodes')
+  fetch('/api/nodes', { headers:{'Authorization':'Bearer '+SESSION_TOKEN} })
     .then(function(r) { return r.json(); })
     .then(function(res) {
       AN = Array.isArray(res) ? res : (Array.isArray(res.data) ? res.data : []);
@@ -320,7 +351,7 @@ function scheduleSave() {
   clearTimeout(ST);
   setSI('g');
   ST = setTimeout(function() {
-    fetch('/api/nodes', { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(AN) })
+    fetch('/api/nodes', { method:'PUT', headers:{'Content-Type':'application/json','Authorization':'Bearer '+SESSION_TOKEN}, body:JSON.stringify(AN) })
       .then(function() { setSI('s'); setTimeout(function(){ setSI(''); }, 2500); })
       .catch(function(e) { setSI('e'); toast('Error al guardar: ' + e.message, 'e'); });
   }, 1200);
@@ -778,6 +809,7 @@ function showTip(e, d) {
 //  CRUD — EDIT / ADD / DELETE
 // ════════════════════════════════
 function openAdd() {
+  if(!window._canEdit) { toast('Solo los administradores pueden agregar posiciones', 'e'); return; }
   resetForm();
   document.getElementById('m-tit').textContent = 'Nueva Posición';
   document.getElementById('btn-del').style.display = 'none';
@@ -786,6 +818,7 @@ function openAdd() {
 }
 
 function openEdit(data) {
+  if(!window._canEdit) { toast('Solo los administradores pueden editar posiciones', 'e'); return; }
   resetForm();
   if(!data) { openAdd(); return; }
   document.getElementById('m-tit').textContent = data.estatus==='Vacante' ? 'Editar Vacante' : 'Editar Posición';
@@ -1137,10 +1170,82 @@ function toast(msg, type) {
 }
 
 // ════════════════════════════════
+//  AUTH SYSTEM
+// ════════════════════════════════
+var SESSION_TOKEN = sessionStorage.getItem('mrt_token') || '';
+var SESSION_ROLE  = sessionStorage.getItem('mrt_role')  || '';
+var SESSION_NAME  = sessionStorage.getItem('mrt_name')  || '';
+var IS_ADMIN = false;
+
+function doLogin() {
+  var user = (document.getElementById('l-user').value || '').trim();
+  var pass = document.getElementById('l-pass').value || '';
+  var btn  = document.querySelector('.login-btn');
+  document.getElementById('l-err').style.display = 'none';
+  if(!user || !pass) { showLoginErr('Ingresa usuario y contrasena'); return; }
+  btn.textContent = 'Verificando...'; btn.disabled = true;
+  fetch('/api/login', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({username:user,password:pass}) })
+    .then(function(r){ return r.json(); })
+    .then(function(res) {
+      btn.textContent = 'Iniciar sesion →'; btn.disabled = false;
+      if(!res.ok) { showLoginErr(res.error || 'Credenciales incorrectas'); return; }
+      SESSION_TOKEN = res.token; SESSION_ROLE = res.role; SESSION_NAME = res.name;
+      IS_ADMIN = res.role === 'admin';
+      sessionStorage.setItem('mrt_token', res.token);
+      sessionStorage.setItem('mrt_role',  res.role);
+      sessionStorage.setItem('mrt_name',  res.name);
+      applyRoleUI();
+      document.getElementById('login-screen').style.display = 'none';
+      loadData();
+    })
+    .catch(function(e) { btn.textContent = 'Iniciar sesion →'; btn.disabled = false; showLoginErr('Error: '+e.message); });
+}
+
+function doLogout() {
+  if(!confirm('Cerrar sesion?')) return;
+  fetch('/api/logout', {method:'POST', headers:{'Authorization':'Bearer '+SESSION_TOKEN}})
+    .finally(function() {
+      sessionStorage.clear(); SESSION_TOKEN=''; SESSION_ROLE=''; SESSION_NAME=''; IS_ADMIN=false;
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('l-pass').value = '';
+    });
+}
+
+function showLoginErr(msg) {
+  var el = document.getElementById('l-err'); el.textContent = msg; el.style.display = 'block';
+}
+
+function applyRoleUI() {
+  IS_ADMIN = SESSION_ROLE === 'admin';
+  window._canEdit = IS_ADMIN;
+  var b = document.getElementById('role-badge');
+  if(b) { b.textContent = IS_ADMIN ? 'Admin' : 'Usuario'; b.className = IS_ADMIN ? 'rb-admin' : 'rb-user'; }
+  document.querySelectorAll('.admin-only').forEach(function(el){ el.style.display = IS_ADMIN ? '' : 'none'; });
+}
+
+function checkSession() {
+  if(!SESSION_TOKEN) { document.getElementById('login-screen').style.display = 'flex'; return; }
+  fetch('/api/me', {headers:{'Authorization':'Bearer '+SESSION_TOKEN}})
+    .then(function(r){ return r.json(); })
+    .then(function(res) {
+      if(!res.authenticated) {
+        sessionStorage.clear();
+        document.getElementById('login-screen').style.display = 'flex';
+      } else {
+        SESSION_ROLE = res.role; SESSION_NAME = res.name; IS_ADMIN = res.role === 'admin';
+        applyRoleUI();
+        document.getElementById('login-screen').style.display = 'none';
+        loadData();
+      }
+    })
+    .catch(function(){ document.getElementById('login-screen').style.display = 'flex'; });
+}
+
+// ════════════════════════════════
 //  INIT
 // ════════════════════════════════
 window.addEventListener('DOMContentLoaded', function() {
-  loadData();
+  checkSession();
   window.addEventListener('resize', function(){
     if(VN.length && CV==='org') fitC();
   });
@@ -1155,5 +1260,30 @@ window.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-ic">&#127970;</div>
+      <div><div class="login-logo-t">MRT Corporativo</div><div class="login-logo-s">Sistema de Organigramas RRHH</div></div>
+    </div>
+    <div class="login-title">Iniciar sesion</div>
+    <div class="login-sub">Ingresa tus credenciales para acceder al sistema</div>
+    <div class="lfg">
+      <label>Usuario</label>
+      <input type="text" id="l-user" placeholder="admin o usuario" autocomplete="username" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <div class="lfg">
+      <label>Contrasena</label>
+      <input type="password" id="l-pass" placeholder="..." autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="login-btn" onclick="doLogin()">Iniciar sesion</button>
+    <div class="login-err" id="l-err"></div>
+    <div class="login-roles">
+      <div class="role-info"><strong>Administrador</strong><span>Editar, agregar y eliminar posiciones. Importar datos.</span></div>
+      <div class="role-info"><strong>Usuario</strong><span>Consultar y visualizar el organigrama.</span></div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
