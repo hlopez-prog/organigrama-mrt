@@ -1,6 +1,6 @@
 {
   "name": "organigrama-mrt",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "Organigrama Corporativo MRT — Sistema de gestión de estructura organizacional",
   "main": "server.js",
   "scripts": {
