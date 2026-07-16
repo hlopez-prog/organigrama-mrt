@@ -598,8 +598,9 @@ function rChart() {
       g.attr('transform', e.transform);
       updMM(e.transform, W, H);
     });
-  svg.call(ZB).on('mousedown.zoom', function(){ svg.classed('svg-act', true); })
-     .on('mouseup.zoom', function(){ svg.classed('svg-act', false); });
+  svg.call(ZB)
+     .on('mousedown.cursor', function(){ svg.classed('svg-act', true); })
+     .on('mouseup.cursor',   function(){ svg.classed('svg-act', false); });
   SV = svg; GV = g;
 
   // Link generator
