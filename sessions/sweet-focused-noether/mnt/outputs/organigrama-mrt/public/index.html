@@ -283,6 +283,7 @@ var COL = new Set();  // Collapsed node IDs
 var SEL = null;       // Selected node ID
 var HL  = new Set();  // Highlighted node IDs (search)
 var ZB, SV, GV;       // D3 zoom, svg, group
+var _savedT = null;  // Saved zoom/pan transform (preserved across re-renders)
 var ST  = null;       // Save timer
 var CV  = 'org';      // Current view
 var LAY = 'lr';       // Layout: td/lr/rad/com
@@ -628,8 +629,8 @@ function rChart() {
       return 'translate('+d.x+','+d.y+')';
     })
     .style('cursor','pointer')
-    .on('click',   function(e,d){ e.stopPropagation(); SEL=d.data.id; rChart(); openEdit(d.data); })
-    .on('dblclick',function(e,d){ e.stopPropagation(); var sid=String(d.data.id); COL.has(sid)?COL.delete(sid):COL.add(sid); rChart(); })
+    .on('click',   function(e,d){ e.stopPropagation(); _savedT = SV ? d3.zoomTransform(SV.node()) : null; SEL=d.data.id; rChart(); openEdit(d.data); })
+    .on('dblclick',function(e,d){ e.stopPropagation(); _savedT = SV ? d3.zoomTransform(SV.node()) : null; var sid=String(d.data.id); COL.has(sid)?COL.delete(sid):COL.add(sid); rChart(); })
     .on('mouseover',function(e,d){ showTip(e,d.data); })
     .on('mouseout', function()  { document.getElementById('tip').style.display='none'; });
 
@@ -701,7 +702,12 @@ function rChart() {
   });
 
   bLeg(VN);
-  fitC(false);
+  if (_savedT) {
+    SV.call(ZB.transform, _savedT);
+    _savedT = null;
+  } else {
+    fitC(false);
+  }
   setTimeout(function(){ updMM(d3.zoomTransform(SV.node()), W, H); }, 100);
 }
 
